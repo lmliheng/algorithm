@@ -1,4 +1,4 @@
-package 多数元素;
+package 多数元素.src.main;
 
 public class Solution {
     public int majorityElement(int[] nums) {

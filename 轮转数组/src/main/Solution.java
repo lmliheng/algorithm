@@ -1,4 +1,4 @@
-package 轮转数组;
+package 轮转数组.src.main;
 
 public class Solution {
     public void rotate(int[] nums, int k) {
