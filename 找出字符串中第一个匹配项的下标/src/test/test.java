@@ -1,6 +1,6 @@
-package 找出字符串中第一个匹配项的下标.test;
+package 找出字符串中第一个匹配项的下标.src.test;
 
-import 找出字符串中第一个匹配项的下标.main.Solution;
+import 找出字符串中第一个匹配项的下标.src.main.Solution;
 
 public class test {
     public static void main(String[] args) {
