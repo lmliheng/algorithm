@@ -2,4 +2,5 @@
 /.vscode
 /.git
 /字节码
-/algorithm.iml
+/*.iml
+/*/*.iml
