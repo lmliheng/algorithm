@@ -6,7 +6,7 @@ public class Test {
     public static void main(String[] args) {
 
         Solution solution = new Solution();
-//ERROR
+//ERROR test：
 //        System.out.println(solution.wordPattern("abba", "dog dog dog dog"));
         System.out.println(solution.wordPattern("abba", "dog cat cat fish"));
         System.out.println(solution.wordPattern("abba", "dog cat cat dog"));
