@@ -24,3 +24,104 @@
 二叉搜索树：用于高效地执行查找、插入和删除操作。
 平衡二叉树（AVL树）：一种自平衡的二叉搜索树，保证树的平衡性，避免退化成链表。
 堆：一种特殊的完全二叉树，用于实现优先队列等数据结构。
+
+## start
+创建二叉树
+```
+package 二叉树;
+
+class TreeNode {
+    int value;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int value) {
+        this.value = value;
+        left = null;
+        right = null;
+    }
+}
+```
+二叉树的插入以及排序搜索
+```
+package 二叉树;
+
+public class BinaryTree {
+    TreeNode root;
+
+    public BinaryTree() {
+        root = null;
+    }
+
+    public void insert(int value) {
+        root = insertRec(root, value);
+    }
+
+
+
+    // 递归插入节点
+    private TreeNode insertRec(TreeNode root, int value) {
+        if (root == null) {
+            root = new TreeNode(value);
+            return root;
+        }
+        if (value < root.value) {
+            root.left = insertRec(root.left, value);
+        } else if (value > root.value) {
+            root.right = insertRec(root.right, value);
+        }
+        // If the value is already present in the tree, do not insert duplicates
+        return root;
+    }
+
+    // 前序遍历
+    public void preorderTraversal(TreeNode root) {
+        if (root != null) {
+            System.out.print(root.value + " ");
+            preorderTraversal(root.left);
+            preorderTraversal(root.right);
+        }
+    }
+
+    // 中序遍历
+    public void inorderTraversal(TreeNode root) {
+        if (root != null) {
+            inorderTraversal(root.left);
+            System.out.print(root.value + " ");
+            inorderTraversal(root.right);
+        }
+    }
+
+    // 后序遍历
+    public void postorderTraversal(TreeNode root) {
+        if (root != null) {
+            postorderTraversal(root.left);
+            postorderTraversal(root.right);
+            System.out.print(root.value + " ");
+        }
+    }
+
+    public static void main(String[] args) {
+        BinaryTree tree = new BinaryTree();
+        tree.insert(50);
+        tree.insert(30);
+        tree.insert(70);
+        tree.insert(20);
+        tree.insert(40);
+        tree.insert(60);
+        tree.insert(80);
+        tree.insert(10);
+        tree.insert(90);
+        tree.insert(5);
+        tree.insert(15);
+
+
+        System.out.println("前序遍历:");
+        tree.preorderTraversal(tree.root);
+        System.out.println("\n中序遍历:");
+        tree.inorderTraversal(tree.root);
+        System.out.println("\n后序遍历");
+        tree.postorderTraversal(tree.root);
+    }
+}
+```
