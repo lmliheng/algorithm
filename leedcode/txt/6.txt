@@ -1,0 +1,15 @@
+s = "PAYPALISHIRING",
+numRows = 3
+let new_s='';
+let nullstr = '0'
+for(let i=0; i<(numRows - s.length % (numRows + 1)); i++){
+    nullstr += '0'
+}
+console.log(nullstr);
+s = s + nullstr
+// s="PAYPALISHIRING00"
+let num_gourp=s.length/(numRows+1)
+console.log(num_gourp);
+
+
+// 放弃

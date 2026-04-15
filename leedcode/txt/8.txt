@@ -1,0 +1,111 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var myAtoi = function (s) {
+
+    // 记录前置空格数目
+    let font_space = 0
+    // 首字母判断正负号
+    let isPositive = false;
+    let isNegative = false;
+    // 首字母是否为数字
+    let isNumber = true;
+    // 处理到这了，记作foot尾声阶段
+    // 记录前置0的数目
+    let foot_font_zero = 0
+    // 记录前置空格数目
+    let foot_font_space = 0
+    // 记录数字数目
+    let foot_number_space = 0
+
+
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] == ' ') {
+            font_space += 1;
+        } else {
+            break
+        }
+    }
+
+
+    let s_nofontspace = ''
+    for (let i = font_space; i < s.length; i++) {
+        s_nofontspace += s[i]
+    }
+
+
+
+    if (s_nofontspace[0] == '+' || s_nofontspace[0] == '-') {
+        isPositive = s_nofontspace[0] == '+' ? true : false;
+        isNegative = s_nofontspace[0] == '-' ? true : false;
+        // 去除正负号
+        s_nofontspace = s_nofontspace.slice(1);
+    } else {
+        isNumber = (s_nofontspace[0] >= '/' && s_nofontspace[0] <= ':') ? true : false;
+    }
+
+    // console.log('isPositive:', isPositive, 'isNegative:', isNegative);
+
+    // '042a'
+    // ' 42a'
+    // 'a42a'
+
+    // 去除空格
+    // for (let i = 0; i < s_nofontspace.length; i++) {
+    //     if (s_nofontspace[i] == ' ') {
+    //         foot_font_space += 1;
+    //     } else {
+    //         break
+    //     }
+    // }
+    // s_nofontspace = s_nofontspace.slice(foot_font_space);
+
+
+    // 去除0
+    for (let i = 0; i < s_nofontspace.length; i++) {
+        if (s_nofontspace[i] == '0') {
+            foot_font_zero += 1;
+        } else {
+            break
+        }
+    }
+
+
+    s_nofontspace = s_nofontspace.slice(foot_font_zero);
+
+    // 记录数字数目
+    for (let i = 0; i < s_nofontspace.length; i++) {
+        if (s_nofontspace[i] >= '/' && s_nofontspace[i] <= ':') {
+            foot_number_space += 1;
+        } else {
+            break
+        }
+    }
+    s_nofontspace = s_nofontspace.slice(0, foot_number_space);
+
+    if (isNumber == false) {
+        return 0
+    }
+
+    num_s = isPositive ? Number(s_nofontspace) : Number(s_nofontspace)
+    num_s = isNegative ? -num_s : num_s
+    num_s = Math.max(num_s, -2147483648)
+
+    if (num_s > 2147483647) {
+        num_s = 2147483647
+    }
+    return num_s
+
+
+};
+
+// console.log(myAtoi("42"));
+// console.log(myAtoi("   -42"));
+// console.log(myAtoi("  -042a"));
+// console.log(myAtoi("a42a"));
+console.log(myAtoi("  +  413"));
+
+
+
+

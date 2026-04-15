@@ -1,0 +1,56 @@
+s = "abcdef"
+
+// aaaaaa
+// baacc
+// abcdef
+let new_s='';
+let max = 0;
+// 排除双数全等的情况
+let x = true;
+for (let i = 0; i < s.length; i++) {
+    if (s[i] != s[i + 1] && i + 1 < s.length) {
+        x = false;
+    }
+}
+if (x) {
+    max = s.length;
+    new_s=s;
+}
+
+
+let max_j = 0
+for (let i = 0; i < s.length; i++) {
+    let j = 0 // 外循环开始j重新赋值0
+    for (let n = 1; n <= Math.ceil(s.length / 2); n++) {
+        if (s[i - n] === s[i + n] && i - n >= 0 && i + n < s.length) {
+
+            j += 1
+            max_j = max_j < j ? j : max_j
+        } else {
+            // 中途一次不等时，跳出循环
+            break
+        }
+    }
+}
+
+max = Math.max(max, 2 * max_j + 1);
+
+
+
+// 排除仅有一对相等的情况 和 全不等的情况
+if (max_j == 0) {
+    for (let i = 0; i < s.length; i++) {
+        if (s[i] == s[i + 1] && i + 1 < s.length) {
+            max = 2
+            break
+        }
+
+    }
+    max != 2 ? max = 0 : max;
+}
+
+
+console.log(max)
+
+
+// 放弃

@@ -1,0 +1,34 @@
+x = 123
+// 判断正负
+let isPositive = x > 0 ? 1 : 0
+// console.log(isPositive);
+// 末尾0个数
+let zero_num = 0;
+let zero_str = ''
+// 
+x = Math.abs(x)
+x_str = x.toString()
+for (i = (x_str.length - 1); i >= 0; i--) {
+    if (x_str[i] == '0') {
+        zero_num += 1;
+    } else {
+        break
+    }
+}
+let x_str_nozero = ''
+let x_str_nozero_reverse = ''
+for (i = 0; i < (x_str.length - zero_num); i++) {
+    x_str_nozero += x_str[i]
+}
+for (i = (x_str_nozero.length - 1); i >= 0; i--) {
+    x_str_nozero_reverse += x_str_nozero[i]
+}
+
+x = Number(x_str_nozero_reverse)
+if (x > Math.pow(2, 31) - 1) {
+    // return 0
+
+}
+
+result = isPositive ? Number(x_str_nozero_reverse) : -Number(x_str_nozero_reverse)
+console.log(result);

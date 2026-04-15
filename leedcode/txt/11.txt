@@ -1,0 +1,46 @@
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+
+// 时间太长了，有重复的计算部分去除左循环
+var maxArea = function (height) {
+    let maxArea = 0;
+    let Area = 0;
+    if (height.length < 2) {
+        return 0
+    }
+    if (height.length == 2) {
+        return Math.min(height[0], height[1])
+    }
+
+    // 遍历
+    for (let i = 0; i < height.length; i++) {
+        // console.log('i=', i);
+
+        // // 左循环
+        // for (let j = i - 1; j >= 0; j--) {
+        //     if (j < 0) {
+        //         continue
+        //     }
+        //     console.log('左j=', j);
+        //     Area = Math.min(height[i], height[j]) * (i - j);
+        //     maxArea = maxArea > Area ? maxArea : Area;
+        // }
+
+        // 右循环
+        for (let n = i + 1; n <= height.length - 1; n++) {
+            if (n > height.length) {
+                continue
+            }
+            // console.log('右n=', n);
+            Area = Math.min(height[n], height[i]) * (n - i);
+            maxArea = maxArea > Area ? maxArea : Area;
+        }
+
+    }
+    return maxArea
+
+
+};
+console.log(maxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]))
