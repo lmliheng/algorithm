@@ -1,0 +1,13 @@
+#!/bin/sh
+# .git/hooks/commit-msg
+
+commit_msg=$(cat "$1")
+pattern="^(feat|fix|docs|style|refactor|test|chore): .+"
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo "❌ 提交信息格式错误！"
+  echo "📋 正确格式: <type>: <description>"
+  echo "📌 类型: feat|fix|docs|style|refactor|test|chore"
+  echo "📄 示例: feat: 添加用户登录功能"
+  exit 1
+fi
