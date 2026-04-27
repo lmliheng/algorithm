@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "moduleDetection": "force", // 强制 模块检测
+    "target": "ES2015", // 目标ES版本
+    "module": "commonjs", // 模块系统
+    "strict": true, // 严格模式 
+    "esModuleInterop": true, // 允许模块导入
+    "skipLibCheck": true, // 跳过库检查
+    "forceConsistentCasingInFileNames": true // 强制文件名大小写一致
+  }
+}
