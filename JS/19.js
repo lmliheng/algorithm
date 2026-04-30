@@ -1,54 +1,51 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Definition for singly-linked list.
- * class ListNode {
- *     val: number
- *     next: ListNode | null
- *     constructor(val?: number, next?: ListNode | null) {
- *         this.val = (val===undefined ? 0 : val)
- *         this.next = (next===undefined ? null : next)
- *     }
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
  * }
  */
-class ListNode {
-    constructor(val, next) {
-        this.val = (val === undefined ? 0 : val);
-        this.next = (next === undefined ? null : next);
-    }
+/**
+ * @param {ListNode} head
+ * @param {number} n
+ * @return {ListNode}
+ */
+
+ function ListNode(val, next) {
+      this.val = (val===undefined ? 0 : val)
+      this.next = (next===undefined ? null : next)
+  }
+
+var removeNthFromEnd = function(head, n) {
+if(head===null){
+    return 0
 }
-function removeNthFromEnd(head, n) {
-    if (!head) {
-        return null;
+    let p1 = head //ListNode 
+    let p2 = head
+    let p3 = head
+    let l = 1
+    while (p1 && p1.next) {
+        console.log("p1:",p1)
+        p1 = p1.next
+        l++
     }
-    // 获取链表长度
-    let list_length = 0;
-    let p1 = head;
-    let p2 = head;
-    while (p1) {
-        p1 = p1.next ? p1.next : null;
-        list_length++;
+    // n=2 ,l=5。0,1,2,
+    for (let i = 0; i < l - n-1; i++) {
+        p2=p2.next // 4,5
+        p3=p3.next
     }
-    if (list_length === n) {
-        return head.next;
-    }
-    for (let i = 0; i < list_length - n - 1; i++) {
-        if (!p2) {
-            break;
-        }
-        p2 = p2.next ? p2.next : null;
-    }
-    console.log('p2', p2);
-    if (p2 && p2.next) {
-        console.log('删除节点', p2.next);
-        p2.next = p2.next.next ? p2.next.next : null;
-    }
-    else {
-        return head.next;
-    }
-    return head;
-}
-;
-const head = new ListNode(1, new ListNode(2));
-// removeNthFromEnd(head, 0)
-console.log(removeNthFromEnd(head, 2));
+    p3=p3.next
+    p2.next=p3.next
+
+    return head
+};
+
+  let head=new ListNode(1,new ListNode(2,new ListNode(3,new ListNode(4,new ListNode(5,null)))))
+console.log(removeNthFromEnd(head,2))
+    // if(p3.next){
+    //     p2.next=p3.next
+    // }else{
+    //     p2.next=null
+    // }
+
+   
