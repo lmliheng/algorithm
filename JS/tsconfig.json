@@ -6,6 +6,6 @@
     "strict": true, // 严格模式 
     "esModuleInterop": true, // 允许模块导入
     "skipLibCheck": true, // 跳过库检查
-    "forceConsistentCasingInFileNames": true // 强制文件名大小写一致
+    // "forceConsistentCasingInFileNames": true // 强制文件名大小写一致
   }
 }
