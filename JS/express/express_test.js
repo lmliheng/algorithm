@@ -6,9 +6,7 @@ app.get("/test", (req, res) => {
     try {
         res.send("test");
     } catch (err) {
-
         res.send("发生错误");
-
     }
 
 });
