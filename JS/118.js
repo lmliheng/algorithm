@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+let numRows = 5;
+let res = [];
+for (let i = 0; i < numRows; i++) {
+    if (i === 0) {
+        res.push([1]);
+    }
+    if (i === 1) {
+        res.push([1, 1]);
+    }
+    if (i > 1) {
+        let arr = new Array(i + 1);
+        arr[0] = 1;
+        arr[i] = 1;
+        for (let j = 1; j < i; j++) {
+            arr[j] = res[i - 1][j - 1] + res[i - 1][j];
+        }
+        res.push(arr);
+    }
+}
+console.log(res);
