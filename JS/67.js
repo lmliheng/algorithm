@@ -1,0 +1,25 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+// 参考66.ts 还是使用模拟加法 封装十二进制转换函数存在问题
+let str = '00111001011110000010100101000000';
+str = str.trim();
+let num = 0;
+for (let i = str.length - 1; i >= 0; i--) {
+    console.log("倍数" + (+(str.length - 1 - i)));
+    console.log("当前位" + (+(str[i])));
+    num += Math.pow(2, +(str.length - 1 - i)) * +(str[i]);
+}
+console.log(num);
+let num2 = 43261596;
+let stack = [];
+while (num2 > 0) {
+    stack.unshift(num2 % 2);
+    num2 = Math.floor(num2 / 2);
+}
+if (stack.length == 0) {
+    stack.unshift(0);
+}
+let zeroArr = new Array(32 - stack.length).fill(0);
+stack.splice(0, 0, ...zeroArr);
+let reserveStack = stack.reverse();
+console.log(reserveStack.join(''));
