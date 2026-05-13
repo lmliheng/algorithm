@@ -1,0 +1,33 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+// ts不支持吗
+class user {
+    constructor(name, age, gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+}
+class Animal {
+}
+;
+class Dog extends Animal {
+}
+let u1 = new user('张三', 18, '男');
+// console.log(Object.getPrototypeOf(u1))
+// console.log(u1.__proto__)
+// console.log(u1.constructor===user)
+let a = 5; // 原始数值类型（primitive）
+// let testArr=[1,'1',true,null,undefined]
+// let set =new Set(['number','string','boolean','null','undefined'])
+// console.log(typeof null)
+// for(let item of testArr){
+//     if(set.has(typeof item)){
+//     console.log(item,'是原始数值类型')
+// }
+// }
+console.log(u1 instanceof user); //instanceof 查找u1原型链上是否有user的原型
+console.log(new Dog() instanceof Animal);
+console.log(new Number(5) instanceof Number); // true
+// console.log(a instanceof Number)
+console.log(Object(5) instanceof Number); //true
