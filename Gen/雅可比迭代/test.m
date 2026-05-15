@@ -1,3 +1,0 @@
-whos
-clear
-whos

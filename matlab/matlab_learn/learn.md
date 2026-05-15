@@ -24,7 +24,7 @@ whos 变量 ：可显示变量的 名称、大小、字节数、类型,属性att
 
 3. 函数
 [函数](https://blog.csdn.net/zhibaijiang/article/details/147601560)
-
+nargin 用于检查函数形参个数
 
 ### 扩展
 [web](https://ww2.mathworks.cn/help/matlab/referencelist.html?type=function&listtype=cat&category=web-access-streaming&blocktype=all&capability=&addon=&startrelease=&endrelease=&s_tid=CRUX_lftnav)
