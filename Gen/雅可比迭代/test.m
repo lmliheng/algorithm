@@ -1,0 +1,3 @@
+whos
+clear
+whos

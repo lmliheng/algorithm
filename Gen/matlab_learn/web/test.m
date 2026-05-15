@@ -1,0 +1,1 @@
+web('https://leetcode.cn/')
