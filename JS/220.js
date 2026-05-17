@@ -1,0 +1,28 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let indexDiff = 10;
+let valueDiff = 5;
+// i在前j在后 和 i在后j在前是一样的结果
+for (let i = 0; i < nums.length; i++) {
+    // 
+    if (indexDiff + i >= nums.length) {
+        // console.log("满足条件")
+        // 找到indexDiff范围内的新数组
+        let newArr = nums.slice(i, indexDiff + i + 1).sort((a, b) => a - b);
+        // console.log("新数组：", newArr)
+        // 剪枝,一旦新数组到尾部了,就不需要继续往后找了
+        if (Math.abs(newArr[0] - newArr[1]) > valueDiff) {
+            console.log("未找到满足valuediff的", false);
+        }
+        else {
+            console.log("到达尾部：", true);
+        }
+    }
+    for (let j = i + 1; j <= indexDiff + i; j++) {
+        if (Math.abs(nums[i] - nums[j]) <= valueDiff) {
+            console.log("此时i=", i, "j=", j, true);
+        }
+    }
+}
+console.log(false);
