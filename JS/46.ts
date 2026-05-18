@@ -21,7 +21,7 @@ const backtrack = (nums: number[], path: number[], used: boolean[]) => {
 
 }
 
-
+62
 let nums = [1, 2, 3]
 let path: number[] = []
 let used: boolean[] = new Array(nums.length).fill(false)

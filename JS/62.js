@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+let m = 3;
+let n = 7;
+let dp = new Array(m).fill(0).map(() => new Array(n).fill(0));
+// 初始化
+dp[0][0] = 1;
+for (let i = 1; i < n; i++) {
+    dp[0][i] = 1;
+}
+for (let i = 1; i < m; i++) {
+    dp[i][0] = 1;
+}
+for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+        console.log(i, j);
+        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+    }
+}
+console.log(dp);
+console.log(dp[m - 1][n - 1]);

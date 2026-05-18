@@ -19,6 +19,7 @@ const backtrack = (nums, path, used) => {
         used[i] = false;
     }
 };
+62;
 let nums = [1, 2, 3];
 let path = [];
 let used = new Array(nums.length).fill(false);
