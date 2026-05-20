@@ -7,6 +7,8 @@ export default defineConfig({
   description: "多语言算法学习宝库 - Java / JavaScript / TypeScript / C++",
   lang: "zh-CN",
 
+  base: '/algorithm/',
+
   ignoreDeadLinks: true,
 
   themeConfig: {
