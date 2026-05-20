@@ -1,0 +1,203 @@
+{
+  "id": "2026-05-20-102418",
+  "generated_at": "2026-05-20T02:24:18.1784725Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-gai-shu-duo-yu-yan-suan-fa-xue-xi-bao-ku",
+      "title": "项目概述：多语言算法学习宝库",
+      "file": "1-xiang-mu-gai-shu-duo-yu-yan-suan-fa-xue-xi-bao-ku.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-kai-shi-huan-jing-da-jian-yu-yun-xing",
+      "title": "快速开始：环境搭建与运行",
+      "file": "2-kuai-su-kai-shi-huan-jing-da-jian-yu-yun-xing.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-cang-ku-jia-gou-yu-mu-lu-yue-ding",
+      "title": "仓库架构与目录约定",
+      "file": "3-cang-ku-jia-gou-yu-mu-lu-yue-ding.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "4-dai-ma-gui-fan-yu-gong-xian-liu-cheng",
+      "title": "代码规范与贡献流程",
+      "file": "4-dai-ma-gui-fan-yu-gong-xian-liu-cheng.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "5-java-ti-jie-ti-xi-xiang-mu-jie-gou-yu-jie-ti-mo-ban",
+      "title": "Java 题解体系：项目结构与解题模板",
+      "file": "5-java-ti-jie-ti-xi-xiang-mu-jie-gou-yu-jie-ti-mo-ban.md",
+      "section": "深度剖析",
+      "group": "LeetCode 题解",
+      "level": "Beginner"
+    },
+    {
+      "slug": "6-javascript-typescript-ti-jie-bian-hao-jian-suo-yu-duo-chong-jie-fa-dui-bi",
+      "title": "JavaScript / TypeScript 题解：编号检索与多种解法对比",
+      "file": "6-javascript-typescript-ti-jie-bian-hao-jian-suo-yu-duo-chong-jie-fa-dui-bi.md",
+      "section": "深度剖析",
+      "group": "LeetCode 题解",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "7-c-ti-jie-lian-biao-yu-zhi-zhen-shi-zhan",
+      "title": "C++ 题解：链表与指针实战",
+      "file": "7-c-ti-jie-lian-biao-yu-zhi-zhen-shi-zhan.md",
+      "section": "深度剖析",
+      "group": "LeetCode 题解",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "8-dong-tai-gui-hua-ru-men-cong-fei-bo-na-qi-dao-da-jia-jie-she",
+      "title": "动态规划入门：从斐波那契到打家劫舍",
+      "file": "8-dong-tai-gui-hua-ru-men-cong-fei-bo-na-qi-dao-da-jia-jie-she.md",
+      "section": "深度剖析",
+      "group": "算法思想与模式",
+      "level": "Beginner"
+    },
+    {
+      "slug": "9-shuang-zhi-zhen-yu-hua-dong-chuang-kou-zi-fu-chuan-yu-shu-zu-wen-ti",
+      "title": "双指针与滑动窗口：字符串与数组问题",
+      "file": "9-shuang-zhi-zhen-yu-hua-dong-chuang-kou-zi-fu-chuan-yu-shu-zu-wen-ti.md",
+      "section": "深度剖析",
+      "group": "算法思想与模式",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "10-tan-xin-ce-lue-jia-you-zhan-wen-ti-yu-tiao-yue-you-xi",
+      "title": "贪心策略：加油站问题与跳跃游戏",
+      "file": "10-tan-xin-ce-lue-jia-you-zhan-wen-ti-yu-tiao-yue-you-xi.md",
+      "section": "深度剖析",
+      "group": "算法思想与模式",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "11-hui-su-fa-pai-lie-zu-he-yu-gua-hao-sheng-cheng",
+      "title": "回溯法：排列组合与括号生成",
+      "file": "11-hui-su-fa-pai-lie-zu-he-yu-gua-hao-sheng-cheng.md",
+      "section": "深度剖析",
+      "group": "算法思想与模式",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "12-tu-lun-ji-chu-dijkstra-zui-duan-lu-jing-suan-fa",
+      "title": "图论基础：Dijkstra 最短路径算法",
+      "file": "12-tu-lun-ji-chu-dijkstra-zui-duan-lu-jing-suan-fa.md",
+      "section": "深度剖析",
+      "group": "算法思想与模式",
+      "level": "Advanced"
+    },
+    {
+      "slug": "13-er-cha-shu-bian-li-cha-ru-yu-ping-heng-xing-pan-duan",
+      "title": "二叉树：遍历、插入与平衡性判断",
+      "file": "13-er-cha-shu-bian-li-cha-ru-yu-ping-heng-xing-pan-duan.md",
+      "section": "深度剖析",
+      "group": "经典数据结构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "14-dui-zui-xiao-dui-yu-zui-da-dui-de-wan-zheng-shi-xian",
+      "title": "堆：最小堆与最大堆的完整实现",
+      "file": "14-dui-zui-xiao-dui-yu-zui-da-dui-de-wan-zheng-shi-xian.md",
+      "section": "深度剖析",
+      "group": "经典数据结构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "15-lian-biao-cao-zuo-he-bing-fan-zhuan-yu-huan-jian-ce",
+      "title": "链表操作：合并、反转与环检测",
+      "file": "15-lian-biao-cao-zuo-he-bing-fan-zhuan-yu-huan-jian-ce.md",
+      "section": "深度剖析",
+      "group": "经典数据结构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "16-gui-bing-pai-xu-fen-zhi-si-xiang-de-jing-dian-ti-xian",
+      "title": "归并排序：分治思想的经典体现",
+      "file": "16-gui-bing-pai-xu-fen-zhi-si-xiang-de-jing-dian-ti-xian.md",
+      "section": "深度剖析",
+      "group": "排序与基础算法",
+      "level": "Beginner"
+    },
+    {
+      "slug": "17-jin-zhi-zhuan-huan-er-jin-zhi-yu-shi-jin-zhi-hu-zhuan",
+      "title": "进制转换：二进制与十进制互转",
+      "file": "17-jin-zhi-zhuan-huan-er-jin-zhi-yu-shi-jin-zhi-hu-zhuan.md",
+      "section": "深度剖析",
+      "group": "排序与基础算法",
+      "level": "Beginner"
+    },
+    {
+      "slug": "18-dui-xiang-di-ceng-ji-zhi-defineproperty-yu-yuan-xing-lian",
+      "title": "对象底层机制：defineProperty 与原型链",
+      "file": "18-dui-xiang-di-ceng-ji-zhi-defineproperty-yu-yuan-xing-lian.md",
+      "section": "深度剖析",
+      "group": "JavaScript 语言特性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "19-typescript-pei-zhi-yu-lei-xing-hua-suan-fa-shi-jian",
+      "title": "TypeScript 配置与类型化算法实践",
+      "file": "19-typescript-pei-zhi-yu-lei-xing-hua-suan-fa-shi-jian.md",
+      "section": "深度剖析",
+      "group": "JavaScript 语言特性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "20-express-kuang-jia-yu-mo-kuai-hua-kai-fa",
+      "title": "Express 框架与模块化开发",
+      "file": "20-express-kuang-jia-yu-mo-kuai-hua-kai-fa.md",
+      "section": "深度剖析",
+      "group": "JavaScript 语言特性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "21-matlab-ji-chu-yu-fa-ju-zhen-yu-wen-jian-io",
+      "title": "MATLAB 基础：语法、矩阵与文件 IO",
+      "file": "21-matlab-ji-chu-yu-fa-ju-zhen-yu-wen-jian-io.md",
+      "section": "深度剖析",
+      "group": "数值计算与 MATLAB",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "22-xian-xing-fang-cheng-zu-qiu-jie-gao-si-xiao-yuan-lu-fen-jie-yu-ya-ke-bi-die-dai",
+      "title": "线性方程组求解：高斯消元、LU 分解与雅可比迭代",
+      "file": "22-xian-xing-fang-cheng-zu-qiu-jie-gao-si-xiao-yuan-lu-fen-jie-yu-ya-ke-bi-die-dai.md",
+      "section": "深度剖析",
+      "group": "数值计算与 MATLAB",
+      "level": "Advanced"
+    },
+    {
+      "slug": "23-shu-zhi-fen-xi-jin-jie-fan-shu-ji-fen-ni-he-yu-zui-su-xia-jiang-fa",
+      "title": "数值分析进阶：范数、积分、拟合与最速下降法",
+      "file": "23-shu-zhi-fen-xi-jin-jie-fan-shu-ji-fen-ni-he-yu-zui-su-xia-jiang-fa.md",
+      "section": "深度剖析",
+      "group": "数值计算与 MATLAB",
+      "level": "Advanced"
+    },
+    {
+      "slug": "24-git-hooks-gui-fan-hua-ti-jiao-xin-xi",
+      "title": "Git Hooks：规范化提交信息",
+      "file": "24-git-hooks-gui-fan-hua-ti-jiao-xin-xi.md",
+      "section": "深度剖析",
+      "group": "工程化配置",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "25-scss-yu-chu-li-qi-shi-jian",
+      "title": "SCSS 预处理器实践",
+      "file": "25-scss-yu-chu-li-qi-shi-jian.md",
+      "section": "深度剖析",
+      "group": "工程化配置",
+      "level": "Intermediate"
+    }
+  ]
+}
