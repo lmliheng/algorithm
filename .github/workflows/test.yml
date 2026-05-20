@@ -50,7 +50,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: Vitepress/post/.vitepress/dist
+          path: Vitepress/.vitepress/dist
 
   # 部署工作
   deploy:
