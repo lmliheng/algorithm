@@ -31,9 +31,9 @@ while (n2?.next) {
             deleteNode.next = n2 // 截断
             isDelete = false
         } else {
-            deleteNode= deleteNode.next
-            n1 = n1.next
-            n2 = n2.next
+            // deleteNode= deleteNode.next
+            // n1 = n1.next
+            // n2 = n2.next
 
         }
 
