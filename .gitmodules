@@ -1,0 +1,3 @@
+[submodule "Fast-NodeServer"]
+        path = Fast-NodeServer
+        url = https://github.com/lmliheng/Fast-NodeServer
