@@ -1,0 +1,3 @@
+[submodule "Fast-NodeServer"]
+	path = Fast-NodeServer
+	url = git@github.com/lmliheng/Fast-NodeServer.git
