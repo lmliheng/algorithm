@@ -1,0 +1,19 @@
+#app {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'logo-cn';
+    src: url('@/font/ZCOOLKuaiLe-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+    /* 优化加载显示 */
+
+    font-family: 'logo-en';
+    src: url('@/font/G8321-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
