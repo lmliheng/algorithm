@@ -16,6 +16,7 @@ export default defineConfig({
       { text: '首页', link: '/' },
       { text: '项目概述', link: '/1-xiang-mu-gai-shu-duo-yu-yan-suan-fa-xue-xi-bao-ku' },
       { text: '快速开始', link: '/2-kuai-su-kai-shi-huan-jing-da-jian-yu-yun-xing' },
+      { text: '代码展示', link: '/code-solutions/index' },
       { text: '算法专题', link: '/8-dong-tai-gui-hua-ru-men-cong-fei-bo-na-qi-dao-da-jia-jie-she' }
     ],
 
@@ -42,6 +43,12 @@ export default defineConfig({
         items: [
           { text: '动态规划入门', link: '/8-dong-tai-gui-hua-ru-men-cong-fei-bo-na-qi-dao-da-jia-jie-she' },
           { text: '双指针与滑动窗口', link: '/9-shuang-zhi-zhen-yu-hua-dong-chuang-kou-zi-fu-chuan-yu-shu-zu-wen-ti' }
+        ]
+      },
+      {
+        text: '代码展示',
+        items: [
+          { text: '题解索引', link: '/code-solutions/index' }
         ]
       },
       {
