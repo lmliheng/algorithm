@@ -32,6 +32,13 @@
       "level": "Beginner"
     },
     {
+      "slug": "code-solutions-index",
+      "title": "题解代码展示",
+      "file": "code-solutions/index.md",
+      "section": "代码展示",
+      "level": "All"
+    },
+    {
       "slug": "5-java-ti-jie-ti-xi-xiang-mu-jie-gou-yu-jie-ti-mo-ban",
       "title": "Java 题解体系：项目结构与解题模板",
       "file": "5-java-ti-jie-ti-xi-xiang-mu-jie-gou-yu-jie-ti-mo-ban.md",
