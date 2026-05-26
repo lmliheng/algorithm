@@ -34,14 +34,21 @@ export default defineConfig({
         text: '题解体系',
         items: [
           { text: 'Java 题解', link: '/5-java-ti-jie-ti-xi-xiang-mu-jie-gou-yu-jie-ti-mo-ban' },
-          { text: 'JavaScript/TypeScript 题解', link: '/6-javascript-typescript-ti-jie-bian-hao-jian-suo-yu-duo-chong-jie-fa-dui-bi' },
+          { text: 'JS/TS 题解', link: '/6-javascript-typescript-ti-jie-bian-hao-jian-suo-yu-duo-chong-jie-fa-dui-bi' },
           { text: 'C++ 题解', link: '/7-c-ti-jie-lian-biao-yu-zhi-zhen-shi-zhan' }
         ]
       },
       {
         text: '算法专题',
         items: [
-          { text: '动态规划入门', link: '/8-dong-tai-gui-hua-ru-men-cong-fei-bo-na-qi-dao-da-jia-jie-she' },
+          { text: '动态规划', link: '/8-dong-tai-gui-hua-ru-men-cong-fei-bo-na-qi-dao-da-jia-jie-she' },
+          { text: '贪心策略', link: '/10-tan-xin-ce-lue-jia-you-zhan-wen-ti-yu-tiao-yue-you-xi' },
+          { text: '回溯与递归', link: '/11-hui-su-fa-pai-lie-zu-he-yu-gua-hao-sheng-cheng' },
+          { text: '图论与最短路径', link: '/12-tu-lun-ji-chu-dijkstra-zui-duan-lu-jing-suan-fa' },
+          { text: '二叉树遍历', link: '/13-er-cha-shu-bian-li-cha-ru-yu-ping-heng-xing-pan-duan' },
+          { text: '堆与优先队列', link: '/14-dui-zui-xiao-dui-yu-zui-da-dui-de-wan-zheng-shi-xian' },
+          { text: '链表操作', link: '/15-lian-biao-cao-zuo-he-bing-fan-zhuan-yu-huan-jian-ce' },
+          { text: '排序算法', link: '/16-gui-bing-pai-xu-fen-zhi-si-xiang-de-jing-dian-ti-xian' },
           { text: '双指针与滑动窗口', link: '/9-shuang-zhi-zhen-yu-hua-dong-chuang-kou-zi-fu-chuan-yu-shu-zu-wen-ti' }
         ]
       },
@@ -49,13 +56,6 @@ export default defineConfig({
         text: '代码展示',
         items: [
           { text: '题解索引', link: '/code-solutions/index' }
-        ]
-      },
-      {
-        text: '示例',
-        items: [
-          { text: 'Markdown 示例', link: '/markdown-examples' },
-          { text: 'API 示例', link: '/api-examples' }
         ]
       }
     ],
