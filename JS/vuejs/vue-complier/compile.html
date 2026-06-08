@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Runtime Render</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+
+</body>
+
+<script>
+    const {compile,createApp} = Vue
+    const template = `<div class="container">
+        <h1>Hello, Vue!</h1>
+        <p>这是一个简单的html模板编译的案例</p>
+    </div>`
+    const renderFn= compile(template)
+
+    // const container = document.getElementById('app')
+    // Vue.render(renderFn, container)
+    const app = createApp({
+        render: renderFn
+    })
+    app.mount('#app')
+
+</script>
+
+</html>
