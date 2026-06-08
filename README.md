@@ -7,6 +7,12 @@
   <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
 </p>
 
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/loc-history-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset=".github/loc-history-light.svg">
+  <img src=".github/loc-history.svg" alt="Lines of code over time">
+</picture>
+
 <p align="center">
   <b>📚 深入学习算法与数据结构 | 多语言实现 | 详细题解</b>
 </p>
