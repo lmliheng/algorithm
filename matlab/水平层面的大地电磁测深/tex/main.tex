@@ -1,0 +1,496 @@
+\documentclass[10pt,aspectratio=169,fontset=none]{ctexbeamer}
+\usepackage[T1]{fontenc}
+
+\title{一维大地电磁测深层状介质的等值性}
+\author{李恒,寇鑫淼,夏凡茜,熊米芬}
+\institute{地球科学与信息物理学院}
+\date{June 12, 2026}
+
+% 添加封面上的大学校标，这里使用的是白色中南大学校标，并设置透明度为 30%
+% 如果你想使用校徽，可以在 beamerinnerthemeSUBLIMING.sty 文件中修改，找到对应的注释即可
+% 我的意思是，四个字的那种叫校徽，圆圆的那个叫校标
+\titlegraphic{\includegraphics[width=8cm]{assets/csu-logo.pdf}}
+
+\usepackage{styles/SUBLIMINGmacros}
+\usefolder{styles}
+\usetheme[style=nupurple, cover=facet]{SUBLIMING} % 在这里更换颜色主题风格
+
+\begin{document}
+
+    \begin{frame}
+        \titlepage
+    \end{frame}
+
+    \begin{frame}{目录 Contents}
+        \tableofcontents
+    \end{frame}
+
+    \section{引言}
+
+    \begin{frame}{大地电磁测深法 Magnetotellurics}
+        \begin{columns}
+            \column{0.55\textwidth}
+            \setblockstyle{metropolis}
+            \begin{tblock}{定义}
+                大地电磁法（Magnetotelluric, 简称 MT）是利用天然交变电磁信号来研究地球内部电性结构的一种被动源地球物理方法 。
+            \end{tblock}
+            \vspace{0.3em}
+            地电断面的电阻率与厚度通过地表观测的视电阻率与相位曲线来反演得到。
+
+            \column{0.4\textwidth}
+            \begin{block}{基本假设}
+                \begin{itemize}
+                    \item 平面电磁波入射
+                    \item 地下为水平层状均匀结构
+                    \item 时谐场 $e^{i\omega t}$
+                \end{itemize}
+            \end{block}
+        \end{columns}
+        \vspace{0.4em}
+        \setblockstyle{nobackground}
+        \begin{talert}{反演中的重要问题}
+            在反演解释中经常发现地电断面参数的解不唯一：一条视电阻率曲线可能对应若干组不同的地电参数——这就是大地电磁测深的\alert{等值现象}。
+        \end{talert}
+    \end{frame}
+
+    \section{理论基础}
+
+    \begin{frame}{Maxwell 方程组}
+        任何宏观电磁场都遵循麦克斯韦方程组。微分形式为：
+        \begin{equation}
+            \nabla\times \boldsymbol{H} = \boldsymbol{j}_c + \frac{\partial \boldsymbol{D}}{\partial t}
+        \end{equation}
+        \begin{equation}
+            \nabla\times \boldsymbol{E} = -\frac{\partial \boldsymbol{B}}{\partial t}
+        \end{equation}
+        \begin{equation}
+            \nabla\cdot \boldsymbol{D} = \rho_v,\quad \nabla\cdot \boldsymbol{B} = 0
+        \end{equation}
+        再补充电荷守恒与本构关系：
+        \begin{equation}
+            \nabla\cdot \boldsymbol{j}_c = -\frac{\partial \rho_v}{\partial t}
+        \end{equation}
+        \begin{equation}
+            \boldsymbol{j}_c = \sigma \boldsymbol{E},\quad \boldsymbol{D}=\varepsilon \boldsymbol{E},\quad \boldsymbol{B}=\mu \boldsymbol{H}
+        \end{equation}
+        \vspace{0.3em}
+        其中 $\sigma$ 为电导率，$\varepsilon_0=8.854\times10^{-12}\ \mathrm{F/m}$，$\mu_0=4\pi\times10^{-7}\ \mathrm{H/m}$。
+    \end{frame}
+
+    \begin{frame}{边界条件与时谐形式}
+        \begin{columns}[T]
+            \column{0.48\textwidth}
+            \begin{block}{边界条件}
+                不同介质分界面上，切向分量连续，法向分量连续：
+                \begin{equation*}
+                    E_{1t}=E_{2t},\ H_{1t}=H_{2t},\quad
+                    D_{1n}=D_{2n},\ B_{1n}=B_{2n}
+                \end{equation*}
+            \end{block}
+
+            \column{0.48\textwidth}
+            \begin{block}{时谐场}
+                取时间因子 $e^{i\omega t}$，则 $\partial/\partial t=i\omega$。忽略位移电流（大地电磁的低频近似），Maxwell 方程可写为：
+                \begin{equation}
+                    \nabla\times \boldsymbol{E} + i\omega\mu_0 \boldsymbol{H}=0
+                \end{equation}
+                \begin{equation}
+                    \nabla\times \boldsymbol{H} - \sigma \boldsymbol{E}=0
+                \end{equation}
+            \end{block}
+        \end{columns}
+        \vspace{0.4em}
+        \setblockstyle{metropolis}
+        \begin{tblock}{一维假设}
+            一维层状介质中电导率仅依赖于深度 $z$，即 $\partial/\partial x=\partial/\partial y=0$，因此电磁场分量可分解为独立的 $E_x,H_y$ 与 $E_y,H_x$ 两组（TE/TM 模式）。
+        \end{tblock}
+    \end{frame}
+
+    \begin{frame}{一维电阻率介质的 Maxwell 方程组}
+        展开旋度运算并利用一维假设，得到一维介质的分量形式：
+        \begin{equation}
+            \frac{\partial E_y}{\partial z} = i\omega \mu_0 H_x,\qquad
+            \frac{\partial E_x}{\partial z} = -i\omega \mu_0 H_y
+        \end{equation}
+        \begin{equation}
+            -\frac{\partial H_y}{\partial z} = \sigma E_x,\qquad
+            \frac{\partial H_x}{\partial z} = \sigma E_y
+        \end{equation}
+        \vspace{0.3em}
+        两组方程形式完全相同，下面以 $E_x, H_y$ 一组为例进行推导。
+    \end{frame}
+
+    \section{一维正演公式}
+
+    \begin{frame}{$N$ 层地电模型}
+        \begin{columns}
+            \column{0.42\textwidth}
+            地电模型由 $N$ 层组成，第 $j$ 层（$j=1,\dots,N$）的电阻率为 $\rho_j=1/\sigma_j$，厚度为 $h_j$，第 $N$ 层为均匀半空间（$h_N=\infty$）。
+
+            \column{0.5\textwidth}
+            \begin{block}{波数与固有阻抗}
+                \begin{equation*}
+                    k_j = \sqrt{i\omega \mu_0 \sigma_j} = \sqrt{i\omega \mu_0 / \rho_j}
+                \end{equation*}
+                \begin{equation*}
+                    Z_{0j} = \frac{i\omega\mu_0}{k_j} = \sqrt{i\omega \mu_0 \rho_j}
+                \end{equation*}
+            \end{block}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{第 $j$ 层的控制方程与通解}
+        由
+        \begin{equation}
+            H_{yj} = -\frac{1}{i\omega \mu_0}\frac{\partial E_{xj}}{\partial z}
+        \end{equation}
+        代入 $-\partial H_{yj}/\partial z=\sigma_j E_{xj}$，得到二阶常微分方程：
+        \begin{equation}
+            \frac{\partial^2 E_{xj}}{\partial z^2} - k_j^2 E_{xj} = 0
+        \end{equation}
+        其通解为
+        \begin{equation}
+            E_{xj}(z) = A_j e^{k_j z} + B_j e^{-k_j z},\quad z_j\le z\le z_{j+1}
+        \end{equation}
+        对应磁场分量为
+        \begin{equation}
+            H_{yj}(z) = -\frac{k_j}{i\omega \mu_0}\bigl(A_j e^{k_j z} - B_j e^{-k_j z}\bigr)
+        \end{equation}
+    \end{frame}
+
+    \begin{frame}{递推阻抗公式}
+        定义第 $j$ 层顶界面的阻抗 $Z_j = E_x(z_j)/H_y(z_j)$，利用界面处 $E_x,H_y$ 连续的边界条件，可以推导出相邻层阻抗之间的递推关系：
+        \begin{equation}
+            Z_j = Z_{0j}\,\frac{1 - R_j Q_j}{1 + R_j Q_j}
+        \end{equation}
+        其中
+        \begin{equation}
+            R_j = \frac{Z_{0j} - Z_{j+1}}{Z_{0j} + Z_{j+1}},\qquad
+            Q_j = e^{-2k_j h_j}
+        \end{equation}
+        \vspace{0.2em}
+        \setblockstyle{nobackground}
+        \begin{talert}{递推顺序}
+            从第 $N$ 层（半空间）开始，$Z_{N}=Z_{0N}$，逐层向上递推得到地表阻抗 $Z_1$。
+        \end{talert}
+    \end{frame}
+
+    \begin{frame}{视电阻率与相位}
+        由地表阻抗 $Z_1=E_x/H_y$，大地电磁视电阻率与相位定义为：
+        \begin{equation}
+            \rho_a = \frac{1}{\omega \mu_0} |Z_1|^2
+            = \frac{1}{\omega \mu_0}\Bigl( (\operatorname{Re} Z_1)^2 + (\operatorname{Im} Z_1)^2 \Bigr)
+        \end{equation}
+        \begin{equation}
+            \phi = \arctan\!\left( \frac{\operatorname{Im} Z_1}{\operatorname{Re} Z_1} \right)
+        \end{equation}
+        \vspace{0.3em}
+        \begin{block}{物理意义}
+            \begin{itemize}
+                \item 视电阻率 $\rho_a$ 反映了不同周期（不同探测深度）下地层的综合导电性。
+                \item 相位 $\phi$ 反映 $E$ 与 $H$ 之间的相位差，均匀半空间时 $\phi=45^\circ$。
+            \end{itemize}
+        \end{block}
+    \end{frame}
+
+    \section{Matlab 实现}
+
+    \begin{frame}{MT1DForward：正演函数}
+        \setblockstyle{metropolis}
+        \begin{tblock}{函数签名}
+            \texttt{function [apparentRho, Phase] = MT1DForward(rho, h, f)}
+        \end{tblock}
+        输入：
+        \begin{itemize}
+            \item \texttt{rho} —— 各层电阻率向量 ($\Omega\cdot\mathrm{m}$)，长度为层数 $N$。
+            \item \texttt{h} —— 各层厚度向量 ($\mathrm{m}$)，长度为 $N-1$（最后一层为半空间）。
+            \item \texttt{f} —— 计算频率 ($\mathrm{Hz}$)。
+        \end{itemize}
+        输出：
+        \begin{itemize}
+            \item \texttt{apparentRho} —— 视电阻率 ($\Omega\cdot\mathrm{m}$)。
+            \item \texttt{Phase} —— 相位（度）。
+        \end{itemize}
+    \end{frame}
+
+    \begin{frame}[fragile]{Matlab 代码 (I)}
+        \begin{minted}[fontsize=\small]{matlab}
+function [apparentRho, Phase] = MT1DForward(rho, h, f)
+    nFreqs = length(f);
+    nLayer = length(rho);
+    u0 = 4 * pi * 1e-7;
+
+    Z = zeros(nFreqs,1);
+    apparentRho = zeros(nFreqs,1);
+    Phase = zeros(nFreqs,1);
+
+    for iFreq = 1:nFreqs
+        omega = 2 * pi * f(iFreq);
+        Zk = 0;
+        for j = nLayer:-1:1
+            k = sqrt(1i * omega * u0 / rho(j));
+            Z0 = sqrt(1i * omega * u0 * rho(j));
+            if j == nLayer
+                Zk = Z0; continue;
+            end
+            R = (Z0 - Zk) / (Z0 + Zk);
+            Q = exp(-2 * k * h(j));
+            Zk = Z0 * (1 - R * Q) / (1 + R * Q);
+        end
+        Z(iFreq) = Zk;
+        apparentRho(iFreq) = abs(Zk)^2 / (omega * u0);
+        Phase(iFreq) = atan2d(imag(Zk), real(Zk));
+    end
+end
+        \end{minted}
+    \end{frame}
+
+    \begin{frame}[fragile]{Matlab 代码 (II)：三层地电模型示例}
+        取三层模型 $\rho=[100,\,10,\,100]\ \Omega\cdot\mathrm{m}$，$h=[2000,\,2000]\ \mathrm{m}$，用对数等间距频率 $f\in[10^{-3},10^3]\ \mathrm{Hz}$ 正演。
+        \begin{minted}[fontsize=\small]{matlab}
+f = logspace(-3, 3, 21)';
+rho = [100; 10; 100];     % 三层
+h   = [2000; 2000];       % 厚度
+
+[apparentRho, Phase] = MT1DForward(rho, h, f);
+
+figure;
+subplot(2,1,1);
+    loglog(1./f, apparentRho, 'o', ...
+        'MarkerFaceColor', [0,0.45,0.74]);
+    xlabel('Period [s]'); ylabel('Apparent \rho [\Omega m]');
+    title('Apparent Resistivity');
+subplot(2,1,2);
+    semilogx(1./f, Phase, 'o', ...
+        'MarkerFaceColor', [0,0.45,0.74]);
+    xlabel('Period [s]'); ylabel('Phase [^\circ]');
+    title('Phase');
+        \end{minted}
+    \end{frame}
+
+    \section{等值现象与反演}
+
+    \begin{frame}{大地电磁测深的等值性}
+        在大地电磁测深的反演解释中，地电断面参数的解往往不唯一——一条视电阻率曲线可以对应若干组不同的地电断面参数，这就是大地电磁测深的\alert{等值现象}。
+        \vspace{0.2em}
+        \begin{columns}
+            \column{0.48\textwidth}
+            \setblockstyle{metropolis}
+            \begin{tblock}{S 等值（横向电导主导）}
+                当中间层很薄且电阻率很低时，只要中间层的\alert{纵向电导}
+                \begin{equation*}
+                    S = \frac{h}{\rho}
+                \end{equation*}
+                保持不变，则视电阻率曲线几乎完全重合。
+            \end{tblock}
+
+            \column{0.48\textwidth}
+            \begin{tblock}{H 等值（厚度主导）}
+                当中间层厚度 $h$ 固定而电阻率 $\rho$ 变化（且 $\rho$ 相对较高）时，视电阻率曲线形态相近——即\alert{H 等值}现象。
+            \end{tblock}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{S 等值：固定纵向电导 $S = h/\rho$}
+        三组三层模型，纵向电导均为 $S=200\ \mathrm{S}$：
+        \begin{columns}[T]
+            \column{0.46\textwidth}
+            \centering
+            \begin{tabular}{lccc}
+                \toprule
+                模型 & $\rho$ & $h$ & $S$ \\
+                \midrule
+                & $\Omega\!\cdot\!\mathrm{m}$ & $\mathrm{m}$ & $\mathrm{S}$ \\
+                \midrule
+                1 & 10  & 2000 & 200 \\
+                2 & 5   & 1000 & 200 \\
+                3 & 20  & 4000 & 200 \\
+                \bottomrule
+            \end{tabular}
+            \vspace{0.4em}
+            \small $\rho$ 相差 4 倍，$h$ 相差 4 倍，$S$ 完全相同。
+
+            \column{0.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{assets/s.png} \\
+            \small \textcolor{primary}{S 等值}：三条曲线在观测周期范围内几乎重合。
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{S 等值：视电阻率曲线与讨论}
+        \centering
+        \includegraphics[width=0.92\textwidth]{assets/s.png}
+    \end{frame}
+
+    \begin{frame}{H 等值：固定中间层厚度 $h$}
+        八组三层模型，中间层厚度固定为 $h=2000\ \mathrm{m}$，电阻率从 5 到 10000 $\Omega\cdot\mathrm{m}$ 变化：
+        \begin{columns}[T]
+            \column{0.48\textwidth}
+            \centering
+            \begin{tabular}{cccc}
+                \toprule
+                模型 & $\rho$ ($\Omega\!\cdot\!\mathrm{m}$) & $h$ ($\mathrm{m}$) & $S$ ($\mathrm{S}$) \\
+                \midrule
+                1 & 5    & 2000 & 400.00 \\
+                2 & 50   & 2000 & 40.00 \\
+                3 & 200  & 2000 & 10.00 \\
+                4 & 500  & 2000 & 4.00 \\
+                5 & 1000 & 2000 & 2.00 \\
+                6 & 3000 & 2000 & 0.67 \\
+                7 & 7000 & 2000 & 0.29 \\
+                8 & 10000& 2000 & 0.20 \\
+                \bottomrule
+            \end{tabular}
+
+            \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{assets/h.png} \\
+            \small \textcolor{primary}{H 等值现象}：$h$ 固定时，电阻率变化引起的曲线差异有限。
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{H 等值：视电阻率曲线}
+        \centering
+        \includegraphics[width=0.92\textwidth]{assets/h.png}
+
+         \end{frame}
+
+    \begin{frame}{大地电磁的等值现象}
+        \setblockstyle{metropolis}
+        \begin{tblock}{现象定义}
+            在大地电磁测深的反演解释中，经常发现地电断面参数的解不是唯一的：\textbf{同一条视电阻率曲线，可以对应多组参数不同的地电断面}。这种视电阻率曲线与地电断面参数之间非一一对应的现象，就是大地电磁测深的\alert{等值现象}。
+        \end{tblock}
+        \vspace{0.3em}
+        \setblockstyle{nobackground}
+        \begin{tblock}{本质}
+            视电阻率$\rho_a$是地电断面电性的\textbf{加权综合效应}，它只对层的"综合电性参数"敏感，而对单独的厚度$h$或电阻率$\rho$不敏感——这是反演非唯一性的根源。
+        \end{tblock}
+        \vspace{0.3em}
+        \centering
+        \small \textcolor{primary}{两种典型的等值类型}：S 等值（纵向电导主导，低阻薄层）、H 等值（横向电阻主导，高阻薄层）。
+    \end{frame}
+
+    \begin{frame}{S 等值：纵向电导 $S=h/\rho$ 主导}
+        \begin{columns}[T]
+            \column{0.48\textwidth}
+            \setblockstyle{metropolis}
+            \begin{tblock}{物理本质}
+                当中间层很薄且电阻率很低（\alert{高导薄层}）时，只要纵向电导
+                \[
+                    S = \frac{h}{\rho}
+                \]
+                保持不变，不同的$h$和$\rho$组合会产生几乎完全相同的视电阻率曲线。
+            \end{tblock}
+            \setblockstyle{nobackground}
+            \begin{tblock}{原理}
+                电磁波穿过薄的高导层时，衰减由\textbf{总电导}决定，而不单独依赖于层厚或电阻率。
+            \end{tblock}
+
+            \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{assets/s.png} \\
+            \small \textcolor{primary}{示例（三组$S=200\ \mathrm{S}$）}：
+            \begin{itemize}
+                \item $h=2000\ \mathrm{m}, \rho=10\ \Omega\cdot\mathrm{m}$
+                \item $h=1000\ \mathrm{m}, \rho=5\ \Omega\cdot\mathrm{m}$
+                \item $h=4000\ \mathrm{m}, \rho=20\ \Omega\cdot\mathrm{m}$
+            \end{itemize}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{H 等值：横向电阻 $T=\rho h$ 主导}
+        \begin{columns}[T]
+            \column{0.48\textwidth}
+            \setblockstyle{metropolis}
+            \begin{tblock}{物理本质}
+                当中间层很薄且电阻率很高（\alert{高阻薄层}）时，只要横向电阻
+                \[
+                    T = \rho h
+                \]
+                保持不变，不同的$h$和$\rho$组合会产生非常相似的视电阻率曲线。
+            \end{tblock}
+            \setblockstyle{nobackground}
+            \begin{tblock}{原理}
+                高阻薄层对电磁波的"阻挡"能力由\textbf{总电阻（单位面积总电阻能力）}决定，厚度$h$是主导因素。
+            \end{tblock}
+
+            \column{0.48\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{assets/h.png} \\
+            \small \textcolor{primary}{示例（固定$h=2000\ \mathrm{m}$）}：
+            \begin{itemize}
+                \item $\rho=5\sim10000\ \Omega\cdot\mathrm{m}$，S 从 400 S 降到 0.2 S
+                \item 低阻时深凹陷，高阻时几乎无凹陷
+            \end{itemize}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{等值现象的成因与反演对策}
+        \begin{columns}[T]
+            \column{0.48\textwidth}
+            \begin{block}{成因}
+                \begin{itemize}
+                    \item 观测频段有限，对应的探测深度范围有限。
+                    \item 电磁波对薄层的敏感度随厚度减小呈指数衰减。
+                    \item 视电阻率是多层电性的加权综合效应。
+                \end{itemize}
+            \end{block}
+
+            \column{0.48\textwidth}
+            \begin{block}{反演对策}
+                \begin{itemize}
+                    \item 拓宽观测频段（覆盖更大探测深度范围）。
+                    \item 联合视电阻率与相位（相位受等值性影响更小）。
+                    \item 引入先验约束与正则化。
+                    \item 结合重磁、地震等其他地球物理方法。
+                \end{itemize}
+            \end{block}
+        \end{columns}
+        \vspace{0.3em}
+        \setblockstyle{nobackground}
+        \begin{talert}{实际工作提醒}
+            大地电磁反演必须给出\alert{一个模型系（多组可能参数）}，而不是唯一的"真值模型"，并向用户明确说明解的非唯一性。
+        \end{talert}
+    \end{frame}
+
+    \begin{frame}{小结}
+        \begin{columns}
+            \column{0.48\textwidth}
+            \begin{block}{正演流程}
+                \begin{enumerate}
+                    \item Maxwell $\xrightarrow{\text{一维假设}}$ 分量方程。
+                    \item 推导 $E_{xj}$ 的二阶常微分方程。
+                    \item 用界面连续性得到阻抗递推公式。
+                    \item 从半空间 $Z_N=Z_{0N}$ 向上递推至 $Z_1$。
+                    \item 由 $Z_1$ 计算视电阻率 $\rho_a$ 与相位 $\phi$。
+                \end{enumerate}
+            \end{block}
+
+            \column{0.48\textwidth}
+            \begin{block}{等值性核心结论}
+                \begin{itemize}
+                    \item S 等值：$S=h/\rho$ 主导低阻薄层。
+                    \item H 等值：厚度 $h$ 主导高阻薄层。
+                    \item 反演必须带约束，且要向用户说明多解。
+                \end{itemize}
+            \end{block}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}{代码与笔记}
+        \centering
+        \vspace{2em}
+        \setblockstyle{metropolis}
+        \begin{tblock}{GitHub 仓库}
+            本报告所用全部 Matlab 代码、TeX 源文件与笔记均托管于：
+            \centering
+            \vspace{0.6em}
+            \href{https://github.com/lmliheng/algorithm}{\texttt{\textcolor{primary}{https://github.com/lmliheng/algorithm}}}
+        \end{tblock}
+        \vspace{2em}
+        \small \textcolor{primary}{说明}：仓库/matlab目录下中包含所有相关公式推导笔记。
+    \end{frame}
+
+    \standout{Questions \& Answers}
+
+\end{document}

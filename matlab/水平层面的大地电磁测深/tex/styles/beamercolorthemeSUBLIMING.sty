@@ -1,0 +1,200 @@
+% Copyright (c) 2023 by Yaokun Yang
+% https://github.com/PourRevenir/Subliming
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\mode<presentation>
+
+% 设置各文档部件的颜色
+\setbeamercolor*{title page header}{fg=white}
+\setbeamercolor*{author}{fg=white}
+\setbeamercolor*{date}{fg=white}
+\setbeamercolor{background canvas}{bg=white}
+
+% 提供 beamer 主题的不同风格的选项，以便用户选择
+\DeclareOptionBeamer{style}{\def\beamer@mytheme@style{#1}}
+\ExecuteOptionsBeamer{style=csublue} %default
+\ProcessOptionsBeamer
+
+\def\beamer@mytheme@stylenupurple{nupurple}%
+\def\beamer@mytheme@stylehnured{hnured}%
+\def\beamer@mytheme@stylepantonea{pantone2018}%
+\def\beamer@mytheme@stylepantonee{pantone2019}%
+\def\beamer@mytheme@stylepantoneb{pantone2021a}%
+\def\beamer@mytheme@stylepantonec{pantone2021b}%
+\def\beamer@mytheme@stylepantoned{pantone2022}%
+
+\ifx\beamer@mytheme@style\beamer@mytheme@stylenupurple%
+    % 定义 Northwestern University 风格 (purple)
+    \definecolor{primary}{RGB}{078, 042, 132}
+    \definecolor{primary130}{RGB}{056, 023, 090}
+    \definecolor{primary120}{RGB}{064, 031, 104}
+    \definecolor{primary110}{RGB}{072, 036, 118}
+    \definecolor{primary40}{RGB}{164, 149, 195}
+    \definecolor{primary30}{RGB}{182, 172, 209}
+    \definecolor{primary20}{RGB}{204, 196, 223}
+    \definecolor{primary10}{RGB}{228, 224, 238}
+    
+    \definecolor{alerted}{RGB}{202, 124, 027}
+    \definecolor{example}{RGB}{000, 134, 086}
+    \else\ifx\beamer@mytheme@style\beamer@mytheme@stylehnured%
+        % 定义 hnu-red 风格 (red) 
+        \definecolor{primary}{HTML}{A00000}
+        \definecolor{primary130}{HTML}{800000}
+        \definecolor{primary120}{HTML}{880000}
+        \definecolor{primary110}{HTML}{900000}
+        \definecolor{primary40}{HTML}{B03030}
+        \definecolor{primary30}{HTML}{C05050}
+        \definecolor{primary20}{HTML}{D07070}
+        \definecolor{primary10}{HTML}{E0A0A0}
+
+        \definecolor{alerted}{HTML}{C06112}
+        \definecolor{example}{HTML}{0B7373}
+        \else\ifx\beamer@mytheme@style\beamer@mytheme@stylepantonee%
+            % 定义 pantone 2019 风格
+		    \definecolor{primary}{HTML}{F36F63}
+            \definecolor{primary130}{HTML}{910408}
+            \definecolor{primary120}{HTML}{B2191E}
+            \definecolor{primary110}{HTML}{D6483D}
+            \definecolor{primary40}{HTML}{FF958C}
+            \definecolor{primary30}{HTML}{FFBCB7}
+            \definecolor{primary20}{HTML}{FFD9D7}
+            \definecolor{primary10}{HTML}{FFF0EF}
+            
+            \definecolor{alerted}{HTML}{F7D92D}
+            \definecolor{example}{HTML}{9CD9DA}
+            \else\ifx\beamer@mytheme@style\beamer@mytheme@stylepantonea%
+                % 定义 pantone 2018 风格
+                \definecolor{primary}{HTML}{8262AC}
+                \definecolor{primary130}{HTML}{371565}
+                \definecolor{primary120}{HTML}{4C277C}
+                \definecolor{primary110}{HTML}{644193}
+                \definecolor{primary40}{HTML}{AA90CC}
+                \definecolor{primary30}{HTML}{D2C2E7}
+                \definecolor{primary20}{HTML}{EEE7F8}
+                \definecolor{primary10}{HTML}{FEFEFF}
+
+                \definecolor{alerted}{HTML}{F49863}
+                \definecolor{example}{HTML}{BDD391}
+                \else\ifx\beamer@mytheme@style\beamer@mytheme@stylepantoneb%    % 定义 pantone 2021a 风格
+                    \definecolor{primary}{HTML}{0283B1}
+                    \definecolor{primary130}{HTML}{00394F}
+                    \definecolor{primary120}{HTML}{014C69}
+                    \definecolor{primary110}{HTML}{016388}
+                    \definecolor{primary40}{HTML}{06A5E1}
+                    \definecolor{primary30}{HTML}{28AADB}
+                    \definecolor{primary20}{HTML}{4DB9E2}
+                    \definecolor{primary10}{HTML}{79CBEA}
+                
+                    \definecolor{alerted}{HTML}{D25C78}
+                    \definecolor{example}{HTML}{949398}
+                    \else\ifx\beamer@mytheme@style\beamer@mytheme@stylepantonec%
+                        % 定义 pantone 2021b 风格
+                        \definecolor{primary}{HTML}{AE95CC}
+                        \definecolor{primary130}{HTML}{4D2978}
+                        \definecolor{primary120}{HTML}{65428F}
+                        \definecolor{primary110}{HTML}{8667AC}
+                        \definecolor{primary40}{HTML}{D3C3E6}
+                        \definecolor{primary30}{HTML}{F1EBF8}
+                        \definecolor{primary20}{HTML}{FEFEFF}
+                        \definecolor{primary10}{HTML}{FFFFFF}
+                        
+                        \definecolor{alerted}{HTML}{D4B657}
+                        \definecolor{example}{HTML}{B4CC54}
+                        \else\ifx\beamer@mytheme@style\beamer@mytheme@stylepantoned%
+                            % 定义 pantone 2022 风格
+                            \definecolor{primary}{HTML}{6868AD}
+                            \definecolor{primary130}{HTML}{181860}
+                            \definecolor{primary120}{HTML}{2D2D79}
+                            \definecolor{primary110}{HTML}{464692}
+                            \definecolor{primary40}{HTML}{9494CB}
+                            \definecolor{primary30}{HTML}{C4C4E6}
+                            \definecolor{primary20}{HTML}{E7E7F7}
+                            \definecolor{primary10}{HTML}{FDFDFF}
+                            
+                            \definecolor{alerted}{HTML}{F36F61}
+                            \definecolor{example}{HTML}{8AACD4}
+                            \else
+                            % 定义 csu-blue 风格（default）
+                            \definecolor{primary}{HTML}{186199}
+                            \definecolor{primary130}{HTML}{022A48}
+                            \definecolor{primary120}{HTML}{053860}
+                            \definecolor{primary110}{HTML}{0D4A79}
+                            \definecolor{primary40}{HTML}{3572A0}
+                            \definecolor{primary30}{HTML}{578DB6}
+                            \definecolor{primary20}{HTML}{81AFD2}
+                            \definecolor{primary10}{HTML}{B6D4EB}
+
+                            \definecolor{alerted}{HTML}{BD3B08}
+                            \definecolor{example}{HTML}{5D9C95}
+                            \fi%
+                        \fi%
+                    \fi%
+                \fi%
+            \fi%
+        \fi%
+\fi%
+
+\definecolor{background}{HTML}{FFFFFF}
+\definecolor{Gray}{HTML}{858b8f}
+
+\definecolor{nurichblack}{RGB}{0,0,0}
+\definecolor{nubrightgreen}{RGB}{88,185,71}
+\definecolor{nubrightteal}{RGB}{127, 206, 205}
+\definecolor{nubrightblue}{RGB}{80, 145, 205}
+\definecolor{nubrightyellow}{RGB}{237, 233, 59}
+\definecolor{nubrightorange}{RGB}{255, 197, 32}
+\definecolor{nubrightred}{RGB}{239, 085, 063}
+\definecolor{nudarkgreen}{RGB}{000, 134, 086}
+\definecolor{nudarkteal}{RGB}{000, 127, 164}
+\definecolor{nudarkblue}{RGB}{013, 045, 108}
+\definecolor{nudarkyellow}{RGB}{217, 200, 038}
+\definecolor{nudarkorange}{RGB}{202, 124, 027} 
+\definecolor{nudarkred}{RGB}{216, 088, 032}
+
+% 有序列表 item 颜色 
+\setlist[enumerate]{label={\ifnum\@itemdepth=1\relax
+  \color{alerted text}\else
+  \color{primary}\fi\theenumi.}}
+
+% 无序列表 item 颜色 (bullet)
+\setlist[itemize]{label=\color{primary}$\bullet$}
+
+\setbeamercolor{alerted text}{fg=alerted}
+
+% Turn off shading for block title when rounded=true (by default, rounded = false)
+\makeatletter
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
+  color(0pt)=(lower.bg); color(4pt)=(lower.bg); color(4pt)=(upper.bg)}
+\setbeamercolor{block title}{fg=white,bg=primary}
+\setbeamercolor{block body}{parent=normal text,fg=black,bg=primary10!55}
+\setbeamercolor{block title alerted}{fg=white,bg=alerted}
+\setbeamercolor{block body alerted}{fg=black,bg=alerted!10}
+\setbeamercolor{block title example}{fg=white,bg=example}
+\setbeamercolor{block body example}{fg=black,bg=example!10}
+\setbeamercolor{example text}{fg=example}
+\setbeamercolor{alerted text}{fg=alerted}
+\setbeamercolor{caption name}{fg=primary}
+\setbeamercolor{section in toc}{fg=primary}
+\setbeamercolor{frametitle continuation}{fg=primary}
+\setbeamercolor{frametitle}{fg=primary}
+\setbeamercolor{description item}{fg=primary}
+
+% Bibliography
+\setbeamercolor*{bibliography entry author}{fg=primary}
+\makeatletter
+\def\@cite#1#2{{\footnotesize \textcolor{primary}{[\textbf{\textit{#1\if@tempswa , #2\fi}}]}}}
+\def\@biblabel#1{[\textbf{#1}]}
+\makeatother
+
+\mode<all>

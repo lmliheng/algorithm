@@ -1,0 +1,81 @@
+% Copyright (c) 2023 by Yaokun Yang
+% https://github.com/PourRevenir/Subliming
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\mode<presentation>
+
+% 使用 \newfontfamily 引入西文字体族
+\newfontfamily\Campton[
+    Path=fonts/Campton/, 
+    UprightFont = * Light,
+    ItalicFont = * Light Italic,
+    BoldFont = * Medium,
+    BoldItalicFont = * Medium Italic,
+    Extension=.otf
+]{Campton}
+
+% 设置标题等处的字体
+\setbeamerfont{title}{family=\Campton, series={\bfseries}, size=\LARGE}
+\setbeamerfont{author}{family=\Campton, size=\small}
+\setbeamerfont{frametitle}{family=\Campton, series={\bfseries}, size=\Large}
+\setbeamerfont{section}{family=\Campton, size=\LARGE}
+
+% 使用 \setCJKmainfont 设置中文字体族（无衬线体和等宽字体）
+\setCJKmainfont[
+    Path = fonts/PingFangSC/,
+    UprightFont = *-Light,
+    ItalicFont = *-Thin,
+    BoldFont = *-Regular,
+    BoldItalicFont = *-Medium,
+    Extension = .ttf
+]{PingFangSC}
+\setCJKsansfont[
+    Path = fonts/PingFangSC/,
+    UprightFont = *-Light,
+    ItalicFont = *-Thin,
+    BoldFont = *-Regular,
+    BoldItalicFont = *-Medium,
+    Extension = .ttf
+]{PingFangSC}
+\setCJKmonofont[
+    Path = fonts/PingFangSC/,
+    UprightFont = *-Light,
+    ItalicFont = *-Thin,
+    BoldFont = *-Regular,
+    BoldItalicFont = *-Medium,
+    Extension = .ttf
+]{PingFangSC}
+
+% 设置西文无衬线字体族和等宽字体族
+\setsansfont[
+    Path = fonts/Akkurat/,
+    UprightFont = *Light-Regular,
+    ItalicFont = *Light-Italic,
+    BoldFont = *-Regular,
+    BoldItalicFont = *-Bold,
+    Extension = .otf
+]{AkkuratPro}
+\setmonofont[
+    Path = fonts/Consolas/,
+    ItalicFont = *i,
+    BoldFont = *b,
+    BoldItalicFont = *z,
+    Extension =.ttf
+]{consola}
+
+% 设置数学字体
+\usepackage[mathrm=sym]{unicode-math}
+\setmathfont{Fira Math}
+
+\mode<all>

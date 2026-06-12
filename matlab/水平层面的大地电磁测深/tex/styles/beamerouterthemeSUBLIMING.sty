@@ -1,0 +1,64 @@
+% Copyright (c) 2023 by Yaokun Yang
+% https://github.com/PourRevenir/Subliming
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\mode<all>
+\mode<presentation>
+
+% 确保使用了 hyperref package
+\usepackage{hyperref}
+
+% 设置 frame title 和 footer
+
+% Frame title
+\defbeamertemplate*{frametitle}{texsx}[1][]
+{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.2cm]{frametitle} 
+  \begin{tikzpicture}
+  \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  \ifx\insertframesubtitle\@empty%
+      {\node[anchor=west, frametitle.fg,font=\Large] at (0.05*\the\paperwidth,0.61){\raggedright\insertframetitle};}
+  \else%
+      {\node[anchor= west, frametitle.fg,font=\large] at (0.05*\the\paperwidth,0.81){\raggedright\insertframetitle};%
+       \node[anchor= west, frametitle.fg,font=\small] at (0.05*\the\paperwidth,0.41){\raggedright\insertframesubtitle};}%
+  \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+% wildcat 的作者提供了上方导航栏的代码，需要可以取消注释
+% 排版上可能不适合中文主题，有能力的可以自行调整
+% \setbeamertemplate{headline}{
+%   % If page > 1 (don't diplsy for first page)
+%   \ifnum\thepage>1
+%     \begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex]{palette quaternary}
+%       \insertnavigation{\paperwidth} % Add navigation symbols
+%     \end{beamercolorbox}
+%   \fi
+% }
+
+% Footer (Pages)
+%% NOTE: ON OVERLEAF USE ht=-2.5ex. Not sure why this is needed.
+\setbeamertemplate{footline}{
+  \ifnum\thepage>1
+    \begin{beamercolorbox}[wd=\paperwidth,ht=-2.5ex,dp=1.125ex,right]{page number in head/foot}
+      \usebeamerfont{page number in head/foot}%
+      \color{black!20} % Change the color to black!40
+      \the\numexpr\insertframenumber-1\relax/\the\numexpr\inserttotalframenumber-1\relax
+      \hspace{1em} % Add some space to the right margin
+    \end{beamercolorbox}
+  \fi
+}
+
+\mode<all>

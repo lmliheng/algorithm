@@ -1,0 +1,358 @@
+% Copyright (c) 2023 by Yaokun Yang
+% https://github.com/PourRevenir/Subliming
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\mode<presentation>
+
+% 提供 beamer 主题的不同风格的选项，以便用户选择
+\DeclareOptionBeamer{cover}{\def\beamer@mytheme@cover{#1}}
+\ExecuteOptionsBeamer{cover=facet} %default
+\ProcessOptionsBeamer
+
+\def\beamer@mytheme@coverplain{plain}%
+
+% 绘制 pattern
+\ifx\beamer@mytheme@cover\beamer@mytheme@coverplain%
+    \newcommand{\drawpattern}[4]{
+        \fill[fill=#1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    }
+    \else%
+    \newcommand{\drawpattern}[4]{
+        % 定义坐标
+        \coordinate (A) at (0,0); % 南西
+        \coordinate (B) at (0,0.9*\the\paperheight); % 西
+        \coordinate (C) at (4.4,0.75*\the\paperheight); % 中西
+        \coordinate (D) at (6.4,0); % 南南西
+        \coordinate (E) at (6.4,\the\paperheight); % 北西
+        \coordinate (F) at (7.7,0); % 南南南西
+        \coordinate (G) at (13.2,0.77*\the\paperheight); % 中东
+        \coordinate (H) at (11.6,0); % 南南南东
+        \coordinate (I) at (\the\paperwidth,0.55*\the\paperheight); % 北东东
+        \coordinate (J) at (\the\paperwidth,0.18*\the\paperheight); % 南东东
+        \coordinate (K) at (12,0); % 南南东
+        \coordinate (L) at (12.8,\the\paperheight); % 北北东
+        \coordinate (M) at (0,\the\paperheight); % 北西
+        \coordinate (N) at (\the\paperwidth,0); % 南东
+        \coordinate (O) at (\the\paperwidth,\the\paperheight); % 北东
+        % 绘制多边形
+        \draw[color=#1,fill=#1, line width=0.05pt] (A) -- (B) -- (C) -- (D) -- cycle;
+        \draw[color=#2,fill=#2, line width=0.05pt] (M) -- (B) -- (C) -- (E) -- cycle;
+        \draw[color=#3,fill=#3, line width=0.05pt] (E) -- (C) -- (D) -- (F) -- (G) -- (L) -- cycle;
+        \draw[color=#4,fill=#4, line width=0.05pt] (F) -- (G) -- (H) -- cycle;
+        \draw[color=#2,fill=#2, line width=0.05pt] (H) -- (G) -- (I) -- (J) -- (K) -- cycle;
+        \draw[color=#1,fill=#1, line width=0.05pt] (K) -- (J) -- (N) -- cycle;
+        \draw[color=#1,fill=#1,  line width=0.05pt] (L) -- (G) -- (I) -- (O) -- cycle;
+    }
+\fi%
+
+% 绘制 title page 和 standout frames, 以及 tblocks
+\newcommand{\bgpattern}{
+  \drawpattern{primary}{primary110}{primary120}{primary130}
+}
+
+% 绘制浅色版本用于制作 section pages
+\newcommand{\bgpatternlight}{
+  \drawpattern{primary10!30}{primary20!30}{primary30!30}{primary40!30}
+}
+
+% 绘制特殊颜色版本用来制作和主题色不一样的 tblocks
+\newcommand{\bgpatternblock}[1]{
+  \drawpattern{#1}{#1!110}{#1!120}{#1!130}
+}
+
+% 背景模板
+\setbeamertemplate{background}{
+    \begin{tikzpicture}
+    \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+
+    % 只给封面添加背景
+    \ifnum\thepage=1
+      \bgpattern
+
+      % 如果有学校 logo , 则在封面上添加
+      \ifx\inserttitlegraphic\@empty\relax
+      \else
+        % 下面被注释的这一行是将 logo 放在封面左上角，适合校徽，如果需要可以取消注释
+        % \node[anchor=west,inner sep=0] at (0.05*\the\paperwidth,0.89*\the\paperheight) {\inserttitlegraphic};
+        % 下面这一行是将 logo 放在封面右侧，适合校标，如果需要改为四字校徽可以注释掉
+        \node[opacity=0.3] at (0.9*\the\paperwidth,0.5*\the\paperheight) {\inserttitlegraphic};
+      \fi
+    \else
+      % 空白页背景
+      \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \fi
+    % 如果使用了 [plain] 选项，执行下面的代码
+    \ifbeamer@plainframe
+      \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \fi
+  \end{tikzpicture}
+}
+
+% 标题页文本位置
+\defbeamertemplate*{title page}{SUBLIMING}[1][]
+{ 
+% 清除 headline/footline 模板
+\setbeamertemplate{headline}{} 
+\setbeamertemplate{footline}{}
+\setbeamertemplate{navigation symbols}{}   
+\vfill
+\vskip4cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=0cm,sep=8pt,#1]{title page header}
+        \raggedright\usebeamerfont{title}\inserttitle\par%
+    \end{beamercolorbox}%
+    \vskip0.75cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=0cm,#1]{author}
+        \raggedright\usebeamerfont{author}\insertauthor\ \ \insertinstitute%
+    \end{beamercolorbox}
+     \vskip0.2cm%
+    \begin{beamercolorbox}[wd=12cm,leftskip=0cm,#1]{date}
+        \raggedright\usebeamerfont{author}\insertdate%
+    \end{beamercolorbox}
+\vfill
+}
+
+% section page 的模板
+\AtBeginSection[]{
+  {\setbeamertemplate{background}{
+    \begin{tikzpicture}
+      \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+      \bgpatternlight
+    \end{tikzpicture}
+  }
+  \setbeamertemplate{headline}{} % 移除 header
+  \setbeamertemplate{footline}{} % 移除 footer
+  \begin{frame}
+    \vfill
+    \vskip4cm%
+    \begin{beamercolorbox}[sep=8pt,left,shadow=false,rounded=false]{title}
+      {\color{primary}\raggedright\usebeamerfont{section}\insertsectionhead\par}%
+    \end{beamercolorbox}
+  \end{frame}
+  }
+}
+
+% ------------------------------------------------
+% 重写 block 环境
+\def\beamer@blockstylenative{native}%
+\def\beamer@blockstylenobackground{nobackground}%
+\def\beamer@blockstylemetropolis{metropolis}%
+\def\beamer@blockstyleemph{emph}%
+
+\newcommand{\setblockstyle}[1]{
+	\def\beamer@blockstyle{#1}
+	\ifx\beamer@blockstyle\beamer@blockstylenobackground%
+		\setbeamercolor{block title}{fg= primary40,bg=background}%
+   		\setbeamercolor{block body}{bg=background}%
+   		\setbeamercolor{block title alerted}{fg=alerted,bg=background}%
+   		\setbeamercolor{block body alerted}{bg=background}%
+   		\setbeamercolor{block title example}{fg=example,bg=background}%
+  		\setbeamercolor{block body example}{bg=background}%
+		% tbox color theme
+		\setbeamercolor{default}{fg= primary40,bg=background}%
+   		\setbeamercolor{alerted}{fg=alerted,bg=background}%
+   		\setbeamercolor{example}{fg=example,bg=background}%
+		
+	\else\ifx\beamer@blockstyle\beamer@blockstylemetropolis%
+		\setbeamercolor{block title}{use=normal text,fg=primary40,bg=normal text.bg!90!fg}
+		\setbeamercolor{block body}{use={block title, normal text},bg=block title.bg!50!normal text.bg}  
+		\setbeamercolor{block title alerted}{fg=alerted,bg=normal text.bg!90!fg}
+		\setbeamercolor{block body alerted}{use={block title, normal text},bg=block title.bg!50!normal text.bg}  
+		\setbeamercolor{block title example}{fg=example,bg=normal text.bg!90!fg}
+	    	\setbeamercolor{block body example}{use={block title, normal text},bg=block title.bg!50!normal text.bg}
+		% tbox color theme
+		\setbeamercolor{default}{use={block title, normal text},fg=primary40,bg=block title.bg!50!normal text.bg}
+		\setbeamercolor{alerted}{use={block title, normal text},fg=alerted,bg=block title.bg!50!normal text.bg}
+		\setbeamercolor{example}{use={block title, normal text},fg=example,bg=block title.bg!50!normal text.bg}
+
+	\else\ifx\beamer@blockstyle\beamer@blockstyleemph%
+    	\setbeamercolor{block title}{bg=primary40, fg=background}%
+   		\setbeamercolor{block body}{bg=primary40, fg=background}%
+   		\setbeamercolor{block title alerted}{bg=alerted!80, fg=background}%
+   		\setbeamercolor{block body alerted}{bg=alerted!80, fg=background}%
+   		\setbeamercolor{block title example}{bg=example!80, fg=background}%
+   		\setbeamercolor{block body example}{bg=example!80, fg=background}%
+		% tbox color theme
+    		\setbeamercolor{default}{bg=primary40, fg=background}%
+   		\setbeamercolor{alerted}{bg=alerted!80, fg=background}%
+   		\setbeamercolor{example}{bg=example!80, fg=background}%
+
+    	\else% 
+    	\setbeamercolor{block title}{bg=primary40, fg=background}%
+   		\setbeamercolor{block body}{bg=normal text.bg!94!fg}%
+   		\setbeamercolor{block title alerted}{bg=alerted!80, fg=background}%
+   		\setbeamercolor{block body alerted}{bg=normal text.bg!94!fg}%
+   		\setbeamercolor{block title example}{bg=example, fg=background}%
+   		\setbeamercolor{block body example}{bg=normal text.bg!94!fg}%
+		% tbox color theme
+   		\setbeamercolor{default}{bg=primary40, fg=background}%
+   		\setbeamercolor{alerted}{bg=alerted!80, fg=background}%
+   		\setbeamercolor{example}{bg=example, fg=background}%
+    \fi
+\fi%
+\fi
+}
+
+% tbox 环境
+\usepackage{ragged2e}% For two-side alignment in box
+% Remove font dependency of blocks
+\setbeamertemplate{block begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=2mm]{block title}
+    \usebeamerfont*{block title}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title}
+  {}
+  {\justifying\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[colsep*=2mm,vmode]{block body}%
+    \justifying\ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+
+
+\setbeamertemplate{block example begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=2mm]{block title example}
+    \usebeamerfont*{block title example}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title example}
+  {}
+  {\justifying\ifbeamercolorempty[bg]{block body example}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body example}%
+  \begin{beamercolorbox}[colsep*=2mm,vmode]{block body example}%
+    \justifying\ifbeamercolorempty[bg]{block body example}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+
+
+\setbeamertemplate{block alerted begin}
+{
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=2mm]{block title alerted}
+    \usebeamerfont*{block title alerted}\insertblocktitle%
+  \end{beamercolorbox}%
+  {\parskip0pt\par}%
+  \ifbeamercolorempty[bg]{block title alerted}
+  {}
+  {\justifying\ifbeamercolorempty[bg]{block body alerted}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body alerted}%
+  \begin{beamercolorbox}[colsep*=2mm,vmode]{block body alerted}%
+    \justifying\ifbeamercolorempty[bg]{block body alerted}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+}
+
+\newenvironment{tbox}[1]{
+  \centering
+  \par\vskip\medskipamount%
+  \begin{beamercolorbox}[colsep*=2mm]{#1}
+    \justifying}{\end{beamercolorbox}}
+
+
+% 三种 tcb 盒子 talerts, texamples 以及 tfacets
+\newtcolorbox{tblock}[1]{
+  enhanced,
+  underlay={
+    \begin{tcbclipframe}
+        \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        \bgpattern  
+      \end{tcbclipframe}
+  },
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[primary10!55] (frame.south west) rectangle (frame.north east);
+    \end{tcbclipinterior}
+  },
+  title=#1
+}
+\newtcolorbox{talert}[1]{
+  enhanced,
+  underlay={
+    \begin{tcbclipframe}
+        \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        \bgpatternblock{alerted}  
+    \end{tcbclipframe}
+  },
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[alerted!10] (frame.south west) rectangle (frame.north east);
+    \end{tcbclipinterior}
+  },
+  title=#1
+}
+\newtcolorbox{texample}[1]{
+  enhanced,
+  underlay={
+    \begin{tcbclipframe}
+        \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        \bgpatternblock{example}  
+    \end{tcbclipframe}
+  },
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[example!10] (frame.south west) rectangle (frame.north east);
+    \end{tcbclipinterior}
+  },
+  title=#1
+}
+% 含颜色双选项 facet block
+\newtcolorbox{tfacetbox}[2][primary]{
+  enhanced,
+  underlay={
+    \begin{tcbclipframe}
+        \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+        \bgpatternblock{#1}  
+      \end{tcbclipframe}
+  },
+  overlay={
+    \begin{tcbclipinterior}
+      \fill[#1!10] (frame.south west) rectangle (frame.north east);
+    \end{tcbclipinterior}
+  },
+  title=#2
+}
+
+% exmaple 环境
+\renewenvironment{example}[1]{
+	\textcolor{primary40}{#1}
+}
+% ------------------------------------------------
+
+% 标准页 Standout Frame
+% 对重点创建无标题 standout frame，内容居中
+\newcommand{\standout}[1]{
+    {
+        \setbeamertemplate{background}{
+            \begin{tikzpicture}
+              \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
+                \bgpattern
+            \end{tikzpicture}
+        }
+        \setbeamertemplate{footline}{}
+        \begin{frame}
+            \vfill
+            \begin{beamercolorbox}[sep=8pt,center,shadow=false,rounded=false]{title}
+                {\color{primary10}\usebeamerfont{section}#1\par}
+            \end{beamercolorbox}
+        \end{frame}
+    }
+}
+
+% ------------------------------------------------
+% bib 参考文献
+\setbeamertemplate{bibliography item}{
+ 	\usebeamercolor[bg]{alerted}\insertbiblabel
+}
+
+\mode<all>

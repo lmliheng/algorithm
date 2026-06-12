@@ -1,0 +1,51 @@
+% Copyright (c) 2023 by Yaokun Yang
+% https://github.com/PourRevenir/Subliming
+%
+% This program is free software: you can redistribute it and/or modify
+% it under the terms of the GNU General Public License as published by
+% the Free Software Foundation, either version 3 of the License, or
+% (at your option) any later version.
+%
+% This program is distributed in the hope that it will be useful,
+% but WITHOUT ANY WARRANTY; without even the implied warranty of
+% MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+% GNU General Public License for more details.
+%
+% You can find the GNU General Public License at <http://www.gnu.org/licenses/>.
+
+\mode<presentation>
+
+% 引入所需宏包
+\RequirePackage{tikz}
+\usetikzlibrary{shapes.geometric,calc,shadows}
+\RequirePackage{pgf}
+\RequirePackage{graphicx}
+\RequirePackage{fontspec}
+\RequirePackage{tcolorbox}
+\RequirePackage{minted}
+\RequirePackage{subcaption}
+\tcbuselibrary{skins}
+\RequirePackage{booktabs}
+\RequirePackage{colortbl}
+\RequirePackage{enumitem}
+
+% 引入主题选项
+\DeclareOptionBeamer{style}{
+    \PassOptionsToPackage{style=#1}{styles/beamercolorthemeSUBLIMING}
+}
+\DeclareOptionBeamer{cover}{
+    \PassOptionsToPackage{cover=#1}{styles/beamerinnerthemeSUBLIMING}
+}
+\ExecuteOptionsBeamer{style=csu-blue, cover=facet}
+\ProcessOptionsBeamer
+
+% 导入主题包
+\useinnertheme{SUBLIMING}
+\useoutertheme{SUBLIMING}
+\usecolortheme{SUBLIMING}
+\usefonttheme{SUBLIMING}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{blocks}[shadow=false]
+
+\mode<all>
