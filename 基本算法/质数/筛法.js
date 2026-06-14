@@ -1,6 +1,6 @@
 
 
-let n=30
+let n=5
 let isPrime=new Array(n).fill(true)
 
 let prime=[]
