@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<head>
+    <title>test</title>
+</head>
+
+<body>
+    <p id="test"></p>
+
+</body>
+<script>
+    // userAgent 和 userAgentData
+    const test = document.querySelector('#test')
+    console.log(JSON.stringify(window.navigator.userAgentData))
+    console.log(window.navigator)
+    test.innerHTML = window.navigator.userAgentData.platform + ' ，isMoblie： ' + window.navigator.userAgentData.mobile
+
+</script>
+
+</html>

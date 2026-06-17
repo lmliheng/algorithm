@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<head>
+    <title>reactive test</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+<script>
+    // reactive effect 到底是什么
+    const { reactive, effect } = Vue
+    const obj = reactive({
+        name: '张三'
+    })
+    console.log(obj);
+    effect(() => {
+        document.querySelector('#app').innerText = obj.name
+    })
+
+    setTimeout(() => {
+        obj.name = '李四'
+    }, 2000);
+</script>
+
+</html>
