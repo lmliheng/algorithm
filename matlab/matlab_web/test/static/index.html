@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATLAB Web App - Minimal Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+            max-width: 720px;
+            margin: 40px auto;
+            padding: 0 20px;
+            color: #222;
+        }
+        h1 { border-bottom: 2px solid #0078d4; padding-bottom: 8px; }
+        h2 { color: #0078d4; margin-top: 32px; }
+        .box { background: #f7f9fc; border: 1px solid #e1e4e8; border-radius: 6px; padding: 16px; margin: 12px 0; }
+        input, button { font-size: 14px; padding: 6px 10px; border-radius: 4px; border: 1px solid #ccc; }
+        button { background: #0078d4; color: white; border-color: #0078d4; cursor: pointer; margin-left: 8px; }
+        button:hover { background: #106ebe; }
+        button.danger { background: #d13438; border-color: #d13438; }
+        table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+        th, td { padding: 8px 10px; border-bottom: 1px solid #e1e4e8; text-align: left; }
+        th { background: #eef3f8; }
+        pre { background: #1e1e1e; color: #d4d4d4; padding: 10px; border-radius: 4px; overflow-x: auto; }
+        .result { font-weight: bold; color: #0078d4; }
+    </style>
+</head>
+<body>
+    <h1>MATLAB Web App 最小示例</h1>
+
+    <div class="box">
+        <strong>服务状态：</strong> <span id="health">检查中...</span>
+    </div>
+
+    <h2>1. MATLAB 计算 (a + b)</h2>
+    <div class="box">
+        <input id="a" type="number" step="any" placeholder="a" value="3.14">
+        <input id="b" type="number" step="any" placeholder="b" value="2.71">
+        <button onclick="doCompute()">调用 MATLAB 计算</button>
+        <div>结果：<span id="computeResult" class="result">-</span></div>
+    </div>
+
+    <h2>2. 数据增删改查 (CRUD)</h2>
+    <div class="box">
+        <input id="newName" type="text" placeholder="名称">
+        <input id="newValue" type="number" step="any" placeholder="数值">
+        <button onclick="doCreate()">新增</button>
+        <button onclick="refreshList()">刷新列表</button>
+
+        <table>
+            <thead>
+                <tr><th>ID</th><th>名称</th><th>数值</th><th>操作</th></tr>
+            </thead>
+            <tbody id="itemList"></tbody>
+        </table>
+    </div>
+
+    <h2>3. 原始 JSON 响应示例</h2>
+    <pre id="rawJson">-</pre>
+
+    <script>
+        const API = "";
+
+        async function checkHealth() {
+            try {
+                const r = await fetch(API + "/health");
+                const d = await r.json();
+                document.getElementById("health").textContent =
+                    "ok=" + d.ok + ", matlab_engine_ready=" + d.matlab;
+            } catch (e) {
+                document.getElementById("health").textContent = "连接失败: " + e;
+            }
+        }
+
+        async function doCompute() {
+            const a = parseFloat(document.getElementById("a").value);
+            const b = parseFloat(document.getElementById("b").value);
+            const res = await fetch(API + "/api/compute", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ a, b })
+            });
+            const d = await res.json();
+            document.getElementById("computeResult").textContent =
+                d.a + " + " + d.b + " = " + d.sum;
+            document.getElementById("rawJson").textContent = JSON.stringify(d, null, 2);
+        }
+
+        async function refreshList() {
+            const res = await fetch(API + "/api/items");
+            const items = await res.json();
+            const tbody = document.getElementById("itemList");
+            tbody.innerHTML = "";
+            items.forEach(it => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${it.id}</td>
+                    <td><input type="text" value="${it.name}" data-id="${it.id}" data-field="name"></td>
+                    <td><input type="number" step="any" value="${it.value}" data-id="${it.id}" data-field="value"></td>
+                    <td>
+                        <button onclick="doUpdate(${it.id})">保存修改</button>
+                        <button class="danger" onclick="doDelete(${it.id})">删除</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            document.getElementById("rawJson").textContent = JSON.stringify(items, null, 2);
+        }
+
+        async function doCreate() {
+            const name = document.getElementById("newName").value.trim();
+            const value = parseFloat(document.getElementById("newValue").value);
+            if (!name || isNaN(value)) { alert("请输入名称和数值"); return; }
+            await fetch(API + "/api/items", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, value })
+            });
+            document.getElementById("newName").value = "";
+            document.getElementById("newValue").value = "";
+            refreshList();
+        }
+
+        async function doUpdate(id) {
+            const inputs = document.querySelectorAll(`input[data-id="${id}"]`);
+            const patch = {};
+            inputs.forEach(inp => {
+                const f = inp.dataset.field;
+                patch[f] = f === "value" ? parseFloat(inp.value) : inp.value;
+            });
+            await fetch(API + "/api/items/" + id, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(patch)
+            });
+            refreshList();
+        }
+
+        async function doDelete(id) {
+            if (!confirm("确认删除 id=" + id + " ?")) return;
+            await fetch(API + "/api/items/" + id, { method: "DELETE" });
+            refreshList();
+        }
+
+        checkHealth();
+        refreshList();
+    </script>
+</body>
+</html>
