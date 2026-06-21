@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body { font-family: Arial; padding: 20px; background: #f0f0f0; }
+  canvas { border: 1px solid #ccc; margin: 10px; max-width: 600px; max-height: 450px; }
+  .controls { margin: 15px 0; }
+  button { padding: 8px 18px; margin: 0 5px; cursor: pointer; font-size: 14px; }
+  select, input { padding: 6px; margin: 0 5px; font-size: 13px; }
+  .container { display: flex; gap: 20px; flex-wrap: wrap; }
+  .container div { text-align: center; }
+</style>
+</head>
+<body>
+
+<h2>WebGL 图片增强</h2>
+
+<div class="controls">
+  <input type="file" id="imageInput" accept="image/*">
+  <select id="algorithm">
+    <option value="histogram">直方图均衡化</option>
+    <option value="gaussian">高斯模糊</option>
+    <option value="sharpen">锐化</option>
+  </select>
+  <button onclick="applyEnhancement()">应用增强</button>
+  <button onclick="resetImage()">重置</button>
+</div>
+
+<div class="container">
+  <div>
+    <p>原图</p>
+    <canvas id="originalCanvas"></canvas>
+  </div>
+  <div>
+    <p>增强后</p>
+    <canvas id="resultCanvas"></canvas>
+  </div>
+</div>
+
+<script>
+// ========== 全局变量 ==========
+let originalImage = null;
+let webglReady = false;
+
+// ========== 顶点着色器 ==========
+const vertexShaderSource = `
+  attribute vec2 a_position;
+  attribute vec2 a_texCoord;
+  varying vec2 v_texCoord;
+  void main() {
+    gl_Position = vec4(a_position, 0.0, 1.0);
+    v_texCoord = a_texCoord;
+  }
+`;
+
+// ========== 片段着色器 ==========
+const histogramFragmentSource = `
+  precision mediump float;
+  uniform sampler2D u_image;
+  uniform float u_lut[256];
+  varying vec2 v_texCoord;
+
+  void main() {
+    vec4 color = texture2D(u_image, v_texCoord);
+    float gray = dot(color.rgb, vec3(0.299, 0.587, 0.114));
+    int idx = int(clamp(gray * 255.0, 0.0, 255.0));
+    float enhanced = u_lut[idx];
+    gl_FragColor = vec4(vec3(enhanced), 1.0);
+  }
+`;
+
+const gaussianFragmentSource = `
+  precision mediump float;
+  uniform sampler2D u_image;
+  uniform vec2 u_textureSize;
+  varying vec2 v_texCoord;
+
+  void main() {
+    vec2 offset = 1.0 / u_textureSize;
+    float kernel[9] = float[](
+      1.0/16.0, 2.0/16.0, 1.0/16.0,
+      2.0/16.0, 4.0/16.0, 2.0/16.0,
+      1.0/16.0, 2.0/16.0, 1.0/16.0
+    );
+    vec4 color = vec4(0.0);
+    for(int y = -1; y <= 1; y++) {
+      for(int x = -1; x <= 1; x++) {
+        vec2 coord = v_texCoord + vec2(float(x), float(y)) * offset;
+        int idx = (y + 1) * 3 + (x + 1);
+        color += texture2D(u_image, coord) * kernel[idx];
+      }
+    }
+    gl_FragColor = color;
+  }
+`;
+
+const sharpenFragmentSource = `
+  precision mediump float;
+  uniform sampler2D u_image;
+  uniform vec2 u_textureSize;
+  varying vec2 v_texCoord;
+
+  void main() {
+    vec2 offset = 1.0 / u_textureSize;
+    float kernel[9] = float[](
+      0.0, -1.0,  0.0,
+      -1.0,  5.0, -1.0,
+      0.0, -1.0,  0.0
+    );
+    vec4 result = vec4(0.0);
+    for(int y = -1; y <= 1; y++) {
+      for(int x = -1; x <= 1; x++) {
+        vec2 coord = v_texCoord + vec2(float(x), float(y)) * offset;
+        int idx = (y + 1) * 3 + (x + 1);
+        result += texture2D(u_image, coord) * kernel[idx];
+      }
+    }
+    gl_FragColor = clamp(result, 0.0, 1.0);
+  }
+`;
+
+// ========== WebGL 工具函数 ==========
+function createShader(gl, source, type) {
+  const shader = gl.createShader(type);
+  gl.shaderSource(shader, source);
+  gl.compileShader(shader);
+  if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+    console.error('着色器编译错误:', gl.getShaderInfoLog(shader));
+    gl.deleteShader(shader);
+    return null;
+  }
+  return shader;
+}
+
+function createProgram(gl, vertexSrc, fragmentSrc) {
+  const vs = createShader(gl, vertexSrc, gl.VERTEX_SHADER);
+  const fs = createShader(gl, fragmentSrc, gl.FRAGMENT_SHADER);
+  if (!vs || !fs) return null;
+
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+    console.error('程序链接错误:', gl.getProgramInfoLog(prog));
+    return null;
+  }
+  return prog;
+}
+
+function initWebGLForCanvas(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) {
+    console.error('找不到画布:', canvasId);
+    return null;
+  }
+  
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) {
+    alert('浏览器不支持 WebGL');
+    return null;
+  }
+
+  // 设置矩形顶点
+  const positions = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+  const texCoords = new Float32Array([0, 0, 1, 0, 0, 1, 1, 1]);
+
+  const positionBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, positions, gl.STATIC_DRAW);
+
+  const texCoordBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+  gl.bufferData(gl.ARRAY_BUFFER, texCoords, gl.STATIC_DRAW);
+
+  return { gl, positionBuffer, texCoordBuffer };
+}
+
+// ========== 直方图均衡化 LUT 计算 ==========
+function calculateHistogramLUT(imageData) {
+  const pixels = imageData.data;
+  const totalPixels = imageData.width * imageData.height;
+
+  // 计算直方图
+  const histogram = new Array(256).fill(0);
+  for (let i = 0; i < pixels.length; i += 4) {
+    const gray = Math.round(0.299 * pixels[i] + 0.587 * pixels[i+1] + 0.114 * pixels[i+2]);
+    histogram[Math.min(gray, 255)]++;
+  }
+
+  // 计算累积分布函数
+  const cdf = new Array(256);
+  let cumulative = 0;
+  for (let i = 0; i < 256; i++) {
+    cumulative += histogram[i];
+    cdf[i] = cumulative / totalPixels;
+  }
+
+  // 创建查找表（归一化到 0-1）
+  const lut = new Array(256);
+  const firstNonZero = cdf.findIndex(v => v > 0);
+  const minCdf = firstNonZero >= 0 ? cdf[firstNonZero] : 0;
+
+  for (let i = 0; i < 256; i++) {
+    lut[i] = ((cdf[i] - minCdf) / (1 - minCdf));
+  }
+
+  return lut;
+}
+
+// ========== 图片上传到 WebGL 纹理 ==========
+function uploadImageToTexture(gl, image) {
+  const canvas = document.createElement('canvas');
+  canvas.width = image.width;
+  canvas.height = image.height;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(image, 0, 0);
+
+  const texture = gl.createTexture();
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, canvas);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+  gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+  // 获取像素数据用于直方图计算
+  const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+  return { texture, imageData, width: canvas.width, height: canvas.height };
+}
+
+// ========== 应用增强 ==========
+function applyEnhancement() {
+  if (!originalImage) {
+    alert('请先上传一张图片！');
+    return;
+  }
+
+  const algorithm = document.getElementById('algorithm').value;
+  const resultCanvas = document.getElementById('resultCanvas');
+  const origCanvas = document.getElementById('originalCanvas');
+
+  // 设置画布尺寸
+  origCanvas.width = originalImage.width;
+  origCanvas.height = originalImage.height;
+  resultCanvas.width = originalImage.width;
+  resultCanvas.height = originalImage.height;
+
+  // 在原图画布显示原图
+  const origCtx = origCanvas.getContext('2d');
+  origCtx.drawImage(originalImage, 0, 0);
+
+  // 初始化 WebGL（每次重新创建，确保尺寸匹配）
+  const webgl = initWebGLForCanvas('resultCanvas');
+  if (!webgl) return;
+  
+  const { gl, positionBuffer, texCoordBuffer } = webgl;
+
+  // 选择片段着色器
+  let fragmentSource;
+  switch(algorithm) {
+    case 'histogram': fragmentSource = histogramFragmentSource; break;
+    case 'gaussian':  fragmentSource = gaussianFragmentSource; break;
+    case 'sharpen':   fragmentSource = sharpenFragmentSource; break;
+  }
+
+  // 创建着色器程序
+  const program = createProgram(gl, vertexShaderSource, fragmentSource);
+  if (!program) {
+    alert('着色器程序创建失败');
+    return;
+  }
+  gl.useProgram(program);
+
+  // 上传图片到纹理
+  const { texture, imageData } = uploadImageToTexture(gl, originalImage);
+
+  // 设置顶点属性
+  const posLoc = gl.getAttribLocation(program, 'a_position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  const texLoc = gl.getAttribLocation(program, 'a_texCoord');
+  gl.enableVertexAttribArray(texLoc);
+  gl.bindBuffer(gl.ARRAY_BUFFER, texCoordBuffer);
+  gl.vertexAttribPointer(texLoc, 2, gl.FLOAT, false, 0, 0);
+
+  // 设置 uniform
+  gl.activeTexture(gl.TEXTURE0);
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.uniform1i(gl.getUniformLocation(program, 'u_image'), 0);
+
+  if (algorithm === 'histogram') {
+    const lut = calculateHistogramLUT(imageData);
+    gl.uniform1fv(gl.getUniformLocation(program, 'u_lut'), lut);
+  } else {
+    gl.uniform2f(gl.getUniformLocation(program, 'u_textureSize'),
+                 originalImage.width, originalImage.height);
+  }
+
+  // 渲染
+  gl.viewport(0, 0, resultCanvas.width, resultCanvas.height);
+  gl.clearColor(0, 0, 0, 0);
+  gl.clear(gl.COLOR_BUFFER_BIT);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+  // 读取结果
+  const pixels = new Uint8Array(resultCanvas.width * resultCanvas.height * 4);
+  gl.readPixels(0, 0, resultCanvas.width, resultCanvas.height,
+                gl.RGBA, gl.UNSIGNED_BYTE, pixels);
+
+  // 写入结果画布（翻转 Y 轴）
+  const resultCtx = resultCanvas.getContext('2d');
+  const resultImageData = resultCtx.createImageData(resultCanvas.width, resultCanvas.height);
+
+  for (let y = 0; y < resultCanvas.height; y++) {
+    for (let x = 0; x < resultCanvas.width; x++) {
+      const srcIdx = (y * resultCanvas.width + x) * 4;
+      const dstIdx = ((resultCanvas.height - 1 - y) * resultCanvas.width + x) * 4;
+      resultImageData.data[dstIdx] = pixels[srcIdx];
+      resultImageData.data[dstIdx + 1] = pixels[srcIdx + 1];
+      resultImageData.data[dstIdx + 2] = pixels[srcIdx + 2];
+      resultImageData.data[dstIdx + 3] = 255;
+    }
+  }
+
+  resultCtx.putImageData(resultImageData, 0, 0);
+}
+
+// ========== 重置图片 ==========
+function resetImage() {
+  if (!originalImage) return;
+  const resultCanvas = document.getElementById('resultCanvas');
+  const ctx = resultCanvas.getContext('2d');
+  resultCanvas.width = originalImage.width;
+  resultCanvas.height = originalImage.height;
+  ctx.drawImage(originalImage, 0, 0);
+}
+
+// ========== 文件上传处理 ==========
+document.getElementById('imageInput').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(event) {
+    const img = new Image();
+    img.onload = function() {
+      originalImage = img;
+
+      // 显示原图
+      const origCanvas = document.getElementById('originalCanvas');
+      origCanvas.width = img.width;
+      origCanvas.height = img.height;
+      const origCtx = origCanvas.getContext('2d');
+      origCtx.drawImage(img, 0, 0);
+
+      // 复制到结果画布
+      const resultCanvas = document.getElementById('resultCanvas');
+      resultCanvas.width = img.width;
+      resultCanvas.height = img.height;
+      const resultCtx = resultCanvas.getContext('2d');
+      resultCtx.drawImage(img, 0, 0);
+      
+      webglReady = true;
+    };
+    img.src = event.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
+console.log('WebGL 图片增强工具已加载');
+console.log('支持的算法：');
+console.log('- 直方图均衡化（对比度增强）');
+console.log('- 高斯模糊（降噪）');
+console.log('- 锐化（边缘增强）');
+</script>
+
+</body>
+</html>
