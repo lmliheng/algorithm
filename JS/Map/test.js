@@ -19,3 +19,5 @@ obj2 = null
 
 console.log(map)
 console.log(Weakmap)
+
+
