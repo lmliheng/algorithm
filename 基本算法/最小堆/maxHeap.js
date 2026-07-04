@@ -1,11 +1,8 @@
 /**
- * @最小堆
- * 一种数组模拟完全二叉树的数据结构，父节点小于等于子节点，通过上浮和下沉满足堆的性质
- * Math.floor((i-1)/2)是其父节点 2*i+1是子左节点 2*i+2是子右节点
- * 堆顶是最小元素
+ * @最大堆
  */
 
-class minHeap {
+class maxHeap {
     constructor() {
         this.heap = []
     }
@@ -36,7 +33,7 @@ class minHeap {
     // 上浮和下沉
     up(index) {
         // Math.floor(2 * index - 1) 可以写成(index-1)>>1
-        while (index > 0 && this.heap[(index - 1) >> 1] > this.heap[index]) {
+        while (index > 0 && this.heap[(index - 1) >> 1] < this.heap[index]) {
             // 父节点和上浮节点交换 swap
             this.swap(index, (index - 1) >> 1)
             index = (index - 1) >> 1
@@ -46,13 +43,13 @@ class minHeap {
         while (index * 2 + 1 < this.heap.length) {
             let left = index * 2 + 1 // 左子节点
             let right = index * 2 + 2 // 右子节点
-            let min = left
-            if (right < this.heap.length && this.heap[right] < this.heap[left]) {
-                min = right
+            let max = left
+            if (right < this.heap.length && this.heap[right] > this.heap[left]) {
+                max = right
             }
-            if (this.heap[index] > this.heap[min]) {
-                this.swap(index, min)
-                index = min
+            if (this.heap[index] < this.heap[max]) {
+                this.swap(index, max)
+                index = max
             } else {
                 break
             }
@@ -66,4 +63,4 @@ class minHeap {
 
 }
 
-export { minHeap }
+export { maxHeap }
