@@ -1,18 +1,13 @@
-/**
- * @最小堆
- * 堆顶是最小元素
- */
-
-class minHeap {
+export class MinHeap {
     constructor() {
         this.heap = []
     }
-    // 入堆
+
     push(val) {
         this.heap.push(val)
-        this._bubbleUp(this.heap[this.heap.length - 1])
+        this._bubbleUp(this.heap.length - 1)
     }
-    // 出堆
+
     pop() {
         if (this.heap.length === 0) return null
         const top = this.heap[0]
@@ -23,12 +18,11 @@ class minHeap {
         }
         return top
     }
-    // 堆的大小
-    size() {
 
+    size() {
+        return this.heap.length
     }
 
-    // 辅助函数
     _bubbleUp(index) {
         while (index > 0) {
             const parent = Math.floor((index - 1) / 2)
@@ -68,4 +62,3 @@ class minHeap {
     }
 }
 
-export { minHeap }
