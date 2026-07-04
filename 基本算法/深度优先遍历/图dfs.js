@@ -1,26 +1,21 @@
-let n = 4
-let roads = [[1, 2, 9], [2, 3, 6], [2, 4, 5], [1, 4, 7]]
-const vis = Array.from({ length: n + 1 }, () => false);
-const graph = Array.from({ length: n + 1 }, () => []);
-for (const [u, v, dis] of roads) {
-    graph[u].push({ v, dis });
-    graph[v].push({ v: u, dis });
-}
+import { g1 } from "../迪杰斯特拉/图的表示.js"
+console.log(g1)
+let n = g1.length
 
+let visit = new Array(n).fill(false)
 
-let ans = Infinity;
-const dfs = (u) => {
-    if (vis[u] === false) {
-        vis[u] = true;
-    }
-
-    for (const { v, dis } of graph[u]) {
-        ans = Math.min(ans, dis);
-        if (vis[v] === false) {
-            dfs(v);
+const graph_dfs = (v, visit) => {
+    console.log('当前节点：', v)
+    visit[v] = true
+    for (let i = 0; i < n; i++) {
+        if (!visit[i] && g1[v][i] === 1) {
+            graph_dfs(i, visit)
         }
     }
-};
-
-dfs(1);
-console.log(ans)
+}
+// 0,1,2,3,4,5个节点
+for (let i = 0; i < n; i++) {
+    if (!visit[i]) {
+        graph_dfs(i, visit)
+    }
+}
