@@ -1,5 +1,6 @@
 /**
  *@最大有效数对
+ * k-1长度的窗口将数组左右隔开
  */
 var maxValidPairSum = function (nums, k) {
     let n = nums.length;

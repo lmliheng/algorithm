@@ -14,6 +14,7 @@ const dfs = (i, j) => {
     if (i < 0 || i >= m || j < 0 || j >= n) {
         return
     }
+    
 
     if(grid[i][j]!=='1'){
         return
