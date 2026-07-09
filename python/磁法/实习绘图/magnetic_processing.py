@@ -1,0 +1,416 @@
+"""
+磁法数据处理：向上延拓、化极(RTP)、垂向一阶导数
+数据来源：data/ 目录下的 CSV 文件
+IGRF参数：GPS(29.0470032, 113.1393198), 海拔35m, 2026年
+"""
+import numpy as np
+import matplotlib
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
+from scipy.interpolate import griddata
+from scipy.ndimage import gaussian_filter
+import warnings
+warnings.filterwarnings('ignore')
+
+# 中文字体
+plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'Arial Unicode MS']
+plt.rcParams['axes.unicode_minus'] = False
+
+
+# ============ IGRF-14 计算 ============
+# from pyIGRF.value import igrf_value
+
+# LAT = 29.0470032
+# LON = 113.1393198
+# ALT_KM = 0.035  # 35m -> km
+# YEAR = 2026.5   # 2026年7月
+
+# D, I, H, X, Y, Z, F = igrf_value(LAT, LON, ALT_KM, YEAR)
+# print(f"=== IGRF-14 磁场参数 ===")
+# print(f"位置: ({LAT}, {LON}), 海拔: {ALT_KM*1000}m")
+# print(f"磁偏角 D = {D:.2f}°")
+# print(f"磁倾角 I = {I:.2f}°")
+# print(f"总场强度 F = {F:.1f} nT")
+# print(f"水平分量 H = {H:.1f} nT")
+# print(f"北向 X = {X:.1f} nT, 东向 Y = {Y:.1f} nT, 垂直 Z = {Z:.1f} nT")
+# print()
+
+INC = 45.43
+DEC = -4.33
+
+
+# ============ 日变校正函数 ============
+def get_diurnal_value(time_input, diurnal_file='data/Diurnal_Station.csv'):
+    import os
+    if not os.path.exists(diurnal_file):
+        raise FileNotFoundError(f"日变站文件不存在: {diurnal_file}")
+
+    if not hasattr(get_diurnal_value, 'diurnal_data'):
+        raw_data = np.loadtxt(diurnal_file, delimiter=',', skiprows=1,
+                              encoding='utf-8-sig', usecols=(0, 1))
+        time_raw = raw_data[:, 1].astype(int)
+        hh = time_raw // 10000
+        mm = (time_raw % 10000) // 100
+        ss = time_raw % 100
+        time_seconds = hh * 3600 + mm * 60 + ss
+        get_diurnal_value.diurnal_data = {
+            'nT': raw_data[:, 0],
+            'time_seconds': time_seconds
+        }
+
+    t_int = time_input.astype(int)
+    input_hh = t_int // 10000
+    input_mm = (t_int % 10000) // 100
+    input_ss = t_int % 100
+    input_seconds = input_hh * 3600 + input_mm * 60 + input_ss
+
+    t_min = get_diurnal_value.diurnal_data['time_seconds'].min()
+    t_max = get_diurnal_value.diurnal_data['time_seconds'].max()
+    input_seconds = np.clip(input_seconds, t_min, t_max)
+
+    nT = np.interp(input_seconds,
+                   get_diurnal_value.diurnal_data['time_seconds'],
+                   get_diurnal_value.diurnal_data['nT'])
+    return nT
+
+
+# ============ 读取测线数据 ============
+line_names = [
+    'Line01_Raw.csv', 'Line02_Raw.csv', 'Line03_Raw.csv',
+    'Line04_Raw.csv', 'Line05_Raw.csv', 'Line06_Raw.csv'
+]
+line_spacing = 5  # 测线间距（米）
+
+all_x, all_y, all_deltaT = [], [], []
+
+for i, filename in enumerate(line_names, start=1):
+    file_path = f'data/{filename}'
+    try:
+        data = np.loadtxt(file_path, delimiter=',', skiprows=1, encoding='utf-8-sig')
+        dist = data[:, 0]
+        field = data[:, 1]
+        meas_time = data[:, 2]
+    except Exception as e:
+        print(f"读取 {file_path} 失败: {e}")
+        continue
+
+    diurnal_val = get_diurnal_value(meas_time)
+    deltaT = field - diurnal_val
+
+    xCoord = dist
+    yCoord = i * line_spacing * np.ones_like(dist)
+
+    all_x.extend(xCoord)
+    all_y.extend(yCoord)
+    all_deltaT.extend(deltaT)
+    print(f"测线{i}: {len(dist)}个测点, ΔT范围 [{np.min(deltaT):.1f}, {np.max(deltaT):.1f}] nT")
+
+all_x = np.array(all_x)
+all_y = np.array(all_y)
+all_deltaT = np.array(all_deltaT)
+
+print(f"\n总计: {len(all_x)} 个测点")
+print(f"ΔT范围: [{all_deltaT.min():.1f}, {all_deltaT.max():.1f}] nT\n")
+
+
+# ============ 网格化插值 ============
+nx, ny = 200, 200
+grid_x = np.linspace(all_x.min(), all_x.max(), nx)
+grid_y = np.linspace(5, 30, ny)
+XI, YI = np.meshgrid(grid_x, grid_y)
+
+ZI = griddata((all_x, all_y), all_deltaT, (XI, YI), method='cubic')
+
+# 用最近邻填充 NaN 边缘
+ZI_nn = griddata((all_x, all_y), all_deltaT, (XI, YI), method='nearest')
+mask = np.isnan(ZI)
+ZI[mask] = ZI_nn[mask]
+
+# 轻微平滑以减少插值噪声
+ZI = gaussian_filter(ZI, sigma=2)
+
+# 网格间距
+dx = (all_x.max() - all_x.min()) / (nx - 1)
+dy = (30 - 5) / (ny - 1)
+
+
+# ============ FFT 频域处理工具函数 ============
+
+def get_wavenumbers(nx, ny, dx, dy):
+    """计算波数矩阵"""
+    kx = 2 * np.pi * np.fft.fftfreq(nx, d=dx)
+    ky = 2 * np.pi * np.fft.fftfreq(ny, d=dy)
+    KX, KY = np.meshgrid(kx, ky)
+    K = np.sqrt(KX**2 + KY**2)
+    K[0, 0] = 1e-10  # 避免除零
+    return KX, KY, K
+
+
+def pad_grid(Z, pad_factor=2):
+    """镜像延拓以减少边缘效应"""
+    ny, nx = Z.shape
+    pnx, pny = nx * pad_factor, ny * pad_factor
+    Z_pad = np.zeros((pny, pnx))
+
+    # 中心区域
+    oy = (pny - ny) // 2
+    ox = (pnx - nx) // 2
+    Z_pad[oy:oy+ny, ox:ox+nx] = Z
+
+    # 镜像延拓四个边
+    Z_pad[:oy, ox:ox+nx] = Z[1:oy+1, :][::-1, :]       # 上
+    Z_pad[oy+ny:, ox:ox+nx] = Z[-(oy+1):-1, :][::-1, :] # 下
+    Z_pad[oy:oy+ny, :ox] = Z[:, 1:ox+1][:, ::-1]        # 左
+    Z_pad[oy:oy+ny, ox+nx:] = Z[:, -(ox+1):-1][:, ::-1]  # 右
+
+    # 四个角
+    Z_pad[:oy, :ox] = Z[1:oy+1, 1:ox+1][::-1, ::-1]
+    Z_pad[:oy, ox+nx:] = Z[1:oy+1, -(ox+1):-1][::-1, ::-1]
+    Z_pad[oy+ny:, :ox] = Z[-(oy+1):-1, 1:ox+1][::-1, ::-1]
+    Z_pad[oy+ny:, ox+nx:] = Z[-(oy+1):-1, -(ox+1):-1][::-1, ::-1]
+
+    return Z_pad, (oy, ox, ny, nx)
+
+
+def unpad_grid(Z_pad, info):
+    """裁剪回原始大小"""
+    oy, ox, ny, nx = info
+    return Z_pad[oy:oy+ny, ox:ox+nx]
+
+
+def upward_continuation(Z, dx, dy, height):
+    """
+    向上延拓：将磁场数据向上延拓 height 米
+    频域滤波器: exp(-k * h)
+    """
+    ny, nx = Z.shape
+    Z_pad, info = pad_grid(Z)
+    pny, pnx = Z_pad.shape
+    pdx = dx
+    pdy = dy
+
+    KX, KY, K = get_wavenumbers(pnx, pny, pdx, pdy)
+
+    F = np.fft.fft2(Z_pad)
+    F_uc = F * np.exp(-K * height)
+    Z_uc = np.real(np.fft.ifft2(F_uc))
+
+    return unpad_grid(Z_uc, info)
+
+
+def reduction_to_pole(Z, dx, dy, inc, dec):
+    """
+    化极处理（Reduction to the Pole）
+    将斜磁化异常转换为垂直磁化（极地）异常
+
+    参数:
+        inc: 磁倾角（度），正向下
+        dec: 磁偏角（度），正东偏
+    假设: x=北, y=东, 感应磁化（磁化方向=地磁场方向）
+    """
+    ny, nx = Z.shape
+    Z_pad, info = pad_grid(Z)
+    pny, pnx = Z_pad.shape
+
+    KX, KY, K = get_wavenumbers(pnx, pny, dx, dy)
+
+    inc_rad = np.radians(inc)
+    dec_rad = np.radians(dec)
+
+    # 方向因子（感应磁化，场方向 = 磁化方向）
+    # theta = sin(I) + i * cos(I) * (kx*cos(D) + ky*sin(D)) / k
+    theta = (np.sin(inc_rad) +
+             1j * np.cos(inc_rad) * (KX * np.cos(dec_rad) + KY * np.sin(dec_rad)) / K)
+
+    # RTP 滤波器 = 1 / theta^2
+    rtp_filter = 1.0 / (theta * theta)
+
+    # DC 分量保持不变
+    rtp_filter[0, 0] = 1.0
+
+    # 限制滤波器振幅，防止低纬度放大噪声
+    max_amp = 10.0
+    amp = np.abs(rtp_filter)
+    scale = np.where(amp > max_amp, max_amp / amp, 1.0)
+    rtp_filter = rtp_filter * scale
+
+    F = np.fft.fft2(Z_pad)
+    F_rtp = F * rtp_filter
+    Z_rtp = np.real(np.fft.ifft2(F_rtp))
+
+    return unpad_grid(Z_rtp, info)
+
+
+def vertical_derivative(Z, dx, dy, order=1):
+    """
+    垂向n阶导数
+    频域滤波器: k^n
+    """
+    ny, nx = Z.shape
+    Z_pad, info = pad_grid(Z)
+    pny, pnx = Z_pad.shape
+
+    KX, KY, K = get_wavenumbers(pnx, pny, dx, dy)
+
+    F = np.fft.fft2(Z_pad)
+    vd_filter = K**order
+    vd_filter[0, 0] = 0  # 去除直流分量
+
+    F_vd = F * vd_filter
+    Z_vd = np.real(np.fft.ifft2(F_vd))
+
+    return unpad_grid(Z_vd, info)
+
+
+# 1. 向上延拓
+heights = [5, 10, 20]  # 延拓高度（米）
+Z_uc_list = []
+for h in heights:
+    Z_uc = upward_continuation(ZI, dx, dy, h)
+    Z_uc_list.append(Z_uc)
+    print(f"向上延拓 {h}m: ΔT范围 [{np.nanmin(Z_uc):.1f}, {np.nanmax(Z_uc):.1f}] nT")
+
+# 2. 化极
+Z_rtp = reduction_to_pole(ZI, dx, dy, INC, DEC)
+print(f"化极处理: ΔT范围 [{np.nanmin(Z_rtp):.1f}, {np.nanmax(Z_rtp):.1f}] nT")
+
+# 3. 垂向一阶导数
+Z_vd = vertical_derivative(ZI, dx, dy, order=1)
+print(f"垂向一阶导数: 范围 [{np.nanmin(Z_vd):.4f}, {np.nanmax(Z_vd):.4f}] nT/m")
+
+# 化极后的垂向导数
+Z_rtp_vd = vertical_derivative(Z_rtp, dx, dy, order=1)
+print(f"化极后垂向导数: 范围 [{np.nanmin(Z_rtp_vd):.4f}, {np.nanmax(Z_rtp_vd):.4f}] nT/m")
+print()
+
+
+# ============ 绘图函数 ============
+def plot_contour(ax, XI, YI, ZI_data, title, cbar_label, levels=20,
+                 show_points=False, show_lines=True, vmin=None, vmax=None):
+    """通用等值线绘图函数"""
+    if vmin is None:
+        vmin = np.nanpercentile(ZI_data, 2)
+    if vmax is None:
+        vmax = np.nanpercentile(ZI_data, 98)
+
+    cf = ax.contourf(XI, YI, ZI_data, levels=levels, cmap='RdBu_r',
+                     alpha=0.9, vmin=vmin, vmax=vmax)
+    cs = ax.contour(XI, YI, ZI_data, levels=10, colors='k', linewidths=0.6)
+    ax.clabel(cs, inline=True, fontsize=6, fmt='%.1f')
+
+    if show_points:
+        ax.scatter(all_x, all_y, c='black', s=12, marker='o', zorder=5)
+
+    if show_lines:
+        for i in range(1, len(line_names) + 1):
+            y_pos = i * line_spacing
+            ax.text(all_x.max() + 1.5, y_pos, f'L{i}', fontsize=9,
+                    verticalalignment='center', fontweight='bold')
+
+    ax.set_ylim(5, 30)
+    ax.set_yticks(np.arange(1, len(line_names) + 1) * line_spacing)
+    ax.set_yticklabels(np.arange(1, len(line_names) + 1))
+    ax.set_ylabel('测线编号', fontsize=10)
+    ax.set_xlabel('测线方向 (m)', fontsize=10)
+    ax.set_title(title, fontsize=11)
+    return cf
+
+
+fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+
+# 原始
+cf = plot_contour(axes[0, 0], XI, YI, ZI,
+                  f' ΔT 等值线图\n(D={DEC:.2f}°, I={INC:.2f}°',
+                  'ΔT (nT)', show_points=True)
+fig.colorbar(cf, ax=axes[0, 0], label='ΔT (nT)', shrink=0.8)
+
+# 延拓 5m, 10m, 20m
+for idx, h in enumerate(heights):
+    ax = axes.flat[idx + 1]
+    cf = plot_contour(ax, XI, YI, Z_uc_list[idx],
+                      f'向上延拓 {h}m',
+                      'ΔT (nT)')
+    fig.colorbar(cf, ax=ax, label='ΔT (nT)', shrink=0.8)
+
+plt.tight_layout()
+plt.savefig('upward_continuation.png', dpi=300, bbox_inches='tight')
+plt.close()
+print("已保存: upward_continuation.png")
+
+# ============ 图2: 化极处理 ============
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+cf = plot_contour(axes[0], XI, YI, ZI,
+                  f'化极前 ΔT\n(I={INC:.2f}°, D={DEC:.2f}°)',
+                  'ΔT (nT)', show_points=True)
+fig.colorbar(cf, ax=axes[0], label='ΔT (nT)', shrink=0.8)
+
+cf = plot_contour(axes[1], XI, YI, Z_rtp,
+                  '化极后 ΔT (RTP)\n(垂直磁化)',
+                  'ΔT (nT)', show_points=True)
+fig.colorbar(cf, ax=axes[1], label='ΔT (nT)', shrink=0.8)
+
+plt.tight_layout()
+plt.savefig('reduction_to_pole.png', dpi=300, bbox_inches='tight')
+plt.close()
+print("已保存: reduction_to_pole.png")
+
+# ============ 图3: 垂向导数 ============
+fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+
+cf = plot_contour(axes[0], XI, YI, Z_vd,
+                  '垂向一阶导数 ∂ΔT/∂z\n(化极前)',
+                  '∂ΔT/∂z (nT/m)', show_points=True)
+fig.colorbar(cf, ax=axes[0], label='∂ΔT/∂z (nT/m)', shrink=0.8)
+
+cf = plot_contour(axes[1], XI, YI, Z_rtp_vd,
+                  '垂向一阶导数 ∂ΔT/∂z\n(化极后)',
+                  '∂ΔT/∂z (nT/m)', show_points=True)
+fig.colorbar(cf, ax=axes[1], label='∂ΔT/∂z (nT/m)', shrink=0.8)
+
+plt.tight_layout()
+plt.savefig('vertical_derivative.png', dpi=300, bbox_inches='tight')
+plt.close()
+print("已保存: vertical_derivative.png")
+
+# ============ 图4: 综合对比（6 panel） ============
+fig, axes = plt.subplots(3, 2, figsize=(14, 18))
+
+# Row 1: 原始 & 化极
+cf = plot_contour(axes[0, 0], XI, YI, ZI,
+                  f'原始 ΔT\n(I={INC:.2f}°, D={DEC:.2f}°)',
+                  'ΔT (nT)', show_points=True)
+fig.colorbar(cf, ax=axes[0, 0], shrink=0.8)
+
+cf = plot_contour(axes[0, 1], XI, YI, Z_rtp,
+                  '化极后 ΔT (RTP)',
+                  'ΔT (nT)', show_points=True)
+fig.colorbar(cf, ax=axes[0, 1], shrink=0.8)
+
+# Row 2: 向上延拓 10m & 20m
+cf = plot_contour(axes[1, 0], XI, YI, Z_uc_list[1],
+                  '向上延拓 10m',
+                  'ΔT (nT)')
+fig.colorbar(cf, ax=axes[1, 0], shrink=0.8)
+
+cf = plot_contour(axes[1, 1], XI, YI, Z_uc_list[2],
+                  '向上延拓 20m',
+                  'ΔT (nT)')
+fig.colorbar(cf, ax=axes[1, 1], shrink=0.8)
+
+# Row 3: 垂向导数（化极前 & 化极后）
+cf = plot_contour(axes[2, 0], XI, YI, Z_vd,
+                  '',             
+                  ' ', show_points=False)
+fig.colorbar(cf, ax=axes[2, 0], shrink=0.8)
+
+cf = plot_contour(axes[2, 1], XI, YI, Z_rtp_vd,
+                  '',
+                  ' ', show_points=False)
+fig.colorbar(cf, ax=axes[2, 1], shrink=0.8)
+
+plt.tight_layout()
+plt.savefig('summary_all_processing.png', dpi=300, bbox_inches='tight')
+plt.close()
+print("已保存: summary_all_processing.png")
+
