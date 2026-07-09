@@ -1,5 +1,5 @@
 // JavaScript 实现
-class UnionFind {
+export class UnionFind {
     constructor(n) {
         // 初始化：每个人的父节点指向自己
         this.parent = new Array(n).fill(0).map((_, index) => index);
@@ -24,18 +24,20 @@ class UnionFind {
     }
 }
 
-// 1. 创建并查集，有 5 个节点
-const uf = new UnionFind(5);
+// // 1. 创建并查集，有 5 个节点
+// const uf = new UnionFind(5);
 
-// 2. 建立连接
-uf.union(0, 1);   // 连接 0 和 1
-uf.union(1, 2);   // 连接 1 和 2
-uf.union(3, 4);   // 连接 3 和 4
+// // 2. 建立连接
+// uf.union(0, 1);   // 连接 0 和 1
+// uf.union(1, 2);   // 连接 1 和 2
+// uf.union(3, 4);   // 连接 3 和 4
 
-console.log(uf.find(0))
-console.log(uf.find(1))
+// console.log(uf.find(0))
+// console.log(uf.find(1))
 
-// 3. 查询连通性
-console.log(uf.find(0) === uf.find(2));  // true，0-1-2 连通
-console.log(uf.find(0) === uf.find(3));  // false，不同集合
-console.log(uf.find(3) === uf.find(4));  // true，3-4 连通
+// // 3. 查询连通性
+// console.log(uf.find(0) === uf.find(2));  // true，0-1-2 连通
+// console.log(uf.find(0) === uf.find(3));  // false，不同集合
+// console.log(uf.find(3) === uf.find(4));  // true，3-4 连通
+
+
