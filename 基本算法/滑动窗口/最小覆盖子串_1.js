@@ -3,9 +3,8 @@
  * 
  * 越长越合法的滑动窗口
  * 
- * 左右指针维护的滑动窗口
+ * 滑动窗口+哈希表
  * 
- * 错误....
  */
 let s = "ADOBECODEBANC"
 let t = "ABC"
@@ -31,19 +30,17 @@ for (let r = 0; r < s_len; r++) {
     if (map.get(rc) === 0) {
         debt--
     }
+    console.log(debt,map)
     // 窗口合法后收缩左指针
     while (debt === 0) {
         console.log('合法窗口：', l, r)
-
         if (r - l + 1 < minLen) {
             minLen = r - l + 1
             start = l
         }
         let lc = s[l]
-        console.log(map)
         map.set(lc, map.get(lc) - 1)
-        console.log(map)
-        if (map.get(lc) === 0) {
+        if (map.get(lc) < 0) {
             // 窗口不再合法
             debt++
         }

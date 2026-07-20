@@ -2,15 +2,73 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')  # 非交互后端，直接保存图片
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 from scipy.interpolate import griddata
 import warnings
 warnings.filterwarnings('ignore')
 
 from matplotlib.ticker import FuncFormatter
 
-# 中文字体设置
-plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'Arial Unicode MS']
-plt.rcParams['axes.unicode_minus'] = False
+
+# ============ GMT 经典地质图风格 ============
+def set_gmt_style():
+    """设置 GMT (Generic Mapping Tools) 经典地质勘探图风格"""
+    plt.rcParams.update({
+        'font.family': 'sans-serif',
+        'font.sans-serif': ['Microsoft YaHei', 'SimHei', 'Helvetica', 'Arial', 'DejaVu Sans'],
+        'font.size': 9,
+        'axes.unicode_minus': False,
+        'axes.linewidth': 1.0,
+        'axes.edgecolor': 'black',
+        'axes.labelsize': 9,
+        'axes.labelcolor': 'black',
+        'axes.titlesize': 10,
+        'axes.titleweight': 'normal',
+        'axes.labelweight': 'normal',
+        'axes.spines.top': True,
+        'axes.spines.right': True,
+        'axes.facecolor': '#f5f5f2',
+        'xtick.labelsize': 8,
+        'ytick.labelsize': 8,
+        'xtick.direction': 'in',
+        'ytick.direction': 'in',
+        'xtick.major.size': 4.0,
+        'ytick.major.size': 4.0,
+        'xtick.minor.size': 2.5,
+        'ytick.minor.size': 2.5,
+        'xtick.major.width': 1.0,
+        'ytick.major.width': 1.0,
+        'xtick.minor.width': 0.6,
+        'ytick.minor.width': 0.6,
+        'xtick.color': 'black',
+        'ytick.color': 'black',
+        'axes.grid': True,
+        'axes.grid.which': 'major',
+        'grid.color': '#b0b0b0',
+        'grid.linestyle': '--',
+        'grid.linewidth': 0.5,
+        'grid.alpha': 0.6,
+        'legend.fontsize': 8,
+        'legend.frameon': True,
+        'legend.edgecolor': 'black',
+        'legend.facecolor': 'white',
+        'lines.linewidth': 1.0,
+        'savefig.dpi': 600,
+        'savefig.bbox': 'tight',
+        'savefig.facecolor': 'white',
+    })
+
+
+def _make_gmt_terrain_cmap():
+    """GMT 地形高程色阶：深蓝(负)→浅蓝→黄→橙→棕(正)"""
+    nodes = [0.00, 0.15, 0.30, 0.45, 0.60, 0.75, 1.00]
+    colors = ['#08306b', '#2171b5', '#6baed6', '#fee391',
+              '#fe9929', '#cc4c02', '#7f2704']
+    return LinearSegmentedColormap.from_list('gmt_terrain', list(zip(nodes, colors)))
+
+
+GMT_CMAP = _make_gmt_terrain_cmap()
+set_gmt_style()
 
 
 # ============ 日变校正函数 ============
@@ -111,41 +169,49 @@ XI, YI = np.meshgrid(grid_x, grid_y)
 ZI = griddata((all_x, all_y), all_deltaT, (XI, YI), method='cubic')
 
 
-# ============ 等值线图 ============
-fig, ax = plt.subplots(figsize=(10, 8))
+# ============ 等值线图 (GMT 地质风格) ============
+fig, ax = plt.subplots(figsize=(7.16, 5.8))
 
-# 等值线填充
+# 等值线填充 — GMT 地形色阶
 levels = 20
-contourf = ax.contourf(XI, YI, ZI, levels=levels, cmap='RdBu_r', alpha=0.9)
-contour = ax.contour(XI, YI, ZI, levels=10, colors='k', linewidths=0.8)
-ax.clabel(contour, inline=True, fontsize=8, fmt='%.1f')
+contourf = ax.contourf(XI, YI, ZI, levels=levels, cmap=GMT_CMAP,
+                       alpha=0.95)
+# 等值线：深棕色（GMT 经典）
+contour = ax.contour(XI, YI, ZI, levels=10, colors='#5a3a1a', linewidths=0.8)
+ax.clabel(contour, inline=True, fontsize=6, fmt='%.0f', colors='black')
 
-# 所有测点位置
-ax.scatter(all_x, all_y, c='black', s=20, marker='o', zorder=5, label='测点位置')
+# 所有测点位置（黑色实心点，GMT 风格）
+ax.scatter(all_x, all_y, c='black', s=10, marker='o', zorder=5,
+           edgecolors='white', linewidths=0.4, label='测点位置')
 
 # 标注每个测点的 ΔT 值
 for px, py, pv in zip(all_x, all_y, all_deltaT):
     ax.annotate(f'{pv:.1f}', xy=(px, py), xytext=(3, 3),
                 textcoords='offset points', fontsize=6, color='black')
 
-# 测线编号标注（右侧）
+# 测线编号标注（右侧，加粗）
 for i in range(1, len(line_names) + 1):
     y_pos = i * line_spacing
-    ax.text(all_x.max() + 1.5, y_pos, f'L{i}', fontsize=11,
-            verticalalignment='center', fontweight='bold')
+    ax.text(all_x.max() * 1.02, y_pos, f'L{i}', fontsize=8,
+            verticalalignment='center', fontweight='bold', color='black')
 
 # 纵坐标：测线编号 1~6，间距5米
 ax.set_ylim(5, 30)
 ax.set_yticks(np.arange(1, len(line_names) + 1) * line_spacing)
-ax.set_yticklabels(np.arange(1, len(line_names) + 1))
-ax.set_ylabel('测线编号', fontsize=12)
+ax.set_yticklabels([str(i) for i in range(1, len(line_names) + 1)])
+ax.set_ylabel('测线编号', fontsize=9)
 
-# 横坐标：测线方向
-ax.set_xlabel('测线方向 (m)', fontsize=12)
-fig.colorbar(contourf, ax=ax, label='ΔT (nT)')
+# 横坐标：测线方向（中文）
+ax.set_xlabel('测线方向距离 (m)', fontsize=9)
+ax.set_aspect('equal', adjustable='box')
+
+cbar = fig.colorbar(contourf, ax=ax, label='ΔT (nT)', shrink=0.9, pad=0.03)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 ax.legend(loc='lower left')
+
 plt.tight_layout()
-plt.savefig('style1_basic.png', dpi=300, bbox_inches='tight')
+plt.savefig('style1_basic.png', dpi=600, bbox_inches='tight')
 plt.close()
 print("已保存: style1_basic.png")
 print("\n图像生成完成！")

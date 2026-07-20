@@ -7,14 +7,100 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 from scipy.interpolate import griddata
 from scipy.ndimage import gaussian_filter
 import warnings
 warnings.filterwarnings('ignore')
 
-# 中文字体
-plt.rcParams['font.sans-serif'] = ['SimHei', 'Microsoft YaHei', 'Arial Unicode MS']
-plt.rcParams['axes.unicode_minus'] = False
+
+# ============ GMT 经典地质图风格 ============
+def set_gmt_style():
+    """设置 GMT (Generic Mapping Tools) 经典地质勘探图风格"""
+    plt.rcParams.update({
+        # 字体：中文字体优先，西文 Helvetica/Arial 作为 fallback
+        'font.family': 'sans-serif',
+        'font.sans-serif': ['Microsoft YaHei', 'SimHei', 'Helvetica', 'Arial', 'DejaVu Sans'],
+        'font.size': 9,
+        'axes.unicode_minus': False,
+
+        # 坐标轴：四周完整边框（GMT 经典 frame）
+        'axes.linewidth': 1.0,
+        'axes.edgecolor': 'black',
+        'axes.labelsize': 9,
+        'axes.labelcolor': 'black',
+        'axes.titlesize': 10,
+        'axes.titleweight': 'normal',
+        'axes.labelweight': 'normal',
+        'axes.spines.top': True,
+        'axes.spines.right': True,
+        'axes.facecolor': '#f5f5f2',  # 略带米色的地质图底色
+
+        # 刻度：朝内（GMT 默认）
+        'xtick.labelsize': 8,
+        'ytick.labelsize': 8,
+        'xtick.direction': 'in',
+        'ytick.direction': 'in',
+        'xtick.major.size': 4.0,
+        'ytick.major.size': 4.0,
+        'xtick.minor.size': 2.5,
+        'ytick.minor.size': 2.5,
+        'xtick.major.width': 1.0,
+        'ytick.major.width': 1.0,
+        'xtick.minor.width': 0.6,
+        'ytick.minor.width': 0.6,
+        'xtick.color': 'black',
+        'ytick.color': 'black',
+
+        # 网格（GMT 经典 grid 线）
+        'axes.grid': True,
+        'axes.grid.which': 'major',
+        'grid.color': '#b0b0b0',
+        'grid.linestyle': '--',
+        'grid.linewidth': 0.5,
+        'grid.alpha': 0.6,
+
+        # 图例
+        'legend.fontsize': 8,
+        'legend.frameon': True,
+        'legend.edgecolor': 'black',
+        'legend.facecolor': 'white',
+
+        # 线条
+        'lines.linewidth': 1.0,
+
+        # 保存
+        'savefig.dpi': 600,
+        'savefig.bbox': 'tight',
+        'savefig.facecolor': 'white',
+    })
+
+
+# GMT 风格磁异常配色：地形高程色阶（绿-黄-棕），模拟 GMT 的 globe/globe-cmap
+# 正异常=暖色（高地），负异常=冷色（深谷）
+def _make_gmt_terrain_cmap():
+    nodes = [0.00, 0.15, 0.30, 0.45, 0.60, 0.75, 1.00]
+    colors = ['#08306b',   # 深海蓝（负异常强）
+              '#2171b5',   # 海蓝
+              '#6baed6',   # 浅蓝（接近零）
+              '#fee391',   # 浅黄
+              '#fe9929',   # 橙
+              '#cc4c02',   # 红棕
+              '#7f2704']   # 深棕（正异常强）
+    return LinearSegmentedColormap.from_list('gmt_terrain', list(zip(nodes, colors)))
+
+
+GMT_CMAP = _make_gmt_terrain_cmap()
+
+
+def add_panel_label(ax, label, x=-0.08, y=1.02):
+    """在子图左上角添加 panel 标签 (a, b, c, ...)"""
+    ax.text(x, y, label, transform=ax.transAxes,
+            fontsize=11, fontweight='bold', va='top', ha='left',
+            color='black')
+
+
+set_gmt_style()
 
 
 # ============ IGRF-14 计算 ============
@@ -284,133 +370,196 @@ print(f"化极后垂向导数: 范围 [{np.nanmin(Z_rtp_vd):.4f}, {np.nanmax(Z_r
 print()
 
 
-# ============ 绘图函数 ============
-def plot_contour(ax, XI, YI, ZI_data, title, cbar_label, levels=20,
-                 show_points=False, show_lines=True, vmin=None, vmax=None):
-    """通用等值线绘图函数"""
+# ============ 绘图函数 (GMT 地质风格) ============
+def plot_contour(ax, XI, YI, ZI_data, title, cbar_label,
+                 levels=20, show_points=False, show_lines=True,
+                 vmin=None, vmax=None):
+    """GMT 经典地质勘探图风格等值线绘图函数"""
     if vmin is None:
         vmin = np.nanpercentile(ZI_data, 2)
     if vmax is None:
         vmax = np.nanpercentile(ZI_data, 98)
 
-    cf = ax.contourf(XI, YI, ZI_data, levels=levels, cmap='RdBu_r',
-                     alpha=0.9, vmin=vmin, vmax=vmax)
-    cs = ax.contour(XI, YI, ZI_data, levels=10, colors='k', linewidths=0.6)
-    ax.clabel(cs, inline=True, fontsize=6, fmt='%.1f')
+    # GMT 地形色阶填充
+    cf = ax.contourf(XI, YI, ZI_data, levels=levels, cmap=GMT_CMAP,
+                     alpha=0.95, vmin=vmin, vmax=vmax)
+    # 等值线：深棕色粗线（GMT 经典风格）
+    cs = ax.contour(XI, YI, ZI_data, levels=10, colors='#5a3a1a',
+                    linewidths=0.8)
+    ax.clabel(cs, inline=True, fontsize=6, fmt='%.0f', colors='black')
 
     if show_points:
-        ax.scatter(all_x, all_y, c='black', s=12, marker='o', zorder=5)
+        # 黑色实心测点（GMT 风格）
+        ax.scatter(all_x, all_y, c='black', s=10, marker='o',
+                   zorder=5, edgecolors='white', linewidths=0.4)
 
     if show_lines:
         for i in range(1, len(line_names) + 1):
             y_pos = i * line_spacing
-            ax.text(all_x.max() + 1.5, y_pos, f'L{i}', fontsize=9,
-                    verticalalignment='center', fontweight='bold')
+            ax.text(all_x.max() * 1.02, y_pos, f'L{i}', fontsize=8,
+                    verticalalignment='center', color='black',
+                    fontweight='bold')
 
     ax.set_ylim(5, 30)
     ax.set_yticks(np.arange(1, len(line_names) + 1) * line_spacing)
-    ax.set_yticklabels(np.arange(1, len(line_names) + 1))
-    ax.set_ylabel('测线编号', fontsize=10)
-    ax.set_xlabel('测线方向 (m)', fontsize=10)
-    ax.set_title(title, fontsize=11)
+    ax.set_yticklabels([str(i) for i in range(1, len(line_names) + 1)])
+    # 中文标签（地质勘探报告惯例）
+    ax.set_ylabel('测线编号', fontsize=9)
+    ax.set_xlabel('测线方向距离 (m)', fontsize=9)
+    ax.set_title(title, fontsize=10, pad=8)
+    ax.set_aspect('equal', adjustable='box')
     return cf
 
 
-fig, axes = plt.subplots(2, 2, figsize=(14, 12))
+# ============ 图1: 向上延拓（4 panel，GMT 风格） ============
+fig, axes = plt.subplots(2, 2, figsize=(7.16, 5.8))
+panel_labels = ['a', 'b', 'c', 'd']
 
-# 原始
+# 原始 ΔT
 cf = plot_contour(axes[0, 0], XI, YI, ZI,
-                  f' ΔT 等值线图\n(D={DEC:.2f}°, I={INC:.2f}°',
+                  f'ΔT 磁异常\n(D={DEC:.2f}°, I={INC:.2f}°)',
                   'ΔT (nT)', show_points=True)
-fig.colorbar(cf, ax=axes[0, 0], label='ΔT (nT)', shrink=0.8)
+add_panel_label(axes[0, 0], 'a')
+cbar1 = fig.colorbar(cf, ax=axes[0, 0], label='ΔT (nT)',
+                     shrink=0.85, pad=0.03)
+cbar1.ax.tick_params(labelsize=7)
+cbar1.outline.set_edgecolor('black')
+cbar1.outline.set_linewidth(0.8)
 
 # 延拓 5m, 10m, 20m
 for idx, h in enumerate(heights):
     ax = axes.flat[idx + 1]
     cf = plot_contour(ax, XI, YI, Z_uc_list[idx],
-                      f'向上延拓 {h}m',
+                      f'向上延拓 {h} m',
                       'ΔT (nT)')
-    fig.colorbar(cf, ax=ax, label='ΔT (nT)', shrink=0.8)
+    add_panel_label(ax, panel_labels[idx + 1])
+    cbar = fig.colorbar(cf, ax=ax, label='ΔT (nT)', shrink=0.85, pad=0.03)
+    cbar.ax.tick_params(labelsize=7)
+    cbar.outline.set_edgecolor('black')
+    cbar.outline.set_linewidth(0.8)
 
-plt.tight_layout()
-plt.savefig('upward_continuation.png', dpi=300, bbox_inches='tight')
+plt.tight_layout(w_pad=1.8, h_pad=1.6)
+plt.savefig('upward_continuation.png', dpi=600, bbox_inches='tight')
 plt.close()
 print("已保存: upward_continuation.png")
 
-# ============ 图2: 化极处理 ============
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+# ============ 图2: 化极处理（2 panel） ============
+fig, axes = plt.subplots(1, 2, figsize=(7.16, 3.2))
 
 cf = plot_contour(axes[0], XI, YI, ZI,
                   f'化极前 ΔT\n(I={INC:.2f}°, D={DEC:.2f}°)',
                   'ΔT (nT)', show_points=True)
-fig.colorbar(cf, ax=axes[0], label='ΔT (nT)', shrink=0.8)
+add_panel_label(axes[0], 'a')
+cbar = fig.colorbar(cf, ax=axes[0], label='ΔT (nT)', shrink=0.9, pad=0.03)
+cbar.ax.tick_params(labelsize=7)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
 cf = plot_contour(axes[1], XI, YI, Z_rtp,
                   '化极后 ΔT (RTP)\n(垂直磁化)',
                   'ΔT (nT)', show_points=True)
-fig.colorbar(cf, ax=axes[1], label='ΔT (nT)', shrink=0.8)
+add_panel_label(axes[1], 'b')
+cbar = fig.colorbar(cf, ax=axes[1], label='ΔT (nT)', shrink=0.9, pad=0.03)
+cbar.ax.tick_params(labelsize=7)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
-plt.tight_layout()
-plt.savefig('reduction_to_pole.png', dpi=300, bbox_inches='tight')
+plt.tight_layout(w_pad=2.5)
+plt.savefig('reduction_to_pole.png', dpi=600, bbox_inches='tight')
 plt.close()
 print("已保存: reduction_to_pole.png")
 
-# ============ 图3: 垂向导数 ============
-fig, axes = plt.subplots(1, 2, figsize=(14, 6))
+# ============ 图3: 垂向导数（2 panel） ============
+fig, axes = plt.subplots(1, 2, figsize=(7.16, 3.2))
 
 cf = plot_contour(axes[0], XI, YI, Z_vd,
                   '垂向一阶导数 ∂ΔT/∂z\n(化极前)',
                   '∂ΔT/∂z (nT/m)', show_points=True)
-fig.colorbar(cf, ax=axes[0], label='∂ΔT/∂z (nT/m)', shrink=0.8)
+add_panel_label(axes[0], 'a')
+cbar = fig.colorbar(cf, ax=axes[0], label='∂ΔT/∂z (nT/m)',
+                    shrink=0.9, pad=0.03)
+cbar.ax.tick_params(labelsize=7)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
 cf = plot_contour(axes[1], XI, YI, Z_rtp_vd,
                   '垂向一阶导数 ∂ΔT/∂z\n(化极后)',
                   '∂ΔT/∂z (nT/m)', show_points=True)
-fig.colorbar(cf, ax=axes[1], label='∂ΔT/∂z (nT/m)', shrink=0.8)
+add_panel_label(axes[1], 'b')
+cbar = fig.colorbar(cf, ax=axes[1], label='∂ΔT/∂z (nT/m)',
+                    shrink=0.9, pad=0.03)
+cbar.ax.tick_params(labelsize=7)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
-plt.tight_layout()
-plt.savefig('vertical_derivative.png', dpi=300, bbox_inches='tight')
+plt.tight_layout(w_pad=2.5)
+plt.savefig('vertical_derivative.png', dpi=600, bbox_inches='tight')
 plt.close()
 print("已保存: vertical_derivative.png")
 
 # ============ 图4: 综合对比（6 panel） ============
-fig, axes = plt.subplots(3, 2, figsize=(14, 18))
+fig, axes = plt.subplots(3, 2, figsize=(7.16, 7.2))
+summary_labels = ['a', 'b', 'c', 'd', 'e', 'f']
 
 # Row 1: 原始 & 化极
 cf = plot_contour(axes[0, 0], XI, YI, ZI,
                   f'原始 ΔT\n(I={INC:.2f}°, D={DEC:.2f}°)',
                   'ΔT (nT)', show_points=True)
-fig.colorbar(cf, ax=axes[0, 0], shrink=0.8)
+add_panel_label(axes[0, 0], 'a')
+cbar = fig.colorbar(cf, ax=axes[0, 0], shrink=0.85, pad=0.03)
+cbar.ax.tick_params(labelsize=6)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
 cf = plot_contour(axes[0, 1], XI, YI, Z_rtp,
-                  '化极后 ΔT (RTP)',
+                  '化极处理 (RTP)',
                   'ΔT (nT)', show_points=True)
-fig.colorbar(cf, ax=axes[0, 1], shrink=0.8)
+add_panel_label(axes[0, 1], 'b')
+cbar = fig.colorbar(cf, ax=axes[0, 1], shrink=0.85, pad=0.03)
+cbar.ax.tick_params(labelsize=6)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
 # Row 2: 向上延拓 10m & 20m
 cf = plot_contour(axes[1, 0], XI, YI, Z_uc_list[1],
-                  '向上延拓 10m',
+                  '向上延拓 10 m',
                   'ΔT (nT)')
-fig.colorbar(cf, ax=axes[1, 0], shrink=0.8)
+add_panel_label(axes[1, 0], 'c')
+cbar = fig.colorbar(cf, ax=axes[1, 0], shrink=0.85, pad=0.03)
+cbar.ax.tick_params(labelsize=6)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
 cf = plot_contour(axes[1, 1], XI, YI, Z_uc_list[2],
-                  '向上延拓 20m',
+                  '向上延拓 20 m',
                   'ΔT (nT)')
-fig.colorbar(cf, ax=axes[1, 1], shrink=0.8)
+add_panel_label(axes[1, 1], 'd')
+cbar = fig.colorbar(cf, ax=axes[1, 1], shrink=0.85, pad=0.03)
+cbar.ax.tick_params(labelsize=6)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
-# Row 3: 垂向导数（化极前 & 化极后）
+# Row 3: 垂向导数
 cf = plot_contour(axes[2, 0], XI, YI, Z_vd,
-                  '',             
-                  ' ', show_points=False)
-fig.colorbar(cf, ax=axes[2, 0], shrink=0.8)
+                  '垂向一阶导数\n(化极前)',
+                  '∂ΔT/∂z (nT/m)', show_points=False)
+add_panel_label(axes[2, 0], 'e')
+cbar = fig.colorbar(cf, ax=axes[2, 0], shrink=0.85, pad=0.03)
+cbar.ax.tick_params(labelsize=6)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
 cf = plot_contour(axes[2, 1], XI, YI, Z_rtp_vd,
-                  '',
-                  ' ', show_points=False)
-fig.colorbar(cf, ax=axes[2, 1], shrink=0.8)
+                  '垂向一阶导数\n(化极后)',
+                  '∂ΔT/∂z (nT/m)', show_points=False)
+add_panel_label(axes[2, 1], 'f')
+cbar = fig.colorbar(cf, ax=axes[2, 1], shrink=0.85, pad=0.03)
+cbar.ax.tick_params(labelsize=6)
+cbar.outline.set_edgecolor('black')
+cbar.outline.set_linewidth(0.8)
 
-plt.tight_layout()
-plt.savefig('summary_all_processing.png', dpi=300, bbox_inches='tight')
+plt.tight_layout(w_pad=1.5, h_pad=1.8)
+plt.savefig('summary_all_processing.png', dpi=600, bbox_inches='tight')
 plt.close()
 print("已保存: summary_all_processing.png")
 
