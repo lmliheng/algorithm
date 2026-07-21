@@ -2,9 +2,15 @@
  * @模拟退火算法 simulated annealing
  * @概率性全局退火算法
  */
-function cost(x, y) {
-    return x * x + y * y;
+// function cost(x, y) {
+//     return x * x + y * y;
+// }
+
+//-1
+function cost(x,y) {
+    return 0.1 * x * x + Math.sin(y);
 }
+
 
 // 随机扰动生成邻域解
 function neighbor(x, y) {
