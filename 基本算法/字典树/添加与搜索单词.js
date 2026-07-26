@@ -22,35 +22,43 @@ WordDictionary.prototype.addWord = function (word) {
 };
 
 
-WordDictionary.prototype.searchPrefix = function (prefix) {
-    let node = this.children
-    for (const ch of prefix) {
-        if (ch === '.') {
-            node = node[ch]
-            continue
-        }
-        if (!node[ch]) {
-            return undefined
-        }
-        node = node[ch]
-    }
-    return node
-}
 
 /** 
+ * @search方法
+ * 这里字典中都是英文....所以没有考虑中文和特殊字符
  * @param {string} word
  * @return {boolean}
  */
 WordDictionary.prototype.search = function (word) {
-    const node = this.searchPrefix(word);
-    return node !== undefined && node.isEnd !== undefined;
+    const dfs = (node, index) => {
+        if (index === word.length) {
+            return node.isEnd === undefined ? false : node.isEnd
+        }
+        const ch = word[index];
+        if (ch !== '.') {
+            if (!node[ch]) return false;
+            return dfs(node[ch], index + 1);
+        }
+
+        for (const key in node) {
+            if (key === 'isEnd') continue;
+            if (dfs(node[key], index + 1)) {
+                return true;
+            }
+        }
+        return false
+    }
+
+    return dfs(this.children, 0)
 };
 
 
 let WD = new WordDictionary()
 WD.addWord('coo')
-WD.addWord('cool vue')
-console.log(WD.searchPrefix('c.o'))
+WD.addWord('cb')
+WD.addWord('coomk1l')
+WD.addWord('cool vue, 我正在构建最小的vue核心')
+// console.log(WD.searchPrefix('coo.'))
 console.log(WD.search('co'))
-console.log(WD.search('c.'))
+console.log(WD.search('c.o'))
 console.log(JSON.stringify(WD))
