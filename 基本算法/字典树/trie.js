@@ -1,4 +1,7 @@
-
+/**
+ * @字典树是一个多叉树结构
+ * isEnd表示字的结尾
+ */
 var Trie = function () {
     // 多叉树
     this.children = {}
