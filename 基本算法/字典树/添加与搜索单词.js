@@ -2,7 +2,6 @@
  * @添加与搜索单词
  */
 var WordDictionary = function () {
-
     this.children = {}
 };
 
