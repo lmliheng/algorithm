@@ -1,7 +1,7 @@
 /**
  * @归并
  */
-const mergeSort=(arr)=>{
+export const mergeSort=(arr)=>{
     // 合并有序数组l,r
     const merge=(left,right)=>{
          let result = [];
@@ -27,4 +27,4 @@ const mergeSort=(arr)=>{
     return merge(mergeSort(arrLeft),mergeSort(arrRight))
 }
 
-console.log(mergeSort([1,5,10,3,2,5]))
+// console.log(mergeSort([1,5,10,3,2,5]))
