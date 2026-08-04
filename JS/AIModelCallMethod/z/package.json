@@ -1,0 +1,15 @@
+{
+  "name": "z",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "embedding": "node --env-file=.env 向量模型/embeddingZ.js",
+    "chat": "node --env-file=.env 对话补全/test.js",
+    "image": "node --env-file=.env 图像生成/imageZ.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
