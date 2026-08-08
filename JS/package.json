@@ -1,5 +1,19 @@
 {
   "dependencies": {
     "typescript": "^6.0.3"
-  }
+  },
+  "name": "js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module"
 }

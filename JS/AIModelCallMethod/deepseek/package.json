@@ -4,8 +4,8 @@
   "description": "",
   "main": "deepseek.js",
   "scripts": {
-    "test": "node --env-file=.env test",
-    "test-sse": "node --env-file=.env test_sse"
+    "test-chat": "node --env-file=.env chat",
+    "test-sse": "node --env-file=.env chat_sse"
   },
   "keywords": [],
   "author": "",
