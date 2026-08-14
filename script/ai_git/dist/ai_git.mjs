@@ -1,4 +1,4 @@
-import { writeFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
 import { exec } from 'child_process';
 import 'path';
 
@@ -45,7 +45,15 @@ function messageCreate(message, role = 'user') {
  * 
  */
 async function ai_changlog(logPath) {
-  console.log(logPath);
+  try {
+    let FileContent = await readFile(logPath);
+    let res = await deepseek_response(messageCreate(`帮我整理内容，整体格式和内容不要变，主要看看有没有多余的行或者行分布不均的情况，${FileContent}`));
+    await writeFile(logPath, res, { flag: 'w', encoding: 'utf8' });
+    console.log(res);
+  }catch(e){
+    console.error(e);
+  }
+ 
 }
 
 /**
