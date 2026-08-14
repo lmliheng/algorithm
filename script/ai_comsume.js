@@ -16,7 +16,8 @@ import { writeFile } from 'fs/promises'
 let git_commit = ''
 function getGitCommit() {
     return new Promise((resolve, reject) => {
-        exec('git show HEAD', (error, stdout, stderr) => {
+        // git show HEAD
+        exec('git log origin/master..HEAD -p', (error, stdout, stderr) => {
             if (error) {
                 reject(error);
                 return;
@@ -35,7 +36,7 @@ try {
     const git_commit = await getGitCommit();
     console.log(git_commit);
     if (process.argv[2] === '--write') {
-        let question = messageCreate(`用md格式帮我用150字总结我这次提交的内容，标题是commit的内容和时间，说说我做了哪些工作，可以扩展什么，工作质量怎么样,${git_commit}`)
+        let question = messageCreate(`用md格式帮我总结我每次提交的内容 一个commit对应150字总结，标题是commit的内容和时间，说说我做了哪些工作，可以扩展什么，工作质量怎么样,${git_commit}`)
         let res = await deepseek_response(question)
         console.log('回复：', res)
         await writeFile(path.join(import.meta.dirname, '../CHANGLOG.md'), '\n'+res, { flag: 'a', encoding: 'utf8' });
