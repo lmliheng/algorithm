@@ -9,7 +9,6 @@
   "scripts": {
     "embedding": "node --env-file=.env 向量模型/embeddingZ.js",
     "chat": "node --env-file=.env 对话补全/chat.js",
-    "image": "node --env-file=.env 图像生成/imageZ.js",
-  
+    "image": "node --env-file=.env 图像生成/imageZ.js"
   }
 }

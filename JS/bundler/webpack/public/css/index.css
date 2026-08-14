@@ -1,0 +1,10 @@
+.app_text {
+    font-size: larger;
+    color: aqua;
+}
+
+.app_size {
+    width: 100px;
+    height: 100px;
+    background-color: antiquewhite;
+}
