@@ -1,9 +1,9 @@
 /**
- * @每个字符最多出现两次的最长子字符串
+ * @无重复字符的最长子串
+ * 力扣第三题，用滑动窗口做
  * 母题：2958最多K个重复元素的最长子数组
  */
-
-export function maximumLengthSubstring(s) {
+export function lengthOfLongestSubstring(s) {
     let res = 0
     let map = new Map()
     let left = 0
@@ -13,12 +13,13 @@ export function maximumLengthSubstring(s) {
         } else {
             map.set(s[i], map.get(s[i]) + 1)
         }
-        while (map.get(s[i]) > 2) {
+
+        while (map.get(s[i]) > 1) {
             map.set(s[left], map.get(s[left]) - 1)
             left++
         }
         res = Math.max(res, i - left + 1)
-    }
 
+    }
     return res
 };
