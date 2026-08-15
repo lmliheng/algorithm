@@ -22,3 +22,11 @@
 ## feat: npm git_ai（2026-08-15 04:01:31 +0800）
 
 本次提交构建了 `ai_git` 工具：将原有 `ai_comsume.js` 重构到 `script/ai_git/src/`，调用 DeepSeek API 读取 `origin/master..HEAD` 的提交差异，生成 Markdown 总结并追加写入 changelog；同时新增 Rollup 配置，打包出 CJS/ESM 双格式产物，删除 Fast-NodeServer 子模块。还补充了滑动窗口算法注释和按位异或题目实现。整体模块划分清晰，但 `ai_changlog` 仍为空壳、构建产物提交进仓库可优化。后续可扩展为 Git hook 自动触发、多轮对话整理、接入更多模型或补充单元测试。
+
+## feat: python learn（2026-08-15 08:40:42 +0800）
+
+**工作内容**：新增 `python/base/data_struct.py` 数据结构占位文件；调整 `request_test.py` 请求体变量名 `payload` → `data`；新增 5 道 LeetCode Hot100 题解：LC1 两数之和、LC560 和为 K 的子数组、LC49 字母异位词分组、LC128 最长连续序列、LC283 移动零。
+
+**可扩展**：可补充 `data_struct.py` 的实际数据结构实现，继续完成 Hot100 剩余题目，并增加单元测试验证边界情况。
+
+**工作质量**：整体算法思路基本正确，主要案例可运行，但细节质量中等：LC1 使用 `nums.index` 在重复值场景下易返回错误索引；LC49 空数组处理不符合题意且残留调试 `print`；LC128 排序解法为 O(n log n)，不满足 O(n) 要求；LC283 倒序 `pop` 效率较低，建议改用双指针。后续需加强边界处理与复杂度优化。

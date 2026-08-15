@@ -4,7 +4,7 @@ import requests
 def get_ds_response(user_input):
     messages = [{"role": "user", "content": user_input}]  # 消息格式
 
-    payload = {
+    data = {
         "model": "deepseek-v4-pro",
         "messages": messages,
         "reasoning_effort": "high",
@@ -18,7 +18,7 @@ def get_ds_response(user_input):
 
     response = requests.post(
         "https://api.deepseek.com/chat/completions",
-        json=payload,  # 使用 json= 参数
+        json=data,  # 使用 json= 参数
         headers=headers,
     )
 
