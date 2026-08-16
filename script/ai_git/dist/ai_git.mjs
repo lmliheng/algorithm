@@ -44,16 +44,24 @@ function messageCreate(message, role = 'user') {
  * 对changlog进行整理，可以不使用
  * 
  */
-async function ai_changlog(logPath) {
+async function ai_changlog(
+  logPath,
+  options = {
+    branch: 'master',
+  }) {
+
+  if (logPath === undefined) {
+    console.error('请写入日志文件绝对地址');
+  }
   try {
     let FileContent = await readFile(logPath);
     let res = await deepseek_response(messageCreate(`帮我整理内容，整体格式和内容不要变，主要看看有没有多余的行或者行分布不均的情况，${FileContent}`));
     await writeFile(logPath, res, { flag: 'w', encoding: 'utf8' });
     console.log(res);
-  }catch(e){
+  } catch (e) {
     console.error(e);
   }
- 
+
 }
 
 /**
@@ -67,26 +75,39 @@ async function ai_changlog(logPath) {
  * 形参路径是changlog的绝对路径
  * 
  */
-async function ai_commsume(logPath) {
+async function ai_commsume(
+    logPath,
+    options = {
+        branch: 'master',
+    }
+) {
+
+
+    if (logPath === undefined) {
+        console.error('请写入日志文件绝对地址');
+        return
+    }
+
     try {
-        const git_commit = await getGitCommit();
-        // console.log(git_commit);
-        // if (process.argv[2] === '--write') {
+        const git_commit = await getGitCommit(options);
+        if (git_commit.length == 0) {
+            console.error('最近没有提交内容');
+            return
+        }
         let question = messageCreate(`用md格式帮我总结我每次提交的内容 一个commit对应150字总结，标题是commit的内容和时间，说说我做了哪些工作，可以扩展什么，工作质量怎么样,${git_commit}`);
         let res = await deepseek_response(question);
         console.log('回复：', res);
         await writeFile(logPath, '\n' + res, { flag: 'a', encoding: 'utf8' });
-        // }
 
     } catch (error) {
         console.error('获取提交信息失败:', error.message);
     }
 }
 
-function getGitCommit() {
+function getGitCommit(options) {
     return new Promise((resolve, reject) => {
         // git show HEAD
-        exec('git log origin/master..HEAD -p', (error, stdout, stderr) => {
+        exec(`git log origin/${options?.branch}..HEAD -p`, (error, stdout, stderr) => {
             if (error) {
                 reject(error);
                 return;
