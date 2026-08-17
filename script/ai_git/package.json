@@ -1,6 +1,6 @@
 {
   "name": "@lmliheng/ai_git",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "git 提交前的ai总结npm库",
   "main": "./dist/ai_git.cjs",
   "module": "./dist/ai_git.mjs",

@@ -20,7 +20,7 @@ async function deepseek_response(message) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.DEEP_SEEK_API}`
+            "Authorization": `Bearer ${process.env.DEEPSEEK_API_KEY}`
         },
         body: JSON.stringify(data),
     });
