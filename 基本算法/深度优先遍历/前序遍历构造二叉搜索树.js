@@ -13,7 +13,6 @@ function TreeNode(val, left, right) {
 let preorder = [4, 2]
 //[8, 5, 1, 7, 10, 12]
 
-
 const CreateBTree = (preorder) => {
     if (preorder.length === 0) { return null }
     // 右子树不存在时r取length
