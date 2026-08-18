@@ -1,11 +1,5 @@
-
 import { readFile } from 'fs/promises'
-
-
 import path from 'path'
-// import { fileURLToPath } from 'url'
-// const __file = fileURLToPath(import.meta.url)
-// const __dir = path.dirname(__file)
 
 
 /**
@@ -18,4 +12,9 @@ if (process.argv[2] === 'image') {
     console.log(image1)
 }
 
+/**
+ * @utf8
+ */
+let code = await readFile(hostjs_path, 'utf8')
+code = JSON.stringify(code)
 
