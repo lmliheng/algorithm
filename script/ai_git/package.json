@@ -1,7 +1,10 @@
 {
   "name": "@lmliheng/ai_git",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "git 提交前的ai总结npm库",
+  "keywords": ["agent","git","comsume"],
+  "author": "lmliheng",
+  "license": "MIT",
   "main": "./dist/ai_git.cjs",
   "module": "./dist/ai_git.mjs",
   "exports": {
@@ -16,11 +19,9 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "test": "node --env-file=.env test/test.js comsume"
+    "p": "npm publish --registry=https://registry.npmjs.org/",
+    "comsume": "node --env-file=.env test/test.js comsume"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "type": "module",
   "devDependencies": {
     "rollup": "^4.62.4"

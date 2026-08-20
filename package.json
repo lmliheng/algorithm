@@ -4,7 +4,9 @@
   "description": "<p align=\"center\">\r   <img src=\"https://img.shields.io/badge/Languages-Java%20%7C%20JS%20%7C%20TS%20%7C%20C++-blue.svg\" alt=\"Languages\">\r   <img src=\"https://img.shields.io/badge/LeetCode-100%2B%20Problems-green.svg\" alt=\"LeetCode\">\r   <img src=\"https://img.shields.io/badge/Study-Friendly-ff69b4.svg\" alt=\"Study\">\r   <img src=\"https://img.shields.io/badge/License-MIT-yellow.svg\" alt=\"License\">\r </p>",
   "main": "index.js",
   "scripts": {
-    "comsume": "node --env-file=.env script/ai_git.js comsume"
+    "comsume": "node --env-file=.env script/ai_git.js comsume",
+    "commits": "node --env-file=.env script/ai_git.js commits",
+    "dev":"node --env-file=.env script/ai_git.js dev"
   },
   "repository": {
     "type": "git",

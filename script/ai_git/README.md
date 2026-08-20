@@ -1,3 +1,7 @@
+更新方向：
+目前git操作均由我写死，逻辑固定
+后续引入Agent模式，结合git MCP,实现功能自动化
+
 使用
 ```
 npm i @lmliheng/ai_git

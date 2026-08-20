@@ -25,12 +25,15 @@ for (const key in obj) {
  * 以下写法都没有报错
  */
 let a=1
-console.log(obj.name)
-console.log(obj.xxx)
+console.log(obj.name) 
+console.log(obj.xxx) // undefined
 console.log(obj['name'])
 console.log(obj['xxx'])
 // 这个是可以读取的，变量是数字
 console.log(obj[a])
+if(obj.liheng==undefined){
+    console.log('属性不存在')
+}
 
 
 
