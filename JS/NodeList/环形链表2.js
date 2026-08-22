@@ -6,15 +6,14 @@
 
 
 /**
- * 
- * @使用哈希表 
+ * @使用集合
  */
 export function detectCycle(head) {
-    let visit = new Set()
+    let set = new Set()
     let p = head
     while (p) {
-        if (!visit.has(p)) {
-            visit.add(p)
+        if (!set.has(p)) {
+            set.add(p)
         } else {
             return p
         }

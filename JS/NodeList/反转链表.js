@@ -3,7 +3,33 @@ import { ListNode } from './ListNode.js'
  * @反转链表
  * 
  */
-export function reverseList(head) {
+
+
+/**
+ * 
+ * @原地修改链表
+ * [1,2,3,4]
+ * pre=[1,null],cur=[2,3,4]
+ * pre=[2,1,null],cur=[3,4]
+ */
+export function reverseList1(head) {
+    let pre = null
+    let cur = head
+    while (cur) {
+        let temp = cur.next
+        cur.next = pre
+        pre = cur
+        cur = temp
+    }
+    return pre
+}
+
+
+/**
+ * 
+ * @使用数组完成
+ */
+export function reverseList2(head) {
     let p1 = head
     let arrList = []
     while (p1) {
@@ -19,3 +45,5 @@ export function reverseList(head) {
     }
     return dummy.next
 };
+
+

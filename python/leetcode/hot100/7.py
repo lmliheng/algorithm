@@ -1,18 +1,24 @@
 """
-合并区间
-lc 56
+7. 接雨水
 """
-class Solution:
-    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key=lambda x:x[0])
-        res=[]
-        for index,interval in enumerate(intervals):
-            if index==0:
-                res.append(interval)
-            if interval[0]>res[len(res)-1][1]:
-                res.append(interval)
-            else:
-                res[len(res)-1][1]=max(interval[1],res[len(res)-1][1])
-        return res
 
-            
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        res=0
+        max_height = max(height)
+        max_height_index = height.index(max_height)
+        left_max_height=0
+        right_max_height=0
+        for i in range(max_height_index+1):
+            if height[i]>left_max_height:
+                left_max_height=height[i]
+            else:
+                res+=left_max_height-height[i]
+
+        for i in range(len(height)-1, max_height_index-1 , -1):
+            if height[i]>right_max_height:
+                right_max_height=height[i]
+            else:
+                res+=right_max_height-height[i]
+
+        return res
