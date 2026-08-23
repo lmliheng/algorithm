@@ -14,3 +14,14 @@ console.log(a2)
  */
 let a3 = Array.from({ length: 3 }, () => Array.from({ length: 4 }, () => Array.from({ length: 2 }, () => 0)))
 console.log(a3)
+
+
+
+
+/**
+ * @数组访问不存在的索引
+ *  不会报错
+ */
+let nums = [1, 2, 3]
+console.log(nums[6] == undefined)
+console.log(nums[8])
