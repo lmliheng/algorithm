@@ -1,6 +1,8 @@
+import { lowerBound, upperBound } from './二分查找.js'
 /**
  * @搜索二维矩阵
  * 
+ * 对行列进行二分查找
  * 题目要求时间复杂度是log(mn)
  * 
  */
@@ -41,3 +43,17 @@ function searchMatrix(matrix, target) {
     }
     return matrix[row][l] === target
 };
+
+function searchMatrix(matrix, target) {
+    let m = matrix.length
+    let n = matrix[0].length
+    if (matrix[0][0] > target || matrix[m - 1][n - 1] < target) {
+        return false
+    }
+    let raw = lowerBound((mid) => matrix[mid][0] > target, 0, m)
+    raw--
+    if (raw == -1) { return false }
+    let col = lowerBound((mid) => matrix[raw][mid] >= target, 0, n)
+    return col < n && matrix[raw][col] == target
+};
+
