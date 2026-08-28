@@ -4,7 +4,6 @@
  * @0 1 背包问题
  * 使用set记录存在的和值，
  */
-
 function canPartition(nums) {
     let n = nums.length
     let sum = 0

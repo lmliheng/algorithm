@@ -1,6 +1,8 @@
-// 数组求和
 
-// reduce :reduce每次迭代都会创建新的函数作用域和执行上下文
+/**
+ * @reduce
+ *  数组求和
+ */
 
 // reduce 方式
 function sumWithReduce(arr) {
