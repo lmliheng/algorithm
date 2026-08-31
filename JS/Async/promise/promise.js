@@ -22,7 +22,9 @@ let p1 = new Promise((resolve, reject) => resolve('1'))
 let p2 = new Promise((resolve, reject) => reject('拒绝2'))
 let p3 = new Promise((resolve, reject) => resolve('3'))
 let p4 = new Promise((resolve, reject) => reject('拒绝4'))
+
 let p5 = new Promise((resolve, reject) => console.log(''))
+
 let all1 = Promise.all([p1, p2, p3, p4])
 let all2 = Promise.all([p1, p3, p5])
 let all3 = Promise.all([p1, p3])
@@ -43,7 +45,6 @@ console.log(all2)
  * 
  * 空数组(没有promise)，则返回一个永远pending的Promise
  */
-
 let p6 = new Promise((resolve, reject) => reject('拒绝6'))
 let p7 = new Promise((resolve, reject) => reject('拒绝7'))
 let p8 = new Promise((resolve, reject) => reject('拒绝8'))
