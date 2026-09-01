@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TOTP 二维码</title>
+</head>
+
+<body>
+    <div style="display: flex; flex-direction: column; align-items: center; height: 600px;">
+        <h3>用 Authenticator App 扫描</h3>
+        <img id="qrcode" />
+        <br>
+        <input id="token" placeholder="输入 6 位验证码" />
+        <button id="check" style="margin-top: 10px;">校验</button>
+        <p id="result"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <script>
+        const userLabel = '0110230306@csu.edu.cn'
+
+        fetch('http://127.0.0.1:3000/totp')
+            .then(res => res.json())
+            .then(data => {
+                QRCode.toDataURL(data.otpauthUrl, {
+                    width: 256,
+                    margin: 2,
+                }, (err, url) => {
+                    if (err) return console.error(err)
+                    document.getElementById("qrcode").src = url
+                })
+            })
+
+        document.getElementById('check').onclick = () => {
+            const token = document.getElementById('token').value
+
+            fetch('http://127.0.0.1:3000/check', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userLabel,
+                    token
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('result').innerText = data.message
+                })
+        }
+    </script>
+</body>
+
+</html>
