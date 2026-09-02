@@ -4,7 +4,7 @@
  *  数组求和
  */
 
-// reduce 方式
+// reduce 方式,0是初值
 function sumWithReduce(arr) {
     return arr.reduce((acc, cur) => acc + cur, 0);
 }
