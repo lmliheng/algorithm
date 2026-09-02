@@ -12,13 +12,12 @@ Object.defineProperty(object1, "property1", { // 没有则创建
     configurable: true,
     // 可删除
     deleteable: true,
-
 });
 
 Object.defineProperty(object1, "property2", { // 没有则创建
     value: 43,
     writable: true,
-    // 可枚举默认是false，不可枚举✅ 属性存在，只是“不可见”
+    // 可枚举默认是false，不可枚举， 属性存在，只是“不可见”
     //enumerable: true,
     // 可配置
     configurable: true,
