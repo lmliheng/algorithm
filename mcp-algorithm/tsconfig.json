@@ -5,8 +5,11 @@
     "moduleResolution": "nodenext",
     "lib": ["es2023"],
     "types": ["node"],
+
     "strict": true,
+
     "noEmit": true,
+    
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,
     "erasableSyntaxOnly": true,

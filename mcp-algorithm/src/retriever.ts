@@ -36,6 +36,7 @@ export async function retrieveAlgorithms(
   return refine(config, candidates, query, config.maxResults)
 }
 
+
 /** 阶段一：从完整清单粗筛候选路径（严格校验来自清单，防 LLM 捏造） */
 async function roughFilter(
   config: AppConfig,

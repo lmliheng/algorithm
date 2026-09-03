@@ -8,6 +8,7 @@ import { retrieveAlgorithms, type AlgorithmHit } from './retriever.ts'
 
 const config = loadConfig()
 
+
 // 启动时扫描一次算法库，生成文件清单供 Agent 检索。
 // stdio 服务器不能往 stdout 写日志（会污染协议），一律用 stderr。
 const fileList = await scanAlgorithmFiles(config.algorithmDir)
