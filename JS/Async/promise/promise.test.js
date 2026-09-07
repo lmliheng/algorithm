@@ -109,3 +109,22 @@ if (process.argv[2] == 'any') {
     any2.then((v) => console.log(v))
         .catch((e) => console.log(e))
 }
+
+
+/**
+ * 输出b的微任务更先入队
+ * adbc
+ */
+if (process.argv[2] === 'pdd') {
+    async function main() {
+        try {
+            console.log('a')
+            Promise.reject('A').catch((reason) => console.log('b'))
+            await Promise.reject('B')
+        } catch (e) {
+            console.log('c')
+        }
+    }
+    main()
+    console.log('d')
+}
