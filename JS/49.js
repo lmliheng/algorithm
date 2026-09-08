@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
 if (strs.length === 0) {
     console.log([['']]);
@@ -22,4 +24,3 @@ for (let i = 0; i < strs.length; i++) {
     }
 }
 console.log(res);
-export {};

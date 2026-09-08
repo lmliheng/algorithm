@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Definition for singly-linked list.
  * class ListNode {
@@ -10,8 +12,6 @@
  * }
  */
 class ListNode {
-    val;
-    next;
     constructor(val, next) {
         this.val = (val === undefined ? 0 : val);
         this.next = (next === undefined ? null : next);
@@ -52,4 +52,3 @@ function removeNthFromEnd(head, n) {
 const head = new ListNode(1, new ListNode(2));
 // removeNthFromEnd(head, 0)
 console.log(removeNthFromEnd(head, 2));
-export {};

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function* fibGenerator() {
     let a = 0;
     let b = 1;
@@ -14,4 +16,3 @@ console.log(fib.next().value); // 5
 console.log(fib.next().value); // 10
 console.log(fib.next().value); // 15
 console.log(fib.next().value); // undefined
-export {};

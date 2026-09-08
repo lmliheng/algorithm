@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @使用Map完成
  *
@@ -6,8 +8,6 @@
  * 其他语言使用map + 双向链表完成
  */
 class LRUCache {
-    capacity;
-    map;
     constructor(capacity) {
         this.capacity = capacity;
         this.map = new Map();
@@ -38,4 +38,3 @@ class LRUCache {
         }
     }
 }
-export {};

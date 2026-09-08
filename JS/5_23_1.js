@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let nums = [0, 29];
 let zeroN = 0;
 let zeroN1 = 0;
@@ -14,4 +16,3 @@ for (let i = nums.length - zeroN; i < nums.length; i++) {
     }
 }
 console.log(zeroN, zeroN1);
-export {};

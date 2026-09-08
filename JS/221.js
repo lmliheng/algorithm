@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let matrix = [["1", "1"], ["1", "1"]];
 console.log(matrix);
 let m = matrix.length;
@@ -24,4 +26,3 @@ for (let i = 1; i < m; i++) {
     }
 }
 console.log(dp);
-export {};

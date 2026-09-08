@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let s = "catsanddog";
 let wordDict = ["cats", "dog", "sand", "and", "cat"];
 let res = 0;
@@ -16,4 +18,3 @@ const recursive = (str) => {
 };
 recursive(s);
 console.log(res);
-export {};

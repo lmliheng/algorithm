@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let nums = [3, 4, 5, 1, 2];
 let MinIndex = nums.indexOf(Math.min(...nums));
 let length = nums.length;
@@ -14,4 +16,3 @@ const checkIncrease = (arr) => {
     return true;
 };
 console.log(checkIncrease(nums));
-export {};

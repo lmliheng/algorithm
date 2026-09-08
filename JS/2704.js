@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function expect(val) {
     const toBe = (b) => {
         if (b === val) {
@@ -23,4 +25,3 @@ function expect(val) {
  * expect(5).notToBe(5); // throws "Equal"
  */
 console.log(expect(5).notToBe(null));
-export {};

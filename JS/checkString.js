@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const checkString = (str) => {
     if (str.length === 0) {
         return true;
@@ -20,4 +22,3 @@ const checkString = (str) => {
     return stack.length === 0;
 };
 console.log(checkString('(()())'));
-export {};

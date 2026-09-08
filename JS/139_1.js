@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let s = "catsanddog";
 let wordDict = ["cats", "dog", "sand", "and", "cat"];
 let set = new Set(wordDict);
@@ -13,4 +15,3 @@ for (let i = 1; i <= n; i++) {
     }
 }
 console.log(dp);
-export {};

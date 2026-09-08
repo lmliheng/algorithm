@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function createCounter(init) {
     let a = init;
     let increment = () => {
@@ -25,4 +27,3 @@ console.log(counter.increment());
 console.log(counter.decrement());
 console.log(counter.reset());
 console.log(counter.increment());
-export {};

@@ -1,6 +1,7 @@
+"use strict";
+var _a;
+Object.defineProperty(exports, "__esModule", { value: true });
 class ListNode {
-    val;
-    next;
     constructor(val, next) {
         this.val = (val === undefined ? 0 : val);
         this.next = (next === undefined ? null : next);
@@ -15,9 +16,9 @@ let isDelete = false;
 let Vhead = new ListNode(0, head);
 let deleteNode = Vhead;
 let n1 = Vhead.next;
-let n2 = Vhead.next?.next; //...
-while (n2?.next) {
-    if (n1?.val === n2.val) {
+let n2 = (_a = Vhead.next) === null || _a === void 0 ? void 0 : _a.next; //...
+while (n2 === null || n2 === void 0 ? void 0 : n2.next) {
+    if ((n1 === null || n1 === void 0 ? void 0 : n1.val) === n2.val) {
         n2 = n2.next;
         isDelete = true;
     }
@@ -34,4 +35,3 @@ while (n2?.next) {
     }
 }
 console.log(Vhead.next);
-export {};

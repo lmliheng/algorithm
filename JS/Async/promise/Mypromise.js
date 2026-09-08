@@ -1,19 +1,22 @@
+"use strict";
 /**
  * @Promise的实现
  *
  * 使用ts完成，有充分的类型推断
  */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MyPromise = void 0;
 /**
  * @MyPromise
  */
-export class MyPromise {
-    // 实例字段=construction里写this
-    state = "pending";
-    value = undefined;
-    reason = undefined;
-    resolveCallbacks = [];
-    rejectCallbacks = [];
+class MyPromise {
     constructor(executor) {
+        // 实例字段=construction里写this
+        this.state = "pending";
+        this.value = undefined;
+        this.reason = undefined;
+        this.resolveCallbacks = [];
+        this.rejectCallbacks = [];
         const resolveHandler = (value) => {
             if (this.state === "pending") {
                 this.state = "fulfilled";
@@ -31,7 +34,7 @@ export class MyPromise {
         try {
             executor(resolveHandler, rejectHandler);
         }
-        catch {
+        catch (_a) {
             rejectHandler();
         }
     }
@@ -148,3 +151,4 @@ export class MyPromise {
         });
     }
 }
+exports.MyPromise = MyPromise;

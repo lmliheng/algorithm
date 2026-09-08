@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // 参考66.ts 还是使用模拟加法 封装十二进制转换函数存在问题
 let str = '00111001011110000010100101000000';
 str = str.trim();
@@ -21,4 +23,3 @@ let zeroArr = new Array(32 - stack.length).fill(0);
 stack.splice(0, 0, ...zeroArr);
 let reserveStack = stack.reverse();
 console.log(reserveStack.join(''));
-export {};

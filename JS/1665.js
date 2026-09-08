@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let tasks = [[1, 1], [1, 4], [1, 4]];
 tasks.sort((a, b) => { return -(a[1] - a[0]) + (b[1] - b[0]); });
 let cur = 0; // 当前能量
@@ -11,4 +13,3 @@ for (let i = 0; i < tasks.length; i++) {
     cur -= tasks[i][0];
 }
 console.log(max);
-export {};

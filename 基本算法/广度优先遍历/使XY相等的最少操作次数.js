@@ -39,5 +39,5 @@ function xy(x, y) {
     }
     return step;
 }
-console.log(xy(26, 1));
 export {};
+// console.log(xy(26, 1)) 3

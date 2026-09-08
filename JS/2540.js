@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let nums1 = [1, 2, 3];
 let nums2 = [2, 4];
 let set = new Set(nums1);
@@ -8,4 +10,3 @@ for (let i of nums2) {
     }
 }
 console.log(res);
-export {};

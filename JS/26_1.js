@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function removeDuplicates(nums) {
     let l = 0;
     let r = 1;
@@ -15,4 +17,3 @@ function removeDuplicates(nums) {
     return nums.length;
 }
 console.log(removeDuplicates([0, 0, 1, 1, 1, 2]));
-export {};

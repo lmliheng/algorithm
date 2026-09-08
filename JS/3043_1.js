@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let arr1 = [1, 10, 100];
 let arr2 = [1000];
 const seen = new Set();
@@ -17,4 +19,3 @@ for (let num of arr2) {
     }
 }
 console.log(best === 0 ? 0 : String(best).length);
-export {};

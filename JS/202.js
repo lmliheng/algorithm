@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let n = 2;
 let set = new Set();
 let res = n;
@@ -22,4 +24,3 @@ while (true) {
         set.add(res);
     }
 }
-export {};

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let n = 4;
 let k = 3;
 let res = [];
@@ -14,4 +16,3 @@ const backtrack = (start, path) => {
 };
 backtrack(1, []);
 console.log(res);
-export {};

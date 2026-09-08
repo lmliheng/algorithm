@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let a = 5 / 3;
 let b = -7 / 3;
 console.log(a);
@@ -10,4 +12,3 @@ if (res < 0 && !Number.isInteger(res)) {
     res = res + 1;
 }
 console.log(res);
-export {};

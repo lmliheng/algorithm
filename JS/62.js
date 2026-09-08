@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let m = 3;
 let n = 7;
 let dp = new Array(m).fill(0).map(() => new Array(n).fill(0));
@@ -17,4 +19,3 @@ for (let i = 1; i < m; i++) {
 }
 console.log(dp);
 console.log(dp[m - 1][n - 1]);
-export {};

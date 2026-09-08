@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let numRows = 5;
 let res = [];
 for (let i = 0; i < numRows; i++) {
@@ -18,4 +20,3 @@ for (let i = 0; i < numRows; i++) {
     }
 }
 console.log(res);
-export {};

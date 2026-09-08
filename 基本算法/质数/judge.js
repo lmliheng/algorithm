@@ -1,14 +1,16 @@
 // 2-根号n
 
-let a=23
 
-let isPrime=false
-for(let i=2;i*i<=a;i++){
-    if(a%i==0){
-        isPrime=true
-        break
+
+function isPrime(num) {
+    let isPrime = false
+    for (let i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            isPrime = true
+            break
+        }
     }
+    return isPrime
 }
 
-
-console.log(isPrime?"不是质数":"是质数")
+console.log(isPrime(23) ? "不是质数" : "是质数")

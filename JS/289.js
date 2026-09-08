@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 // let board = [[0, 1, 0], [0, 0, 1], [1, 1, 1], [0, 0, 0]]
 // let board=[[1,1],[1,0]]
 let board = [[0]];
@@ -185,4 +187,3 @@ for (let i = 0; i < m; i++) {
 }
 board = NewBoard;
 console.log(board);
-export {};

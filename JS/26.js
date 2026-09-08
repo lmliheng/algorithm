@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function removeDuplicates(nums) {
     const map = new Map();
     nums.forEach((item, index) => {
@@ -11,7 +13,6 @@ function removeDuplicates(nums) {
     // [0,1,2,3,4]
 }
 console.log(removeDuplicates([0, 0, 1, 1, 1, 2]));
-export {};
 // console.log(removeDuplicates([1,1,2]))
 // [0,1,2,3,4]
 // 2

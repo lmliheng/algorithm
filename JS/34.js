@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let nums = [5, 7, 7, 8, 8, 10];
 let target = 6;
 let first_index = nums.indexOf(target);
@@ -11,4 +13,3 @@ if (first_index !== -1) {
 else {
     console.log([-1, -1]);
 }
-export {};

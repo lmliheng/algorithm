@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let nums = [1, 3, 6, 4, 1, 2];
 let target = 2;
 // dp[i]表示跳到该索引对应元素所需的最大次数
@@ -22,4 +24,3 @@ for (let i = 1; i < n; i++) {
 }
 console.log(dp);
 console.log(set);
-export {};

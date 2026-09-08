@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let boxGrid = [["#", "#", "*", ".", "*", "."],
     ["#", "#", "#", "*", ".", "."],
     ["#", "#", "#", ".", "#", "."]];
@@ -36,4 +38,3 @@ for (let i = newRow - 1; i >= 0; i--) {
     }
 }
 console.log(NewboxGrid);
-export {};

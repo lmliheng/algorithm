@@ -1,3 +1,4 @@
+"use strict";
 // function check(num: number): boolean { // num=66
 //     let arr=num.toString().split("")
 //     let hasMapNum=0
@@ -10,6 +11,7 @@
 //         }else{
 //             return false
 //         }
+Object.defineProperty(exports, "__esModule", { value: true });
 //     }
 //     if(hasMapNum==0){
 //         return false
@@ -46,4 +48,3 @@ for (let i = 1; i <= n; i++) {
     }
 }
 console.log(res);
-export {};

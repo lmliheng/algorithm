@@ -1,7 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 class _Node {
-    val;
-    next;
-    random;
     constructor(val, next, random) {
         this.val = (val === undefined ? 0 : val);
         this.next = (next === undefined ? null : next);
@@ -22,4 +21,3 @@ for (let cur = head; cur !== null; cur = cur.next) {
     copyNode.random = cur.random ? map.get(cur.random) : null;
 }
 console.log(map.get(head)); // map中存储的是地址
-export {};

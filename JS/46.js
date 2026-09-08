@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let res = [];
 const backtrack = (nums, path, used) => {
     if (path.length === nums.length) {
@@ -23,4 +25,3 @@ let path = [];
 let used = new Array(nums.length).fill(false);
 backtrack(nums, path, used);
 console.log(res);
-export {};

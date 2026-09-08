@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let gas = [5, 1, 2, 3, 4];
 let cost = [4, 4, 1, 5, 1];
 let l = gas.length;
@@ -80,4 +82,3 @@ for (let i = 0; i < start.length; i++) {
         }
     }
 }
-export {};

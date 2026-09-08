@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 let s = "1010";
 let n = s.length;
 let pattern1 = "";
@@ -15,4 +17,3 @@ for (let i = 0; i < n; i++) {
         diff2++;
 }
 console.log(Math.min(diff1, diff2));
-export {};
