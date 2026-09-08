@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let nums = [1, 2, 3];
 let dp = new Array(nums.length).fill(0);
 const dp_equation = (i) => {
@@ -18,3 +16,4 @@ for (let i = 1; i < nums.length; i++) {
     dp[i] = dp_equation(i);
 }
 console.log(dp);
+export {};

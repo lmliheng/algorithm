@@ -1,7 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 // ts不支持吗
 class user {
+    name;
+    age;
+    gender;
     constructor(name, age, gender) {
         this.name = name;
         this.age = age;
@@ -31,3 +32,4 @@ console.log(new Dog() instanceof Animal);
 console.log(new Number(5) instanceof Number); // true
 // console.log(a instanceof Number)
 console.log(Object(5) instanceof Number); //true
+export {};

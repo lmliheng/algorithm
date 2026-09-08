@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let points = [[1, 9], [7, 16], [12, 17]];
 // error : [[1,9],[7,16],[2,5],[7,12],[9,11],[2,10],[9,16],[3,9],[1,3]]
 points.sort((a, b) => a[0] - b[0]);
@@ -20,3 +18,4 @@ for (let i = 1; i < points.length; i++) {
     }
 }
 console.log(num);
+export {};

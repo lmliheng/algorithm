@@ -6,7 +6,7 @@
   "scripts": {
     "comsume": "node --env-file=.env script/ai_git.js comsume",
     "commits": "node --env-file=.env script/ai_git.js commits",
-    "dev":"node --env-file=.env script/ai_git.js dev"
+    "dev": "node --env-file=.env script/ai_git.js dev"
   },
   "repository": {
     "type": "git",
@@ -22,5 +22,8 @@
   "homepage": "https://github.com/lmliheng/algorithm#readme",
   "dependencies": {
     "@lmliheng/ai_git": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^26.5.0"
   }
 }

@@ -11,26 +11,24 @@ function _Node(val, left, right, next) {
 
 let root = new _Node(1, new _Node(2, new _Node(4), new _Node(5)), new _Node(3, new _Node(6), new _Node(7)))
 
-let quene = [root]
+let queue = [root]
 
-while (quene.length > 0) {
-    console.log(quene.map(item=>item.val))
-    setNext(quene)
-    let len = quene.length
+while (queue.length > 0) {
+    console.log(queue.map(item=>item.val))
+    setNext(queue)
+    let len = queue.length
     for (let i = 0; i < len; i++) {
-        let node = quene.shift()
+        let node = queue.shift()
         if (node.left) {
-            quene.push(node.left)
+            queue.push(node.left)
         }
         if (node.right) {
-            quene.push(node.right)
+            queue.push(node.right)
         }
     }
 }
 
 function setNext(array) {
-
-    
     let n = array.length
     for (let i = 0; i < n; i++) {
         if (i === n - 1) {

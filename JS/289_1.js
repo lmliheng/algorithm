@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 function gameOfLife(board) {
     const m = board.length;
     const n = board[0].length;
@@ -46,3 +44,4 @@ function gameOfLife(board) {
         }
     }
 }
+export {};

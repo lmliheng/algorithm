@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let A = [1, 3, 2, 4];
 let B = [3, 1, 2, 4];
 let set = new Set();
@@ -16,3 +14,4 @@ for (let i = 0; i < B.length; i++) {
     console.log(num);
 }
 console.log(res);
+export {};

@@ -28,13 +28,13 @@ let n = grid2[0].length
 let dist = new Array(m).fill(Infinity).map(() => new Array(n).fill(Infinity))
 console.log(dist)
 let dirction = [[0, 1], [1, 0], [-1, 0], [0, -1]]
-let quene = []//普通队列
+let queue = []//普通队列
 
 dist[0][0] = grid2[0][0]
-quene.push([0, 0])
+queue.push([0, 0])
 
-while (quene.length) {
-    let [x, y] = quene.shift()
+while (queue.length) {
+    let [x, y] = queue.shift()
     for (const [u, v] of dirction) {
         let nx = x + u
         let ny = y + v
@@ -43,9 +43,9 @@ while (quene.length) {
         if (dist[x][y] + weight < dist[nx][ny]) {
             dist[nx][ny] = dist[x][y] + weight
             if (weight === 0) {
-                quene.unshift([nx, ny])
+                queue.unshift([nx, ny])
             } else {
-                quene.push([nx, ny])
+                queue.push([nx, ny])
             }
         }
     }

@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let arr = [1, 2, 3, 4, 5, 6];
 // 回溯
 function permute(arr) {
@@ -23,3 +21,4 @@ function permute(arr) {
     return res;
 }
 console.log(permute([1, 2, 3, 4]));
+export {};

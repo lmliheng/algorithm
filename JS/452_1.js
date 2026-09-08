@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let points = [[10, 16], [2, 8], [1, 6], [7, 12]];
 points.sort((a, b) => a[1] - b[1]);
 console.log(points);
@@ -17,3 +15,4 @@ while (points.length > 0) {
     res++;
 }
 console.log(res);
+export {};

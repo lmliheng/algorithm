@@ -1,6 +1,14 @@
 /**
  *
  * @可取消函数
+ *
+ *
+ */
+/**
+ *
+ * @错误
+ * 这里cancel 只是"忽略结果"，不是"中止执行"
+ *
  */
 export function Cancellable(fn) {
     return (...args) => {

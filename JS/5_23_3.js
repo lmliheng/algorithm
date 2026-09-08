@@ -1,6 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 Q3.矩阵中最大共享路径和;
+export {};
 // 中等
 // 5 分
 // 给你一个 m x n 的整数矩阵 grid 。

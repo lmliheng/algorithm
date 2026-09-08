@@ -1,4 +1,3 @@
-"use strict";
 /**
 * Definition for a binary tree node.
 * class TreeNode {
@@ -12,8 +11,10 @@
 *     }
 * }
 */
-Object.defineProperty(exports, "__esModule", { value: true });
 class TreeNode {
+    val;
+    left;
+    right;
     constructor(val, left, right) {
         this.val = (val === undefined ? 0 : val);
         this.left = (left === undefined ? null : left);
@@ -55,3 +56,4 @@ else if (sortarr.length === 1 && sortarr[0] <= 2) {
 else {
     console.log('不平衡');
 }
+export {};

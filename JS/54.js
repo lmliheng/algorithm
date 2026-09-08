@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let matrix = [
     [1, 2, 3, 8],
     [4, 5, 6, 9],
@@ -38,3 +36,4 @@ while (true) {
         break;
 }
 console.log(res);
+export {};

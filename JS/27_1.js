@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 function removeElement(nums, val) {
     let r = 0;
     while (r < nums.length) {
@@ -13,3 +11,4 @@ function removeElement(nums, val) {
 }
 ;
 console.log(removeElement([3, 2, 2, 3], 3));
+export {};

@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let chunks = ["a--b a-", "--------c"];
 let queries = ["a", "b", "c", "ab"];
 let chunkStr = "";
@@ -40,3 +38,4 @@ for (let j = 0; j < chunkArr.length; j++) {
     }
 }
 console.log(res);
+export {};

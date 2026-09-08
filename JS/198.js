@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let nums = [1, 2, 3, 1];
 let dp = new Array(nums.length).fill(0);
 dp[0] = nums[0];
@@ -8,3 +6,4 @@ for (let i = 2; i < nums.length; i++) {
     dp[i] = Math.max(...dp.slice(0, i - 1)) + nums[i];
 }
 console.log(dp);
+export {};

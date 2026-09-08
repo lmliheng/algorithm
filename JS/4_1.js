@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 let nums1 = [1, 3, 5];
 let nums2 = [2, 4, 6];
 let num = [];
@@ -11,3 +9,4 @@ if (num.length % 2 == 0) {
 else {
     console.log(num[Math.floor(num.length / 2)]);
 }
+export {};
