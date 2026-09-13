@@ -2,8 +2,8 @@
   // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
     // File Layout
-    // "rootDir": "./src",
-    // "outDir": "./dist",
+    "rootDir": "./ts",
+    "outDir": "./dist",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
@@ -20,7 +20,6 @@
     "declaration": false,
     "declarationMap": false,
     // Stricter Typechecking Options
-
     // 索引超出范围的检查
     "noUncheckedIndexedAccess": false,
     "exactOptionalPropertyTypes": true,
@@ -39,5 +38,20 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "cpp",
+    "dist",
+    "Java",
+    "matlab",
+    "mcp-algorithm",
+    "python",
+    "script",
+    "sql",
+    "scss"
+  ],
+  "include": [
+    "ts"
+  ]
 }

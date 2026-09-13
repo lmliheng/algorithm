@@ -1,0 +1,15 @@
+/**
+ * @单向链表
+ * 
+ * 不是NodeList,NodeList是DOM接口类型
+ */
+export class ListNode {
+    val: any
+    next: ListNode | null
+    constructor(val?: any, next?: ListNode) {
+        this.val = val === undefined ? 0 : val
+        this.next = next === undefined ? null : next
+    }
+}
+
+const head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4))))

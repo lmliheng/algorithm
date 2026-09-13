@@ -24,6 +24,6 @@
     "@lmliheng/ai_git": "^1.0.5"
   },
   "devDependencies": {
-    "@types/node": "^26.5.0"
+    "@types/node": "^26.5.1"
   }
 }
