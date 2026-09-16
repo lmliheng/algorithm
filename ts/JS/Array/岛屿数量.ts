@@ -3,14 +3,14 @@
  * 
  * 矩阵DFS
  */
-function numIslands(grid) {
+function numIslands(grid:string[][]) {
     let res = 0
     let m = grid.length
     let n = grid[0].length
 
     let visited = Array.from({ length: m }, () => Array.from({ length: n }, () => false))
 
-    const dfs = (i, j) => {
+    const dfs = (i:number, j:number) => {
         if (i < 0 || i >= m || j < 0 || j >= n || visited[i][j] || grid[i][j] === '0') {
             return
         }

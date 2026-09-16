@@ -4,7 +4,7 @@
  * @找出最大的几近缺失整数
  * 脑筋急转弯
  */
-export function largestInteger(nums, k) {
+export function largestInteger(nums:number[], k:number) {
     let n = nums.length
     if (k === 1) {
         // 重复的不要

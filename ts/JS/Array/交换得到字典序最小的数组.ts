@@ -9,9 +9,9 @@
  * 
  * @错误的解法
  */
-function lexicographicallySmallestArray(nums, limit) {
+function lexicographicallySmallestArray(nums:number[], limit:number) {
     let n = nums.length
-    const swap = (a, b) => {
+    const swap = (a:number, b:number) => {
         [nums[a], nums[b]] = [nums[b], nums[a]]
     }
     for (let i = 0; i < n - 1; i++) {

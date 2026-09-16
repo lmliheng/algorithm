@@ -2,7 +2,7 @@
  * @大于等于顺序前缀和的最小缺失整数
  */
 
-export var missingInteger = function (nums) {
+export var missingInteger = function (nums: number[]) {
     let set = new Set(nums)
     let record = nums[0]
     for (let i = 0; i < nums.length - 1; i++) {

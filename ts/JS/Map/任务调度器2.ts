@@ -8,7 +8,7 @@
  * @哈希表
  * 超时
  */
-function taskSchedulerII(tasks, space) {
+function taskSchedulerII(tasks: number[], space: number) {
     let day = 0
     let TaskRecord = new Map()
     for (let i = 0; i < tasks.length; i++) {
@@ -31,7 +31,7 @@ function taskSchedulerII(tasks, space) {
  * @哈希表
  * 不超时，直接用Math.max不用while一个一个加天数
  */
-var taskSchedulerII = function (tasks, space) {
+var taskSchedulerII1 = function (tasks:number[], space:number) {
     let res = 0
     // 记录完成第i个任务需要的天数
     let mp = new Map()

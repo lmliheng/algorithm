@@ -8,7 +8,7 @@
  * res[1]=第一行所有元素乘积
  * res[2]=第二行所有元素乘积
  */
-export function productExceptSelf(nums) {
+export function productExceptSelf(nums: number[]) {
     let n = nums.length
     let res = Array.from({ length: n }, () => 1)
 

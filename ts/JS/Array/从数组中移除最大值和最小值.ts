@@ -6,7 +6,7 @@
  * @比第二个解法快太多
  * 取三数最小值就可 没有必要走if
  */
-function minimumDeletions(nums) {
+function minimumDeletions(nums: number[]) {
     let maxIndex = nums.indexOf(Math.min(...nums))
     let minIndex = nums.indexOf(Math.max(...nums))
     let l = nums.length
@@ -28,7 +28,7 @@ function minimumDeletions(nums) {
  * 
  * @效率低
  */
-function minimumDeletions1(nums) {
+function minimumDeletions1(nums:number[]) {
     let n = nums.length
     let nums_ = nums.map((item, index) => [item, index])
     nums_.sort((a, b) => a[0] - b[0])

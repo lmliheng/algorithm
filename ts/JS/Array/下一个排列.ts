@@ -8,7 +8,7 @@
  * @param {number[]} nums
  * @return {void} Do not return anything, modify nums in-place instead.
  */
-var nextPermutation = function(nums) {
+var nextPermutation = function (nums: number[]) {
     const n = nums.length;
 
     for (let i = n - 1; i >= 1; i--) {
@@ -33,7 +33,7 @@ var nextPermutation = function(nums) {
 };
 
 // 原地反转数组的辅助函数
-function reverse(arr, left, right) {
+function reverse(arr: number[], left: number, right: number) {
     while (left < right) {
         [arr[left], arr[right]] = [arr[right], arr[left]];
         left++;

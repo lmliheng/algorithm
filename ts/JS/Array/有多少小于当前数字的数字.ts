@@ -1,7 +1,7 @@
 /**
  * @有多少小于当前数字的数字
  */
-export function smallerNumbersThanCurrent(nums) {
+export function smallerNumbersThanCurrent(nums: number[]) {
     let n = nums.length
     let raw_nums = nums.map((item) => item)
 

@@ -9,11 +9,11 @@
  * 
  */
 
-function orangesRotting(grid){
+function orangesRotting(grid: number[][]) {
     let m = grid.length
     let n = grid[0].length
     let res = 0
-    let queue = []
+    let queue: number[][] = []
     let count = 0
     for (let i = 0; i < m; i++) {
         for (let j = 0; j < n; j++) {
@@ -33,7 +33,7 @@ function orangesRotting(grid){
         let len = queue.length
         console.log(queue)
         for (let i = 0; i < len; i++) {
-            let [r, c] = queue.shift()
+            let [r, c] = queue.shift()!
             if (r - 1 >= 0 && grid[r - 1][c] == 1) {
                 grid[r - 1][c] = 2
                 count--

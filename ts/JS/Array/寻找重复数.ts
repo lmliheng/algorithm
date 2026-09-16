@@ -8,7 +8,7 @@
  * 一个从起点出发，一个从相遇点出发，每次都走一步，它们相遇的位置就是环的入口- 重复数字
  */
 
-var findDuplicate = function (nums) {
+var findDuplicate = function (nums:number[]) {
     let slow = 0, fast = 0;
 
     slow = nums[slow];

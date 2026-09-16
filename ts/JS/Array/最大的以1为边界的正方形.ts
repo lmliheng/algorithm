@@ -11,7 +11,7 @@ let grid = [[1, 1, 0], [1, 0, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 0], [1
  * @暴力解法
  * 可以优化：层序遍历思想选择左上角元素，直接剪枝
  */
-export function largest1BorderedSquare1(grid) {
+export function largest1BorderedSquare1(grid: number[][]) {
     let res = 0
     const m = grid.length
     const n = grid[0].length
@@ -55,7 +55,7 @@ export function largest1BorderedSquare1(grid) {
  * 用left[i][j] 记录该点以下有几个连续1，top[i][j]一样
  * 
  */
-export function largest1BorderedSquare2(grid) {
+export function largest1BorderedSquare2(grid: number[][]) {
     let res = 0
     let m = grid.length
     let n = grid[0].length
@@ -118,7 +118,7 @@ export function largest1BorderedSquare2(grid) {
 }
 
 
-export function largest1BorderedSquare3(grid) {
+export function largest1BorderedSquare3(grid: number[][]) {
     const m = grid.length, n = grid[0].length;
     const left = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0));
     const up = new Array(m + 1).fill(0).map(() => new Array(n + 1).fill(0));
