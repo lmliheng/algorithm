@@ -8,11 +8,11 @@
  * 
  */
 
-function canFinish(numCourses, prerequisites) {
+function canFinish(numCourses:number, prerequisites:number[][]) {
     let res = 0
     // 课程的入度值
     let degree = Array.from({ length: numCourses }, () => 0)
-    let graph = {}
+    let graph:any = {}
     for (let i = 0; i < prerequisites.length; i++) {
         degree[prerequisites[i][0]] += 1
         if (graph[prerequisites[i][1]] == undefined) {
@@ -23,7 +23,7 @@ function canFinish(numCourses, prerequisites) {
     }
     console.log(graph)
 
-    let queue = []
+    let queue:number[] = []
     // 找出入度为0的课程,也就是可以直接选择的课程
     for (let i = 0; i < degree.length; i++) {
         if (degree[i] == 0) {
@@ -34,7 +34,7 @@ function canFinish(numCourses, prerequisites) {
     while (queue.length) {
         let course = queue.shift()
         res++
-        let NeedClass = graph[course]
+        let NeedClass = graph[course!]
         if (NeedClass && NeedClass.length) {
             for (let i = 0; i < NeedClass.length; i++) {
                 degree[NeedClass[i]]--

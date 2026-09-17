@@ -1,4 +1,4 @@
-import { minHeap } from './Heap.js'
+import { minHeap } from '../DataStructure/Heap.js'
 /**
  * @查找和最小的K对数字
  * 
@@ -11,16 +11,16 @@ import { minHeap } from './Heap.js'
  * 
  */
 
-function kSmallestPairs(nums1, nums2, k) {
+function kSmallestPairs(nums1:number[], nums2:number[], k:number) {
     let n1 = nums1.length
     let n2 = nums2.length
-    const heap = new minHeap((a, b) => a[0] + a[1] - b[0] - b[1])
+    const heap = new minHeap<number[]>((a, b) => a[0] + a[1] - b[0] - b[1])
     const result = []
     for (let i = 0; i < Math.min(n1, k); i++) {
         heap.push([nums1[i], nums2[0], 0])
     }
     while (result.length < k && heap.size() > 0) {
-        const [num1, num2, idx2] = heap.pop()
+        const [num1, num2, idx2] = heap.pop()!
         result.push([num1, num2])
         //
         if (idx2 + 1 < n2) {

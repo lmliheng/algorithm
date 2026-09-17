@@ -10,31 +10,31 @@
  * 
  */
 
-export class maxHeap {
-    heap: number[]
+export class maxHeap<T> {
+    heap: T[]
     constructor() {
         this.heap = []
     }
     // 元素入堆并重排
-    push(val: number) {
+    push(val: T) {
         this.heap.push(val)
         this.up(this.heap.length - 1)
     }
     // 堆顶元素出堆，返回堆顶值
-    pop() {
+    pop(): T | undefined {
         this.swap(0, this.heap.length - 1)
         let peak = this.heap.pop()
         this.down(0)
         return peak
     }
     // 堆的大小
-    size() {
+    size(): number {
         return this.heap.length
     }
     // peak查看堆顶元素 不弹出
-    peak() {
+    peak(): T | undefined {
         if (this.heap.length === 0) {
-            return null
+            return undefined
         }
         return this.heap[0]
     }
@@ -84,10 +84,10 @@ export class maxHeap {
 export class minHeap<T> {
     heap: T[]
     compare: (a: T, b: T) => number
-    constructor(compareFn: (a: T, b: T) => number = ((a, b) => (a as number) - (b as number))) {
+    constructor(compareFn?: (a: T, b: T) => number) {
         this.heap = []
         // 如果传入了比较函数则使用，否则默认按数值升序
-        this.compare = compareFn
+        this.compare = compareFn || ((a: any, b: any) => a - b)
     }
 
     push(val: T) {
@@ -95,20 +95,20 @@ export class minHeap<T> {
         this.up(this.heap.length - 1)
     }
 
-    pop() {
-        if (this.heap.length === 0) return null
+    pop(): T | undefined {
+        if (this.heap.length === 0) return undefined
         this.swap(0, this.heap.length - 1)
         let peak = this.heap.pop()
         this.down(0)
         return peak
     }
 
-    size() {
+    size(): number {
         return this.heap.length
     }
 
-    peak() {
-        if (this.heap.length === 0) return null
+    peak(): T | undefined {
+        if (this.heap.length === 0) return undefined
         return this.heap[0]
     }
 
