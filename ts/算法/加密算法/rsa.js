@@ -1,4 +1,4 @@
-// 代码段1: 工具函数
+// 工具函数
 function modPow(base, exponent, modulus) {
   // 快速模幂运算
   let result = 1n;

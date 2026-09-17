@@ -1,4 +1,4 @@
-import { BinaryTree } from '../../JS/Tree/BinayTree/BinaryTree.js'
+import { BinaryTree } from '../../JS/DataStructure/BinaryTree.js'
 
 /**
  * @二叉树的bfs
