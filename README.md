@@ -1,4 +1,4 @@
-# 🧠 Algorithm Zoo
+# Algorithm
 
 <p align="center">
   <img src="https://img.shields.io/badge/Languages-Java%20%7C%20JS%20%7C%20TS%20%7C%20C++-blue.svg" alt="Languages">
@@ -14,5 +14,5 @@
 </picture>
 
 <p align="center">
-  <b>📚 深入学习算法与数据结构 | 主要写TS/JS 力扣题目，在目录ts/leetcode目录下</b>
+  <b>深入学习算法与数据结构 | 主要写TS/JS 力扣题目，在目录ts/leetcode目录下</b>
 </p>
