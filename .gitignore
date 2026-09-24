@@ -9,4 +9,5 @@ node_modules/
 .env
 dist
 Java/target
-gith
+.zvec-grep
+.zread

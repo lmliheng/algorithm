@@ -1,5 +1,8 @@
 package com.algorithm;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,14 +26,12 @@ public class Alogorithm {
 
     /**
      * 
-     * @2. 两数相加
+     * @2.两数相加
      */
-
-
 
     /**
      * 
-     * @3. 无重复字符的最长子串
+     * @3.无重复字符的最长子串
      */
     public int lengthOfLongestSubstring(String s) {
         int res = 0;
@@ -50,12 +51,40 @@ public class Alogorithm {
                 left++;
             }
             res = Math.max(res, i - left + 1);
-
         }
         return res;
-
     }
 
-    
+    /**
+     * @56. 合并区间
+     */
+    public int[][] merge(int[][] intervals) {
+        
+        if (intervals == null || intervals.length == 0) {
+            return new int[0][]; // 返回空二维数组
+        }
+
+        List<int[]> res = new ArrayList<>();
+        // 后续改成lamada
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return a[0] - b[0];
+            }
+        });
+        res.add(intervals[0]);
+        // jdk17 ArrayList无getLast()
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] > res.get(res.size() - 1)[1]) {
+                res.add(intervals[i]);
+            } else {
+                int[] newInterval = { res.get(res.size() - 1)[0],
+                        Math.max(res.get(res.size() - 1)[1], intervals[i][1]) };
+                res.set(res.size() - 1, newInterval);
+            }
+
+        }
+        return res.toArray(new int[res.size()][]);
+    }
 
 }
