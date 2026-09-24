@@ -1,16 +1,25 @@
+# 内置函数
+
+### 字符方法:
+# ord('a') 单个字符转ASCII
+# chr(97) ASCII转字符
+print(ord('a'))
+print(chr(97))
+
+
 
 # int float
+print(type(1))
+
 
 
 """
 string
 
 """
-### 字符方法:
-# ord('a') 单个字符转ASCII
-# chr(97) ASCII转字符
-print(ord('a'))
-print(chr(97))
+str="string 字符串的声明"
+## 字符串拼接使用f"你好{str}" 或者 %+占位符
+print(f"xxx{str}")
 
 ### 转字符串
 arr_=[1,3,5]
@@ -29,7 +38,6 @@ for index,item in enumerate(items):
 # range(start,stop-1,step=1)
 for i in range(0,len(items)):
     print(i,items[i])
-
 # 预创建固定长度列表
 list1=[0]*10
 # 包括start,不包括end，[start,end,step]
@@ -69,6 +77,10 @@ print(arr)
 arr1=[1,3,5]
 arr2=[4,1,5]
 print([*arr1,*arr2])
+
+
+
+
 
 
 """
