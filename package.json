@@ -24,6 +24,7 @@
     "@lmliheng/ai_git": "^1.0.5"
   },
   "devDependencies": {
+    "@clack/prompts": "^1.8.1",
     "@types/node": "^26.5.1"
   }
 }
