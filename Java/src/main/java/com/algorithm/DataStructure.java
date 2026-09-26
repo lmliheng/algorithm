@@ -9,6 +9,31 @@ public class DataStructure {
      * @String和int
      */
     public void testInteger() {
+
+        Integer a = 127;
+        Integer b = 127;
+        System.out.println(a == b); // true
+
+        Integer c = 128;
+        Integer d = 128;
+        System.out.println(c == d); // false
+
+        Long e = 127L;
+        Long f = 127L;
+        System.out.println(e == f); // true
+
+        Long g = 128L;
+        Long h = 128L;
+        System.out.println(g == h); // false
+
+        // 转成基本类型再比较
+        System.out.println(e.longValue() == f.longValue());
+        System.out.println(c.intValue() == d.intValue()); // true
+
+        // 或者用equal比较内容
+        System.out.println(c.equals(g)); // false 看实现
+        System.out.println(c.equals(d)); // true
+
         System.out.println(('a' + 1)); // int
         System.out.println((char) ('a' + 1)); // Character
 
@@ -19,7 +44,7 @@ public class DataStructure {
      */
     public void testArray() {
         // util.Array 还是int[]
-        int[] arr1={1,2,3};
+        int[] arr1 = { 1, 2, 3 };
 
     }
 
