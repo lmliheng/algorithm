@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数学,矩阵,模拟
+ * @time O(n*m)
+ * @space O(n*m)
+ * @note 按 k 从 1 到 4 分情况拼出通路网络
  * @创建一个恰好有K条路径的网格图
  * 
  * 当m>=4 n>=4

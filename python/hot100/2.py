@@ -1,4 +1,9 @@
 """
+@difficulty medium
+@tags 哈希表,字符串,排序
+@time O(n*k log k)
+@space O(n*k)
+@note 排序后的字符串作哈希键分组
 分母异位词分组
 lc 49
 """

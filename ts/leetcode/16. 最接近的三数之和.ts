@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数组,双指针,排序
+ * @time O(n^2)
+ * @space O(1)
+ * @note 排序后固定一个数，双指针向 target 逼近
  * @16. 最接近的三数之和
  */
 

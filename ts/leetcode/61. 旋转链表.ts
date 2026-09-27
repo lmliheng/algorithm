@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 链表,双指针
+ * @time O(n)
+ * @space O(1)
+ * @note 双指针走到倒数第二，尾节点接头部
  * @61. 旋转链表
  */
 

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags DFS,矩阵
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note DFS 淹没岛屿，不触边界则计数加一
  * @1254. 统计封闭岛屿的数目
  */
 

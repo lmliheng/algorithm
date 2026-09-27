@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags BFS,树,队列
+ * @time O(n)
+ * @space O(n)
+ * @note 层序遍历，用队列下一元素串接 next
  * @117. 填充每个节点的下一个右侧节点指针 II
  */
 

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,矩阵
+ * @time O(n*m)
+ * @space O(n*m)
+ * @note dp 取上一行相邻三格最小值累加，未取末行最小
  * @931. 下降路径最小和
  */
 

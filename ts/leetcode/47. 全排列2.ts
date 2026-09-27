@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 回溯,排列
+ * @time O(n*n!)
+ * @space O(n)
+ * @note 回溯全排列后用Set去重，未做剪枝
  * @47. 全排列 II
  */
 

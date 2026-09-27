@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 数组,模拟
+ * @time O(n)
+ * @space O(1)
+ * @note 记录相邻两个 1 的下标差是否达 k
  * @1437. 是否所有 1 都至少相隔 k 个元素
  */
 

@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags dp,字符串,括号
+ * @time O(n)
+ * @space O(n)
+ * @note dp 记录以 i 结尾的最长有效括号长度
  * @32. 最长有效括号
  */
 

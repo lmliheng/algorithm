@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags DFS,矩阵
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note DFS 标记连通块，触边界的不改成 X
  * @130. 被围绕的区域
  */
 

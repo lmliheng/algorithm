@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 模拟,数学
+ * @time O(1)
+ * @space O(1)
+ * @note 按位数构造顺次数，筛出区间内的
  * @1291. 顺次数
  */
 

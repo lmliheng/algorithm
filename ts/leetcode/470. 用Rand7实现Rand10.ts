@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数学,模拟
+ * @time O(1)
+ * @space O(1)
+ * @note 两次rand7构造1~49，拒绝大于40后取模
  * @470. 用Rand7实现Rand10
  */
 /**

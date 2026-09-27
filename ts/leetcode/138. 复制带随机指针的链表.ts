@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 链表,哈希表
+ * @time O(n)
+ * @space O(n)
+ * @note 哈希表映射原节点到副本，再连指针
  * @138. 复制带随机指针的链表
  */
 

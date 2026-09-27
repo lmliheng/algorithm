@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数组,矩阵,模拟
+ * @time O(m*n)
+ * @space O(1)
+ * @note 与解法一相同，中间状态标记后再还原
  * @289. 生命游戏（解法二）
  */
 function gameOfLife(board: number[][]): void {

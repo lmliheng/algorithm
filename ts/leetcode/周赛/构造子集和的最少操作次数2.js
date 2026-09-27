@@ -1,4 +1,7 @@
 /**
+ * @difficulty hard
+ * @tags dp,位运算
+ * @note 尚未实现
  * @构造子集和的最少操作次数2
  * 
  * 给你一个整数数组 nums 和一个整数 sum。

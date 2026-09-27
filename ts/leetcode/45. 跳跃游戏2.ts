@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,贪心,数组
+ * @time O(n^2)
+ * @space O(n)
+ * @note 只写了 dp 版，贪心解留空未写
  * @45. 跳跃游戏 II
  */
 

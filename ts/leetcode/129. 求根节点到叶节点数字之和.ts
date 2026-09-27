@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 树,DFS,递归
+ * @time O(n)
+ * @space O(n)
+ * @note DFS 向下传递路径数值，到叶子时累加
  * @129. 求根节点到叶节点数字之和
  */
 

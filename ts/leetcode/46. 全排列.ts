@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 回溯,排列
+ * @time O(n*n!)
+ * @space O(n)
+ * @note 回溯配used数组，叶子处深拷贝收集
  * @46. 全排列
  */
 

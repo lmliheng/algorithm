@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 树,二叉搜索树,DFS
+ * @time O(n)
+ * @space O(n)
+ * @note 中序遍历收集后判严格递增，未提前返回
  * @98. 验证二叉搜索树
  */
 

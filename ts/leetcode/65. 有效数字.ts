@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 字符串,模拟
+ * @time O(n)
+ * @space O(1)
+ * @note 状态机逐字符转移，终态须合法
  * @65. 有效数字
  */
 

@@ -1,4 +1,9 @@
 """
+@difficulty medium
+@tags dp
+@time O(n*target)
+@space O(target)
+@note 完全背包求排列数，外层枚举容量
 组合总和 Ⅳ
 lc 377
 动态规划题

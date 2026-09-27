@@ -1,3 +1,10 @@
+/**
+ * @difficulty easy
+ * @tags 矩阵,数组
+ * @time O(n*m)
+ * @space O(n*m)
+ * @note 新建矩阵，按下标对调填入
+ */
 import * as readline from 'readline'
 const rl = readline.createInterface({
     input: process.stdin,

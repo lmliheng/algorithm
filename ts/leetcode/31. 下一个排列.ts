@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数组,原地算法
+ * @time O(n)
+ * @space O(1)
+ * @note 从右找升序对，反转后缀再交换进位
  * @31. 下一个排列
  */
 function nextPermutation(nums: number[]) {

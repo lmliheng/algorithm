@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 二分,数组
+ * @time O(log n)
+ * @space O(1)
+ * @note 两次 lowerBound 分别求左右边界
  * @34. 在排序数组中查找元素的第一个和最后一个位置
  */
 

@@ -1,4 +1,7 @@
 /**
+ * @difficulty hard
+ * @tags dp,矩阵
+ * @note DFS 尝试有误，最优解未实现
  * @1301. 最大得分的路径数目
  */
 

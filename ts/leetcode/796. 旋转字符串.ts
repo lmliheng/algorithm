@@ -1,4 +1,7 @@
 /**
+ * @difficulty easy
+ * @tags 字符串
+ * @note 只做了左旋一位的演示，未实现本题
  * @796. 旋转字符串
  */
 let s = "abcde"

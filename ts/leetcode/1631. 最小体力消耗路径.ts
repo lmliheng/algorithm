@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 图,dp
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note 注释自述 dp 不成立，路径可回头，此解错误
  * @1631. 最小体力消耗路径
  */
 

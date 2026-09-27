@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 回溯,括号,字符串
+ * @time O(4^n)
+ * @space O(n)
+ * @note 回溯生成，右括号数不得超过左括号数
  * @22. 括号生成
  */
 function generateParenthesis(n: number): string[] {

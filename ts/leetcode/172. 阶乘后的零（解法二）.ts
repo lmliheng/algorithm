@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数学
+ * @time O(log n)
+ * @space O(1)
+ * @note 累加 n/5、n/25…，统计因子 5 的个数
  * @172. 阶乘后的零（解法二）
  */
 

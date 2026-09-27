@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 矩阵,模拟
+ * @time O(n^2)
+ * @space O(1)
+ * @note 四边界收缩依次填入递增数字
  * @59. 螺旋矩阵 II
  */
 

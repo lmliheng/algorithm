@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 滑动窗口,队列
+ * @time O(n)
+ * @space O(k)
+ * @note 单调递减队列存下标，队头为窗口最大值
  * @239. 滑动窗口最大值
  */
 let nums = [1, 3, -1, -3, 5, 3, 6, 7]

@@ -1,4 +1,9 @@
 """
+@difficulty medium
+@tags 矩阵,模拟
+@time O(n*m)
+@space O(1)
+@note 四条边界收缩模拟螺旋遍历
 54. 螺旋矩阵
 """
 

@@ -1,3 +1,10 @@
+/**
+ * @difficulty medium
+ * @tags 排序,区间,数组
+ * @time O(n*log n)
+ * @space O(n)
+ * @note 新区间追加后排序，复用合并区间逻辑
+ */
 
 var insert = function (intervals: number[][], newInterval: number[]) {
     intervals.push(newInterval)

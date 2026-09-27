@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 回溯,递归
+ * @time O(n!)
+ * @space O(n)
+ * @note 回溯计数，布尔数组判列与对角线冲突
  * @52. N 皇后 II
  */
 

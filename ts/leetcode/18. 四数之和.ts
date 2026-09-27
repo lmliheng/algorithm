@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 回溯,数组
+ * @time O(n^4)
+ * @space O(n)
+ * @note 回溯枚举四元组再排序去重，注释标注超时
  * @18. 四数之和
  */
 

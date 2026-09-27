@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 栈,字符串
+ * @time O(n)
+ * @space O(n)
+ * @note 栈匹配括号，用 Map 判断右括号是否配对
  * @20. 有效的括号 
  */
 function isValid(s: string): boolean {

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 位运算
+ * @time O(log n)
+ * @space O(1)
+ * @note 取两数公共二进制前缀，其后低位清零
  * @201. 数字范围按位与
  */
 

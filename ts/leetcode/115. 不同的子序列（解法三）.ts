@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags dp,字符串,子序列
+ * @time O(n*m)
+ * @space O(m)
+ * @note 一维 dp 倒序更新，s[i]==t[j] 时累加
  * @115. 不同的子序列（解法三）
  * dp解法 - 困难
  */

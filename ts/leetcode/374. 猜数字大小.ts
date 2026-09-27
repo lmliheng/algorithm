@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 二分
+ * @time O(log n)
+ * @space O(1)
+ * @note 按 guess 返回值收缩二分区间
  * @374. 猜数字大小
  */
 declare function guess(num: number): number;

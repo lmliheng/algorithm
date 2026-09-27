@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数学,数组
+ * @time O(n*log(log n))
+ * @space O(n)
+ * @note 埃氏筛，从 i*i 起标记合数
  * @204. 计数质数
  */
 function countPrimes(n: number): number {

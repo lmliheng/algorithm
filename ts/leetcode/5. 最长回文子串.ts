@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 字符串,双指针
+ * @time O(n^2)
+ * @space O(1)
+ * @note 中心扩展，奇数与偶数两种中心
  * @5. 最长回文子串
  */
 

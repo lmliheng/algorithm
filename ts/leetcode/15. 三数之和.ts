@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 双指针,排序,数组
+ * @time O(n^2)
+ * @space O(n)
+ * @note 排序加双指针，最后对结果去重
  * @15. 三数之和
  */
 function threeSum(nums: number[]) {

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 树,分治,递归
+ * @time O(n^2)
+ * @space O(n)
+ * @note 后序末元素为根，在中序中划分后递归
  * @106. 从中序与后序遍历序列构造二叉树
  */
 

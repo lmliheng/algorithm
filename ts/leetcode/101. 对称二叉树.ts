@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 树,递归,DFS
+ * @time O(n)
+ * @space O(n)
+ * @note 递归镜像比较左右子树是否互为镜像
  * @101. 对称二叉树
  */
 

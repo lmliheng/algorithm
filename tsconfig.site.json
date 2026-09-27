@@ -1,0 +1,13 @@
+{
+  // `npm run typecheck` 用的配置：在根 tsconfig.json 的基础上只圈定站点生成脚本。
+  //
+  // 不直接用它检查整个仓库，是因为 ts/ 是练习代码、本来就带着一批类型错误
+  // （63 条 / 14 个文件），混进来会让检查永远红，掩盖生成脚本自己的问题。
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [
+    "site/scripts"
+  ]
+}

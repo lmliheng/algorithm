@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 贪心,双指针,排序
+ * @time O(n log n)
+ * @space O(n)
+ * @note 排序后双指针，优先凑出超过 M 的配对
  * @找朋友
  * 
  *

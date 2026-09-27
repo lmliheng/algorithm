@@ -1,4 +1,9 @@
 """
+@difficulty medium
+@tags 前缀和,数组
+@time O(n)
+@space O(n)
+@note 先左积后右积，两遍扫描不用除法
 238. 除了自身以外数组的乘积
 
 

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 链表,双指针
+ * @time O(n)
+ * @space O(1)
+ * @note 虚拟头加三指针，整段跳过重复值并处理尾部
  * @82. 删除排序链表中的重复元素 II（解法三）
  */
 

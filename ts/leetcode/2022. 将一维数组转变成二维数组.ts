@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 数组,矩阵,模拟
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note 按下标 i*n+j 逐行填入二维数组
  * @2022. 将一维数组转变成二维数组
  */
 

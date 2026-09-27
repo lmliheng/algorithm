@@ -1,8 +1,11 @@
 """
-最大子数组和
-
-动态规划
-
+@lc 53
+@title 最大子数组和
+@difficulty medium
+@tags dp,数组,子数组
+@time O(n)
+@space O(n)
+@note 一维 dp：dp[i]=max(dp[i-1]+nums[i], nums[i])，空间可以再压到 O(1)
 """
 
 class Solution:

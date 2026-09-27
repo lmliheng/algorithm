@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 滑动窗口,数组
+ * @time O(n)
+ * @space O(1)
+ * @note 窗口只看连续三个数，未覆盖子序列情形
  * @456. 132模式
  */
 let nums = [1,0,1,-4,-3]

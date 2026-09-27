@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数组,矩阵,模拟
+ * @time O(m*n)
+ * @space O(1)
+ * @note 用 -1/2 标记死亡与复活，两轮原地更新
  * @289. 生命游戏
  */
 function gameOfLife(board: number[][]): void {

@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 数组,原地算法
+ * @time O(n^2)
+ * @space O(1)
+ * @note splice 就地删零，最后在数组末尾补齐
  * @283. 移动零
  */
 let nums = [0, 1, 0, 3, 12]

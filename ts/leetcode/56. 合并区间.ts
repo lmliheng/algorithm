@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 排序,区间,数组
+ * @time O(n*log n)
+ * @space O(n)
+ * @note 按起点排序后逐个合并重叠区间
  * @56. 合并区间
  * 
  * 以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。

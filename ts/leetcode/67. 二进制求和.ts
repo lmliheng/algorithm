@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 字符串,数学
+ * @time O(n)
+ * @space O(n)
+ * @note 进制互转练习，模拟加法并未实现
  * @67. 二进制求和
  */
 

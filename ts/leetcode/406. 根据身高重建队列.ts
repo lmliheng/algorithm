@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 贪心,排序,数组
+ * @time O(n^2)
+ * @space O(n)
+ * @note 身高降序、k 升序排序后逐个插到第 k 位
  * @406. 根据身高重建队列
  */
 /**

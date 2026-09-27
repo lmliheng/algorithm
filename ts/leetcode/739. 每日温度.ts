@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 单调栈,数组
+ * @time O(n)
+ * @space O(n)
+ * @note 单调栈存下标，出栈时得到等待天数
  * @739. 每日温度
  */
 let temperatures = [73, 74, 75, 71, 69, 72, 76, 73]

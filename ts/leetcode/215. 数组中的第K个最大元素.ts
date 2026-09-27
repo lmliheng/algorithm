@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 堆,数组
+ * @time O(n*log k)
+ * @space O(k)
+ * @note 手写小顶堆并保持容量 k，堆顶即答案
  * @215. 数组中的第K个最大元素
  */
 // 最小堆

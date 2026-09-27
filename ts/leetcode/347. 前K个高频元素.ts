@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 哈希表,排序,计数
+ * @time O(n log n)
+ * @space O(n)
+ * @note 哈希计数后按频次排序取前 k 个
  * @347. 前K个高频元素
  */
 /**

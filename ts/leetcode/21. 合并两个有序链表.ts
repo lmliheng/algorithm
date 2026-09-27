@@ -1,6 +1,11 @@
 
 import { ListNode } from '../JS/DataStructure/ListNode.js'
 /**
+ * @difficulty easy
+ * @tags 链表,双指针
+ * @time O(m+n)
+ * @space O(1)
+ * @note 双指针比较大小依次接续，哑结点返回
  * @21. 合并两个有序链表
  */
 

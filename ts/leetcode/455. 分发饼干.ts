@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 贪心,排序
+ * @time O(n*m)
+ * @space O(m)
+ * @note 排序后双循环贪心，大饼干优先匹配
  * @455. 分发饼干
  */
 /**

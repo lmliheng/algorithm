@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 贪心,双指针,排序
+ * @time O(n log n)
+ * @space O(1)
+ * @note 排序后双指针，重的先上船再尽量塞轻的
  * @881. 救生艇
  */
 

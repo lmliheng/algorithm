@@ -1,5 +1,11 @@
 """
-矩阵置零
+@lc 73
+@title 矩阵置零
+@difficulty medium
+@tags 矩阵,数组
+@time O(z*(m+n))
+@space O(z)
+@note 先记下所有 0 的位置再逐行逐列置零（z 是 0 的个数）；标准做法能压到 O(m*n)
 """
 
 class Solution:

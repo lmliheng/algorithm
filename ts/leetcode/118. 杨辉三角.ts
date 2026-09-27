@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 数组,dp,模拟
+ * @time O(n^2)
+ * @space O(n^2)
+ * @note 逐行递推，两端为 1 中间由上一行相加
  * @118. 杨辉三角
  */
 

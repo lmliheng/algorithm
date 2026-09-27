@@ -1,11 +1,12 @@
 package com.algorithm;
 
+import com.algorithm.leetcode.MergeIntervals;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class TestMerge {
 
-    private final Alogorithm algorithm = new Alogorithm();
+    private final MergeIntervals algorithm = new MergeIntervals();
 
     @Test
     public void testBasicCase() {

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 矩阵,哈希表
+ * @time O(n*m*(n+m))
+ * @space O(n*m)
+ * @note 先记录 0 的位置，再置零所在行列
  * @73. 矩阵置零
  */
 

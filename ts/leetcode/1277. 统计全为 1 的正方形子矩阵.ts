@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,矩阵
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note dp[i][j] 为右下角最大正方形边长并累加计数
  * @1277. 统计全为 1 的正方形子矩阵
  */
 

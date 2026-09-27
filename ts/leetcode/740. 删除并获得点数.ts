@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,数组
+ * @time O(n + V^2)
+ * @space O(V)
+ * @note 按值域建表做打家劫舍 dp，V 为最大点数
  * @740. 删除并获得点数
  */
 let nums = [2,2,3,3,3,4]

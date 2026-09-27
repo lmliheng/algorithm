@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Algorithm Zoo">
+  <title>Algorithm Zoo</title>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4a6bd6"/>
+      <stop offset="1" stop-color="#2b4396"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#tile)"/>
+  <g fill="#ffffff">
+    <rect x="11.5" y="32" width="9" height="14" rx="4.5"/>
+    <rect x="27.5" y="24" width="9" height="22" rx="4.5"/>
+    <rect x="43.5" y="16" width="9" height="30" rx="4.5"/>
+  </g>
+</svg>

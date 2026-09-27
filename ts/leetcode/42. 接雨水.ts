@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 数组,双指针
+ * @time O(n)
+ * @space O(1)
+ * @note 以最高柱为中轴，两侧累加前缀最大值差
  * @42. 接雨水
  */
 /**

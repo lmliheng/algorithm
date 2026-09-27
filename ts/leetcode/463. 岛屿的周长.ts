@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 矩阵,模拟
+ * @time O(m*n)
+ * @space O(1)
+ * @note 每块陆地记4，与上/左相邻各减2
  * @463. 岛屿的周长
  */
 let grid = [

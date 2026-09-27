@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 模拟
+ * @time O(n)
+ * @space O(n)
+ * @note 文件内容是完成时间模拟，与题名不符
  * @363. 矩形区域不超过K的最大数值和
  */
 let landStartTime = [2, 8]

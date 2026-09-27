@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 链表
+ * @time O(n)
+ * @space O(1)
+ * @note 一次遍历，重复就跳过，只保留一个
  * @83. 删除排序链表中的重复元素
  */
 

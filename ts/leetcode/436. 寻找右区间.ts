@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数组,区间
+ * @time O(n^2)
+ * @space O(n)
+ * @note 双重扫描找最小的 start 不小于 end 的区间
  * @436. 寻找右区间
  */
 let intervals = [[1,1],[3,4]]

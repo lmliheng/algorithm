@@ -1,6 +1,11 @@
 
 import { ListNode } from '../JS/DataStructure/ListNode.js'
 /**
+ * @difficulty medium
+ * @tags 链表,双指针
+ * @time O(n)
+ * @space O(1)
+ * @note 先求链表长度，再定位待删节点的前驱
  * 
  * @19. 删除链表的倒数第 N 个结点
  */

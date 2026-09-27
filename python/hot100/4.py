@@ -1,4 +1,9 @@
 """
+@difficulty easy
+@tags 数组,双指针,原地算法
+@time O(n)
+@space O(1)
+@note 倒序删除 0 再在末尾补齐，原地修改
 移动零
 lc 283
 """

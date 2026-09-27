@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 图,DFS,哈希表
+ * @time O(n)
+ * @space O(n)
+ * @note DFS 用 map 克隆节点，再补邻居关系
  * @133. 克隆图
  */
 

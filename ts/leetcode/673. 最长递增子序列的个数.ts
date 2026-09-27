@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,子序列
+ * @time O(n^2)
+ * @space O(n)
+ * @note dp1记长度dp2记个数，等长时累加
  * @673. 最长递增子序列的个数
  */
 /**

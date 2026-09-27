@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 贪心,数组
+ * @time O(n)
+ * @space O(1)
+ * @note 维护最远可达下标，一趟遍历判断
  * @跳跃游戏1
  */
 

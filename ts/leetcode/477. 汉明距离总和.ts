@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 位运算,数组
+ * @time O(32*n)
+ * @space O(1)
+ * @note 按位统计0/1个数，乘积累加
  * @477. 汉明距离总和
  */
 /**

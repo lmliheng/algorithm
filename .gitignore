@@ -11,3 +11,9 @@ dist
 Java/target
 .zvec-grep
 .zread
+# 站点构建产物（由 site/scripts 生成，不入库；node_modules 和 dist 已在上方忽略）
+site/.cache
+site/docs/problems
+site/docs/guide
+site/docs/public/problems.json
+site/docs/.vitepress/cache

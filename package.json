@@ -6,7 +6,16 @@
   "scripts": {
     "comsume": "node --env-file=.env script/ai_git.js comsume",
     "commits": "node --env-file=.env script/ai_git.js commits",
-    "dev": "node --env-file=.env script/ai_git.js dev"
+    "dev": "node --env-file=.env script/ai_git.js dev",
+    "typecheck": "tsc -p tsconfig.site.json",
+    "site:scan": "node site/scripts/scan.ts",
+    "site:render": "node site/scripts/render.ts",
+    "site:gen": "node site/scripts/scan.ts && node site/scripts/render.ts",
+    "site:annotate": "node site/scripts/annotate.ts",
+    "site:icons": "node site/scripts/icons.ts",
+    "site:dev": "npm run site:gen && vitepress dev site/docs",
+    "site:build": "npm run site:gen && vitepress build site/docs",
+    "site:preview": "vitepress preview site/docs"
   },
   "repository": {
     "type": "git",
@@ -25,6 +34,8 @@
   },
   "devDependencies": {
     "@clack/prompts": "^1.8.1",
-    "@types/node": "^26.5.1"
+    "@types/node": "^26.5.1",
+    "typescript": "^5.9.3",
+    "vitepress": "^1.6.4"
   }
 }

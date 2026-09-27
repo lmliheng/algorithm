@@ -1,4 +1,7 @@
 /**
+ * @difficulty medium
+ * @tags 回溯,组合,数组
+ * @note 回溯枚举组合，和超过目标时剪枝
  * @39. 组合总和
  */
 function combinationSum(candidates: number[], target: number) {

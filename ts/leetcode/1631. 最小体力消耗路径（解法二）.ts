@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 图,堆
+ * @time O(m*n*log(m*n))
+ * @space O(m*n)
+ * @note 手写最小堆做类 Dijkstra，边权取相邻高差
  * @1631. 最小体力消耗路径（解法二）
  */
 

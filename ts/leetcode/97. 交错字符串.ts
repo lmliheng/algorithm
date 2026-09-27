@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,字符串
+ * @time O(n*m)
+ * @space O(n*m)
+ * @note dp 由上方或左侧转移，比较对应字符
  * @97. 交错字符串
  */
 

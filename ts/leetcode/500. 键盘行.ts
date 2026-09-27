@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 字符串,哈希表
+ * @time O(n*k)
+ * @space O(1)
+ * @note 三个Set判断单词字符是否同一行
  * @500. 键盘行
  */
 let words = ["Hello", "Alaska", "Dad", "Peace"]

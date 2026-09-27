@@ -1,4 +1,7 @@
 /**
+ * @difficulty medium
+ * @tags 字典树,设计,字符串
+ * @note 字典树实现 addWord，search 未处理通配符
  * @211. 添加与搜索单词-数据结构设计
  */
 var WordDictionary = function() {

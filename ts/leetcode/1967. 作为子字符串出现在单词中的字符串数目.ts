@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 字符串
+ * @time O(m*n)
+ * @space O(1)
+ * @note 用 indexOf 逐个判断 pattern 是否出现
  * @1967. 作为子字符串出现在单词中的字符串数目
  */
 

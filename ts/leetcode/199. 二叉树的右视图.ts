@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 树,BFS
+ * @time O(n)
+ * @space O(n)
+ * @note BFS 逐层遍历，取每层最后一个节点值
  * @199. 二叉树的右视图
  */
 

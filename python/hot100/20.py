@@ -1,9 +1,11 @@
 """
-旋转图像
-
-原地旋转,元素可能重复，不要使用map
-
-
+@lc 48
+@title 旋转图像
+@difficulty medium
+@tags 矩阵,原地算法
+@time O(n^2)
+@space O(1)
+@note 先沿主对角线转置，再逐行反转，原地完成
 """
 class Solution:
     def rotate(self, matrix: List[List[int]]) -> None:

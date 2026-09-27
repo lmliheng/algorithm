@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 回溯,组合
+ * @time O(k*C(n,k))
+ * @space O(k)
+ * @note 回溯枚举，路径长度到 k 就收集
  * @77. 组合
  */
 

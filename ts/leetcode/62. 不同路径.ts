@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,矩阵
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note dp为上格加左格，首行首列全为1
  * @62. 不同路径
  */
 

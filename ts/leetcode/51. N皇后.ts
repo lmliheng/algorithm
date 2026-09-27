@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 回溯,递归
+ * @time O(n!)
+ * @space O(n)
+ * @note 逐行回溯，列与两条对角线剪枝
  * @51. N 皇后
  */
 function solveNQueens(n: number): string[][] {

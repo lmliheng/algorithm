@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,数组
+ * @time O(n^2)
+ * @space O(n*1001)
+ * @note dp[i][d] 记录以 i 结尾公差 d 的最长长度
  * @1027. 最长等差数列
  */
 

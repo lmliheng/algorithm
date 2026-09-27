@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 贪心,数组
+ * @time O(n)
+ * @space O(n)
+ * @note 左右各扫一遍取较大值，累加糖果数
  * @135. 分发糖果
  * 左右循环，有思想高度
  */

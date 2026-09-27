@@ -1,4 +1,9 @@
 """
+@difficulty medium
+@tags 前缀和,哈希表,子数组
+@time O(n)
+@space O(n)
+@note 前缀和配哈希表，统计差为 k 的次数
 和为 K 的子数组
 lc 560
 """

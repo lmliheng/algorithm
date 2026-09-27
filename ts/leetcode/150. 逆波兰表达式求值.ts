@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 栈,数组
+ * @time O(n)
+ * @space O(n)
+ * @note 用数组模拟栈，遇运算符弹两个数算完再压回
  * @150. 逆波兰表达式求值
  */
 

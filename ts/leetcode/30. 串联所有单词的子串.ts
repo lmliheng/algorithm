@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 滑动窗口,哈希表,字符串
+ * @time O(n*m)
+ * @space O(k)
+ * @note 按单词长度分组滑动窗口，比较计数表
  * @30. 串联所有单词的子串
  */
 

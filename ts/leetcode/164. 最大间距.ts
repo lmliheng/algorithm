@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 数组,排序
+ * @time O(n*log n)
+ * @space O(n)
+ * @note 排序后求相邻最大差，未达线性时间要求
  * @164. 最大间距
  */
 

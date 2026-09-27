@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 矩阵,模拟
+ * @time O(m*n)
+ * @space O(1)
+ * @note 四边界收缩模拟螺旋读取
  * @54. 螺旋矩阵
  */
 

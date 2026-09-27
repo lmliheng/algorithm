@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,排序
+ * @time O(n^2)
+ * @space O(n)
+ * @note 按左端点排序后做LIS式DP
  * @646. 最长数对链
  */
 /**

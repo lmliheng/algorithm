@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数学,字符串
+ * @time O(1)
+ * @space O(1)
+ * @note 按千、百、十、个位查表拼接罗马数字
  * @12. 整数转罗马数字
  */
 

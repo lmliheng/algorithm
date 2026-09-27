@@ -1,4 +1,9 @@
 """
+@difficulty medium
+@tags 数组,哈希表,排序
+@time O(n log n)
+@space O(1)
+@note 排序后扫描统计最长连续段
 最长连续序列
 lc 128
 """

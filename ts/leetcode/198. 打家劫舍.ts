@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,数组
+ * @time O(n^2)
+ * @space O(n)
+ * @note dp[i] 取前 i-1 项最大值再加当前值
  * @198. 打家劫舍
  */
 

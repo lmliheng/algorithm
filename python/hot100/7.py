@@ -1,5 +1,11 @@
 """
-7. 接雨水
+@lc 42
+@title 接雨水
+@difficulty hard
+@tags 数组,双指针
+@time O(n)
+@space O(1)
+@note 按最高点把数组分成左右两段，各自维护本侧最大值累加差值
 """
 
 class Solution:

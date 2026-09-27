@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,字符串,哈希表
+ * @time O(n^2)
+ * @space O(n)
+ * @note dp[i] 表示前 i 个字符可拆分，Set 查子串
  * @139. 单词拆分（解法二）
  */
 

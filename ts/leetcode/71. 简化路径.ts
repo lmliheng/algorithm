@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 栈,字符串
+ * @time O(n^2)
+ * @space O(n)
+ * @note 斜杠切分后扫描，遇上一级目录就删掉前一项
  * @71. 简化路径
  */
 

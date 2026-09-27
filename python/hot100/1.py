@@ -1,4 +1,9 @@
 """
+@difficulty easy
+@tags 哈希表,数组
+@time O(n)
+@space O(n)
+@note 边遍历边在哈希表里查补数
 两数之和
 lc 1
 """

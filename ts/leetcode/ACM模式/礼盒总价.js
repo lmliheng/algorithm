@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 排序,数组
+ * @time O(n*m)
+ * @space O(n+m)
+ * @note 排序后逐行找临界点，超过 P 的按 P 批量累加
  * @礼盒总价
  * 
  * 

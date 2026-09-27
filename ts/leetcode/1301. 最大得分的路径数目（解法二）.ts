@@ -1,4 +1,7 @@
 /**
+ * @difficulty hard
+ * @tags dp,矩阵
+ * @note 尚未实现
  * @1301. 最大得分的路径数目（解法二）
  */
 

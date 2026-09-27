@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,矩阵
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note 转移取上/左较小值再加当前格
  * @64. 最小路径和
  */
 

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 图,拓扑排序
+ * @time O(n+m)
+ * @space O(n+m)
+ * @note 只统计无先修课的课程，拓扑排序未写完
  * @207. 课程表
  */
 let numCourses = 2

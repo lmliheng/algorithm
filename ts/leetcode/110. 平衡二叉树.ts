@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 树,DFS,递归
+ * @time O(n)
+ * @space O(n)
+ * @note 递归收集各叶子层级，比较极差判断平衡
  * @110. 平衡二叉树
  */
 

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,矩阵
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note dp 为以该格为右下角的最大正方形边长
  * @221. 最大正方形
  */
 let matrix =[["1","1"],["1","1"]]

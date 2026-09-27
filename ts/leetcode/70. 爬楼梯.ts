@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags dp
+ * @time O(n)
+ * @space O(n)
+ * @note dp 递推 f(n)=f(n-1)+f(n-2)
  * @70. 爬楼梯
  */
 

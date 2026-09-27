@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 数学,排列
+ * @time O(n^2)
+ * @space O(n)
+ * @note 阶乘分组逐位定位，k先自减
  * @60. 排列序列
  */
 

@@ -1,4 +1,9 @@
 """
+@difficulty medium
+@tags 双指针,贪心
+@time O(n)
+@space O(1)
+@note 双指针向中间收，移动较短的一边
 盛最多水的容器
 lc 11
 题目中heigtht[left]<height[right],必然有

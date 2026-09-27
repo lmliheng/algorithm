@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 数组,分治
+ * @time O((m+n)log(m+n))
+ * @space O(m+n)
+ * @note 只写了合并排序的暴力解，未写 O(log) 解
  * @寻找两个正序数组的中位数
  * 要求时间复杂度是O(log(m+n))
  */

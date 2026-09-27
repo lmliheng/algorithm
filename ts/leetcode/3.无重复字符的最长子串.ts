@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 滑动窗口,哈希表,字符串
+ * @time O(n)
+ * @space O(n)
+ * @note 滑动窗口配计数表，重复时右移左边界
  * @
  * 滑动窗口
  * 

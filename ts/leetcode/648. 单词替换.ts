@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 队列,贪心,字符串
+ * @time O(n)
+ * @space O(n)
+ * @note 两队列存下标，小者禁言对方（非648）
  * @648. 单词替换
  */
 /**

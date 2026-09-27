@@ -1,6 +1,11 @@
 """
-三数之和
-1. 暴力-超时
+@lc 15
+@title 三数之和
+@difficulty medium
+@tags 双指针,数组,排序
+@time O(n^3)
+@space O(1)
+@note 文件里是多重循环的暴力解法，会超时；正解是排序 + 双指针 O(n^2)
 """
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:

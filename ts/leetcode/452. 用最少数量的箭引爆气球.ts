@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 贪心,排序,区间
+ * @time O(n log n)
+ * @space O(1)
+ * @note 按左端点排序求区间交，注释自标有错
  * @452. 用最少数量的箭引爆气球
  */
 let points: number[][] = [[1,9],[7,16],[12,17]]

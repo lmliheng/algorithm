@@ -1,4 +1,7 @@
 /**
+ * @difficulty medium
+ * @tags 堆,数组
+ * @note 尚未实现，只留未完成的循环框架
  * @373. 查找和最小的K对数字
  */
 /**
@@ -27,7 +30,7 @@ while (p1 !== n1 && p2 !== n2) {
     if (p1 === 0 && p2 === 0) {
         res.push([nums1[p1], nums2[p2]])
     }
-    if (nums1[p1 + 1] + nums2[p2])
+    // if (nums1[p1 + 1] + nums2[p2])
 
 }
 

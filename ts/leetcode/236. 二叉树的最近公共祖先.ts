@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 树,哈希表,DFS
+ * @time O(n)
+ * @space O(n)
+ * @note 父节点哈希表加祖先集合求第一个交点
  * @236. 二叉树的最近公共祖先
  */
 function TreeNode(val: number, left?: TreeNode | null, right?: TreeNode | null) {

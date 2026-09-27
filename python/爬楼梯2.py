@@ -1,3 +1,10 @@
+"""
+@difficulty medium
+@tags dp
+@time O(n)
+@space O(n)
+@note dp 每次可跨 1/2/3 级，取最小花费
+"""
 class Solution:
     def climbStairs(self, n: int, costs: List[int]) -> int:
         dp = [0] * (n + 1)

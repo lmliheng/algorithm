@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags BFS,树,队列
+ * @time O(n)
+ * @space O(n)
+ * @note 层序遍历，偶数层正序、奇数层反转
  * @103. 二叉树的锯齿形层序遍历
  */
 

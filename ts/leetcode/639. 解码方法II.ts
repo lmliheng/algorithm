@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags BFS,树,队列
+ * @time O(n)
+ * @space O(n)
+ * @note 层序遍历求每层均值，与文件名不符
  * @639. 解码方法II
  */
 function TreeNode(val: number, left?: TreeNode | null, right?: TreeNode | null) {

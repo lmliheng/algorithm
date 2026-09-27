@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数学
+ * @time O(n)
+ * @space O(1)
+ * @note 直接算阶乘再数末尾 0，大数会失真
  * @172. 阶乘后的零
  */
 

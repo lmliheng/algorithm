@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags dp,数组
+ * @time O(n^2)
+ * @space O(n)
+ * @note dp 松弛左右邻格与同值下标，未用 BFS
  * @跳跃游戏4
  * dp
  */

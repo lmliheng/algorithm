@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 哈希表,计数,数组
+ * @time O(n+m)
+ * @space O(n+m)
+ * @note 两表分别计数，按较小次数展开结果
  * @350. 两个数组的交集II
  */
 let nums1 = [1, 2, 2, 1]

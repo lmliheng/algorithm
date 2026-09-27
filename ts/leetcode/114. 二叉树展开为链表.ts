@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 树,DFS,链表
+ * @time O(n)
+ * @space O(n)
+ * @note 先序收集节点值，再串成右链的新树
  * @114. 二叉树展开为链表
  */
 

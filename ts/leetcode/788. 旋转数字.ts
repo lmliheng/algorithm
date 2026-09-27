@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数学,模拟
+ * @time O(n log n)
+ * @space O(log n)
+ * @note 逐个检查数位是否可旋转，且含 2/5/6/9
  * @788. 旋转数字
  */
 let n = 857

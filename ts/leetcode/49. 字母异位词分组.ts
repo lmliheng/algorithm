@@ -1,6 +1,11 @@
 
 
 /**
+ * @difficulty medium
+ * @tags 哈希表,字符串,排序
+ * @time O(n*k*log k)
+ * @space O(n*k)
+ * @note 排序后的字符串当哈希键分组
  * @49. 字母异位词分组
  */
 var groupAnagrams = function (strs: string) {

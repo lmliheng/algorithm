@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数学,字符串
+ * @time O(log n)
+ * @space O(log n)
+ * @note 转字符串反转去尾零，BigInt判溢出
  * @7. 整数反转
  */
 

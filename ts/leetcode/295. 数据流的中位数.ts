@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 设计,数组,排序
+ * @time O(n)
+ * @space O(n)
+ * @note 插入时冒泡维持有序数组，注释标注超时
  * @295. 数据流的中位数
  */
 /**

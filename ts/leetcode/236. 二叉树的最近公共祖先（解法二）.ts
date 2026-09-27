@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 树,递归,DFS
+ * @time O(n)
+ * @space O(n)
+ * @note 后序递归，左右子树都返回非空时当前即答案
  * @236. 二叉树的最近公共祖先（解法二）
  */
 /**

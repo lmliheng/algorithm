@@ -1,6 +1,11 @@
 import { ListNode } from "../JS/DataStructure/ListNode.js"
 
 /**
+ * @difficulty hard
+ * @tags 链表,模拟
+ * @time O(n)
+ * @space O(n)
+ * @note 取值到数组按 k 分组翻转后重建链表
  * @25. K 个一组翻转链表
  */
 

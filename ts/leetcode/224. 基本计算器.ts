@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 栈,数学,字符串
+ * @time O(n)
+ * @space O(n)
+ * @note 栈保存括号外的结果与符号，处理多位数
  * @224. 基本计算器
  */
 /**

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 哈希表,矩阵,数组
+ * @time O(1)
+ * @space O(1)
+ * @note 分三轮用集合校验行、列与九个宫格
  * @36. 有效的数独
  */
 function isValidSudoku(board: string[][]): boolean {

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 字符串,模拟
+ * @time O(n)
+ * @space O(n)
+ * @note 逐字符写入对应行，到边界反向
  * @6. Z 字形变换
  */
 

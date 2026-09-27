@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 哈希表,数组
+ * @time O(n^2)
+ * @space O(n^2)
+ * @note 两数组和存入哈希表，再查后两组补数
  * @454. 四数相加 II
  * 
  * 

@@ -1,4 +1,7 @@
 /**
+ * @difficulty hard
+ * @tags 回溯,矩阵
+ * @note 行列宫布尔表剪枝，逐格回溯填数
  * @37. 解数独
  */
 function solveSudoku(board: string[][]): string[][] {

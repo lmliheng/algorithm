@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags DFS,图,矩阵
+ * @time O(m*n)
+ * @space O(m*n)
+ * @note DFS 淹没法，统计连通块数量
  * @200. 岛屿数量
  */
 

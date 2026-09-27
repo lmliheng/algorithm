@@ -1,4 +1,9 @@
 """
+@difficulty medium
+@tags 滑动窗口,哈希表,字符串
+@time O(n)
+@space O(n)
+@note 滑动窗口配字符计数，超 1 就左移
 无重复字符的最长子串
 
 lc 3

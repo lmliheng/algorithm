@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 递归,字符串
+ * @time O(2^n)
+ * @space O(n)
+ * @note 递归切分所有前缀组合，未剪枝
  * @139. 单词拆分
  */
 

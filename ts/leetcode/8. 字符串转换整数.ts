@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 字符串,模拟
+ * @time O(n)
+ * @space O(n)
+ * @note 手写解析，去空格、判符号、截数字后按边界截断
  * 8. 字符串转换整数 (atoi)
  * 
  */

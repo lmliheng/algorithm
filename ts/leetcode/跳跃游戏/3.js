@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags DFS,数组
+ * @time O(n)
+ * @space O(n)
+ * @note 显式栈做 DFS，visited 去重，遇到 0 即成功
  * @跳跃游戏3
  * 使用栈的思想
  */

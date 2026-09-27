@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 位运算,哈希表,数组
+ * @time O(n)
+ * @space O(n)
+ * @note 两个 Set 记录出现过的数与重复数
  * @137. 只出现一次的数字 II
  */
 

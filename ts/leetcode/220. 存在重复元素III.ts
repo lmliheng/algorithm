@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 数组,滑动窗口
+ * @time O(n*k)
+ * @space O(k)
+ * @note 暴力枚举 indexDiff 窗口内元素对
  * @220. 存在重复元素III
  */
 let nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]

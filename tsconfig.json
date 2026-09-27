@@ -1,20 +1,20 @@
 {
   // Visit https://aka.ms/tsconfig to read more about this file
+  // 仓库唯一的一份 TypeScript 配置：ts/ 的题解源码 + site/scripts 的站点生成脚本。
+  // 只检查站点生成脚本用 tsconfig.site.json（npm run typecheck）。
   "compilerOptions": {
     // File Layout
-    "rootDir": "./ts",
+    // 输入跨 ts/ 和 site/scripts/，所以不设 rootDir，产物按同样层级落在 dist/ 下
     "outDir": "./dist",
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
     "module": "nodenext",
+    "moduleResolution": "nodenext",
     "target": "esnext",
+    "lib": ["esnext"],
     "types": [
       "node"
     ],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
     // Other Outputs
     "sourceMap": false,
     "declaration": false,
@@ -38,6 +38,10 @@
     "noUncheckedSideEffectImports": true,
     "moduleDetection": "force",
     "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    // site/scripts 由 Node 原生类型剥离直接运行，import 里带 .ts 后缀
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true
   },
   "exclude": [
     "node_modules",
@@ -49,9 +53,13 @@
     "python",
     "script",
     "sql",
-    "scss"
+    "scss",
+    "site/docs/problems",
+    "site/docs/.vitepress/cache",
+    "site/docs/.vitepress/dist"
   ],
   "include": [
-    "ts"
+    "ts",
+    "site/scripts"
   ]
 }

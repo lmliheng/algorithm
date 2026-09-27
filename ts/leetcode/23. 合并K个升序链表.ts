@@ -1,4 +1,9 @@
 /**
+ * @difficulty hard
+ * @tags 链表,排序
+ * @time O(n*log n)
+ * @space O(n)
+ * @note 取出全部值排序后重建链表，非分治最优
  * @23. 合并 K 个升序链表
  */
 

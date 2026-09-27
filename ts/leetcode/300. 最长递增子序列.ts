@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,数组,子序列
+ * @time O(n^2)
+ * @space O(n)
+ * @note dp[i] 为以 i 结尾的最长递增子序列长度
  * @300. 最长递增子序列
  */
 // dp dp[i]表示以i结尾的最长递增子序列的长度

@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 双指针,贪心,数组
+ * @time O(n)
+ * @space O(1)
+ * @note 双指针从两端收缩，每次移动较短的一边
  * @11. 盛最多水的容器
  */
 

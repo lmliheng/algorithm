@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 字符串,排序
+ * @time O(n log n * m)
+ * @space O(1)
+ * @note 排序后只需比较首末两串的公共前缀
  * @14. 最长公共前缀
  */
 

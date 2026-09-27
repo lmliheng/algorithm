@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,二叉搜索树,数学
+ * @time O(n^2)
+ * @space O(n)
+ * @note 卡特兰数 dp，按根划分左右子树相乘
  * @96. 不同的二叉搜索树
  */
 

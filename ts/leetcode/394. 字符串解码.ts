@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 栈,字符串
+ * @time O(n)
+ * @space O(n)
+ * @note 栈保存外层重复次数与已拼好的前缀串
  * @394. 字符串解码
  */
 let s = "3[a]2[bc]"

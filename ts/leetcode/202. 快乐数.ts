@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 哈希表,数学
+ * @time O(log n)
+ * @space O(log n)
+ * @note 用 Set 检测循环，过程中判断是否到 1
  * @202. 快乐数
  */
 let n = 2

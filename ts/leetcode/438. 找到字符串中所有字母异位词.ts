@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 滑动窗口,哈希表,字符串
+ * @time O(n)
+ * @space O(1)
+ * @note 定长窗口滑动，26 位计数数组逐位比较
  * @438. 找到字符串中所有字母异位词
  */
 let s = "cbaebabacd"

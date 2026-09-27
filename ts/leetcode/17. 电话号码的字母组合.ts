@@ -1,3 +1,10 @@
+/**
+ * @difficulty medium
+ * @tags 回溯,字符串
+ * @time O(4^n)
+ * @space O(n)
+ * @note 回溯枚举每个数字对应的字母组合
+ */
 
 type PhoneMap = {
     [key: string]: string[]

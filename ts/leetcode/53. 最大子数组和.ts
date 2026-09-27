@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags dp,数组,子数组
+ * @time O(n)
+ * @space O(n)
+ * @note dp为以i结尾的最大和，负数则重新开始
  * @53. 最大子数组和
  */
 

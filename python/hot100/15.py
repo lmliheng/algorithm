@@ -1,6 +1,11 @@
 """
-轮转数组
-
+@lc 189
+@title 轮转数组
+@difficulty medium
+@tags 数组,原地算法
+@time O(n)
+@space O(1)
+@note 三次翻转：整体 → 前 k 个 → 后 n-k 个；下面还有一版 pop/insert 会超时
 """
 ## 超时解法：使用pop弹出右移元素 再insert到nums
 

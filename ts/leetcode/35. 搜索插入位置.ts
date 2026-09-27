@@ -1,4 +1,9 @@
 /**
+ * @difficulty easy
+ * @tags 二分,数组
+ * @time O(log n)
+ * @space O(1)
+ * @note lowerBound 二分定位插入下标，注释已写明
  * @35. 搜索插入位置
  */
 

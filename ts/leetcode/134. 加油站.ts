@@ -1,4 +1,9 @@
 /**
+ * @difficulty medium
+ * @tags 模拟,数组
+ * @time O(n^2)
+ * @space O(1)
+ * @note 枚举每个起点逐站模拟油量，暴力判定
  * @134. 加油站
  */
 
