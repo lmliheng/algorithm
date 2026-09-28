@@ -1,4 +1,5 @@
-# Algorithm
+<img width="1137" height="360" alt="image" src="https://github.com/user-attachments/assets/eaba50cc-23bd-4d70-8832-5a091b158ded" />
+
 
 <p align="center">
   <img src="https://img.shields.io/badge/Languages-Java%20%7C%20JS%20%7C%20TS%20%7C%20C++-blue.svg" alt="Languages">
