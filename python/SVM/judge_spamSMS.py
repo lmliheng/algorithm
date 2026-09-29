@@ -1,8 +1,8 @@
 import jieba
 import joblib
 
-model = joblib.load('spam_svm_model.pkl')
-vectorizer = joblib.load('spam_tfidf.pkl')
+model = joblib.load('model/spam_svm_model.pkl')
+vectorizer = joblib.load('model/spam_tfidf.pkl')
 
 def predict_spam(text):
     seg = ' '.join(jieba.lcut(text))

@@ -11,14 +11,19 @@ import joblib
 texts = []
 labels = []
 
-with open('data/chinese_sms.txt', 'r', encoding='utf-8') as f:
-    for line in f:
-        line = line.rstrip('\n')
-        if not line.strip():
-            continue
-        label, text = line.split('\t')
-        labels.append(int(label))
-        texts.append(text)
+# with open('data/chinese_sms.txt', 'r', encoding='utf-8') as f:
+#     for line in f:
+#         line = line.rstrip('\n')
+#         if not line.strip():
+#             continue
+#         label, text = line.split('\t')
+#         labels.append(int(label))
+#         texts.append(text)
+
+df=pd.read_csv('data/train.csv')
+for i in range(len(df)):
+        labels.append(int(df.iloc[i]['label']))
+        texts.append(df.iloc[i]['text'])
 
 # ---------- 2. 中文分词 ----------
 def cut_text(text):
@@ -77,6 +82,6 @@ for i in top_ham:
     print(feature_names[i], round(coef[i], 3))
 
 # ---------- 8. 保存模型 ----------
-joblib.dump(model, 'spam_svm_model.pkl')
-joblib.dump(vectorizer, 'spam_tfidf.pkl')
+joblib.dump(model, 'model/spam_svm_model.pkl')
+joblib.dump(vectorizer, 'model/spam_tfidf.pkl')
 print("\n模型已保存")
