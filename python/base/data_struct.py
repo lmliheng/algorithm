@@ -13,14 +13,6 @@ print(type(1))
 
 
 
-"""
-string
-
-"""
-str="string 字符串的声明"
-## 字符串拼接使用f"你好{str}" 或者 %+占位符
-print(f"xxx{str}")
-
 ### 转字符串
 arr_=[1,3,5]
 print(type(str(arr_)))
