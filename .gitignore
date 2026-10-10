@@ -17,3 +17,7 @@ site/docs/problems
 site/docs/guide
 site/docs/public/problems.json
 site/docs/.vitepress/cache
+
+
+.ipynb_checkpoints/
+__pycache__/
