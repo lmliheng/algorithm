@@ -1,3 +1,5 @@
+
+
 class UserObj:
 
     #类属性
@@ -26,7 +28,7 @@ class UserObj:
     def canDone(self):
         print("啥也不能干")
 
-    ## 静态方法
+    ## 静态方法,使用staticmethod装饰器
     @staticmethod
     def validate_age(age):
         """校验年龄是否合法"""

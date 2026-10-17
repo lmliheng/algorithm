@@ -7,8 +7,8 @@
 """
 
 from typing import List
-class Solution:
-    def climbStairs(self, n: int, costs: List[int]) -> int:
+
+def climbStairs( n: int, costs: List[int]) -> int:
         dp = [0] * (n + 1)
         if n == 1:
             return dp[0] + costs[0] + 1

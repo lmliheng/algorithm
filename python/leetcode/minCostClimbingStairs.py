@@ -5,8 +5,8 @@
 @space O(n)
 @note 一维 dp，每步取前一级或前两级的最小花费
 """
-class Solution:
-    def minCostClimbingStairs(self, cost: List[int]) -> int:
+from typing import List
+def minCostClimbingStairs(self, cost: List[int]) -> int:
         n = len(cost)
         dp = [0] * (n+1)
         for i in range(2,n+1):
