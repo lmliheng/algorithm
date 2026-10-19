@@ -12,7 +12,6 @@
  * 
  * 
  */
-import { merge } from '../../leetcode/56. 合并区间.js'
 var partitionLabels = function (s: string) {
     let res = []
     let map = new Map()
