@@ -6,17 +6,12 @@
 print(ord('a'))
 print(chr(97))
 
-
-
 # int float
 print(type(1))
-
-
 
 ### 转字符串
 arr_=[1,3,5]
 print(type(str(arr_)))
-
 
 """
 list 列表
