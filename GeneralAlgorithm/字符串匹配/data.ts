@@ -3,7 +3,7 @@ export const data1 = {
     p: 'abcdabd'
 }
 
-function randStr(n, seed = 7) {
+function randStr(n:number, seed = 7) {
   // 简单可复现伪随机，避免每次跑数据变
   let x = seed;
   const chars = "abcdefghijklmnopqrstuvwxyz";

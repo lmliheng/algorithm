@@ -6,7 +6,7 @@
  * @note 哑结点加进位逐位相加，另一版转 BigInt 不推荐
  */
 
-import { ListNode } from '../JS/DataStructure/ListNode.js'
+import { ListNode } from '../base/DataStructure/ListNode.js'
 
 
 function addTwoNumbers(l1: ListNode<number> | null, l2: ListNode<number> | null): ListNode<number> | null {

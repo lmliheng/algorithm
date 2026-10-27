@@ -5,7 +5,7 @@
  * 和next数组生成一样
  * 
  */
-export function longestPrefix(s) {
+export function longestPrefix(s:string) {
     let n = s.length
     let i = 0
     let j = -1
