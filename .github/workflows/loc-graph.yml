@@ -44,17 +44,18 @@ jobs:
           cache: npm
           cache-dependency-path: tools/loc-graph/package-lock.json
 
-      - name: Cache Remotion browser
-        if: steps.data.outputs.changed == 'true' || inputs.force
-        uses: actions/cache@v4
-        with:
-          path: tools/loc-graph/node_modules/.remotion
-          key: remotion-browser-${{ runner.os }}-4.0.463
-
       - name: Install renderer deps
         if: steps.data.outputs.changed == 'true' || inputs.force
         working-directory: tools/loc-graph
         run: npm ci
+
+      - name: Cache Remotion browser
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        uses: actions/cache@v4
+        with:
+          # 放在 npm ci 之后：npm ci 会清掉 node_modules，缓存先还原就等于白还原
+          path: tools/loc-graph/node_modules/.remotion
+          key: remotion-browser-${{ runner.os }}-4.0.463
 
       - name: Install img2webp
         if: steps.data.outputs.changed == 'true' || inputs.force
@@ -76,7 +77,8 @@ jobs:
             echo "数据没有变化，跳过提交"
           else
             git commit -m "Update LOC graph [skip ci]"
-            git push
+            # schedule 事件下 checkout 是游离 HEAD，用显式 refspec 推
+            git push origin HEAD:master
           fi
 
       - name: Publish animated image to loc-graph branch
