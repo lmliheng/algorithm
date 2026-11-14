@@ -1,4 +1,4 @@
-<img width="1137" height="360" alt="image" src="https://github.com/user-attachments/assets/eaba50cc-23bd-4d70-8832-5a091b158ded" />
+<img width="1137" height="360" alt="algorithm" src=".github/banner.webp" />
 
 
 <p align="center">
@@ -9,9 +9,9 @@
 </p>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset=".github/loc-history-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset=".github/loc-history-light.svg">
-  <img src=".github/loc-history.svg" alt="Lines of code over time">
+  <source media="(prefers-color-scheme: dark)" srcset=".github/loc-history-dark.webp">
+  <source media="(prefers-color-scheme: light)" srcset=".github/loc-history-light.webp">
+  <img width="900" src=".github/loc-history-light.webp" alt="Lines of code over time">
 </picture>
 
 <p align="center">
