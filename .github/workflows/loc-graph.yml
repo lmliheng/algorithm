@@ -1,12 +1,25 @@
 name: LOC graph
 
+# 每天统计一次代码行数，生成 README 里那张会动的「代码行数随时间」图。
+# 数据（json + 静态 svg）提交到 master；动图（webp，一天一张、体积大）放在
+# loc-graph 分支上，用单提交强制覆盖，README 用 raw 链接引用，不往 master 堆历史。
+
 on:
   schedule:
-    - cron: '0 0 * * *'  # Daily at midnight
+    - cron: '0 0 * * *' # 每天 UTC 0 点
   workflow_dispatch:
+    inputs:
+      force:
+        description: '数据没变也重新渲染动图'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
+
+concurrency:
+  group: loc-graph
+  cancel-in-progress: false
 
 jobs:
   build-loc-graph:
@@ -14,5 +27,65 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-      - uses: botforge-pro/loc-graph-action@main
+          fetch-depth: 0 # 逐提交统计行数，需要完整历史
+
+      - name: Install cloc
+        run: sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends cloc
+
+      - name: Collect LOC history
+        id: data
+        run: python3 tools/loc-graph/scripts/loc_graph.py
+
+      - name: Setup Node
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: tools/loc-graph/package-lock.json
+
+      - name: Cache Remotion browser
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        uses: actions/cache@v4
+        with:
+          path: tools/loc-graph/node_modules/.remotion
+          key: remotion-browser-${{ runner.os }}-4.0.463
+
+      - name: Install renderer deps
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        working-directory: tools/loc-graph
+        run: npm ci
+
+      - name: Install img2webp
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        run: sudo apt-get install -y --no-install-recommends webp
+
+      - name: Render animated chart
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        working-directory: tools/loc-graph
+        run: node scripts/render.mjs
+
+      - name: Commit data and static SVG
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .github/loc_history.json .github/loc-history.svg \
+                  .github/loc-history-light.svg .github/loc-history-dark.svg
+          if git diff --cached --quiet; then
+            echo "数据没有变化，跳过提交"
+          else
+            git commit -m "Update LOC graph [skip ci]"
+            git push
+          fi
+
+      - name: Publish animated image to loc-graph branch
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        run: |
+          set -euo pipefail
+          light=$(git hash-object -w .github/loc-history-light.webp)
+          dark=$(git hash-object -w .github/loc-history-dark.webp)
+          tree=$(printf '100644 blob %s\tloc-history-light.webp\n100644 blob %s\tloc-history-dark.webp\n' "$light" "$dark" | git mktree)
+          commit=$(git commit-tree "$tree" -m "Update LOC animation ($(date -u +%F))")
+          # 单个提交、每天强制覆盖：图片有 200+KB，不适合天天堆在 master 的历史里
+          git push --force origin "$commit:refs/heads/loc-graph"

@@ -1,0 +1,22 @@
+{
+  "name": "loc-graph",
+  "version": "1.0.0",
+  "private": true,
+  "description": "README 里那张「代码行数随时间」图：数据由 scripts/loc_graph.py 统计，动图由 Remotion 渲染",
+  "scripts": {
+    "data": "python3 scripts/loc_graph.py",
+    "render": "node scripts/render.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.463",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "remotion": "4.0.463"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.2",
+    "@types/react-dom": "19.2.1",
+    "typescript": "5.9.3"
+  }
+}
