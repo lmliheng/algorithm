@@ -21,3 +21,5 @@ site/docs/.vitepress/cache
 
 .ipynb_checkpoints/
 __pycache__/
+# README 动图是构建产物：走 loc-graph 分支 + Vercel，不进 git
+.github/loc-history-*.webp
