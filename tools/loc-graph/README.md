@@ -32,9 +32,13 @@ node scripts/render.mjs             # 出 .github/loc-history-{light,dark}.webp
 
 - `.github/loc_history.json`、`.github/loc-history*.svg` —— 跟以前一样提交到 `master`
   （都是小文本，留着数据历史）。
-- `.github/loc-history-{light,dark}.webp` —— 每张 200+KB，每天重出会把仓库撑大，
-  所以 workflow 把它们推到一个**单提交、每天强制覆盖**的 `loc-graph` 分支，
-  README 用 `raw.githubusercontent.com/.../loc-graph/...` 引用。
+- `.github/loc-history-{light,dark}.webp` —— 每张 250KB 上下，每天重出会把仓库撑大，所以：
+  - 一条单提交、每天强制覆盖的 `loc-graph` 分支留一份（备份，`raw.githubusercontent.com` 可直取）；
+  - 同时 `scripts/deploy-vercel.mjs` 把这两张图 + 一个预览页部署到 Vercel 项目 `algorithm-loc`，
+    README 引用的就是 `https://algorithm-loc.vercel.app/loc-history-*.webp`。
+- Vercel 部署用 Deployments API（`VERCEL_TOKEN`，在仓库 Actions secrets 里），
+  每次是一个不可变部署，生产域名自动指过去，所以 URL 固定、内容每天更新。
+  workflow 最后一步会把线上图和本地图做 sha256 比对，对不上就红。
 
 ## 形态
 

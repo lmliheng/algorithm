@@ -9,9 +9,9 @@
 </p>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/lmliheng/algorithm/loc-graph/loc-history-dark.webp">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/lmliheng/algorithm/loc-graph/loc-history-light.webp">
-  <img width="900" src="https://raw.githubusercontent.com/lmliheng/algorithm/loc-graph/loc-history-light.webp" alt="Lines of code over time">
+  <source media="(prefers-color-scheme: dark)" srcset="https://algorithm-loc.vercel.app/loc-history-dark.webp">
+  <source media="(prefers-color-scheme: light)" srcset="https://algorithm-loc.vercel.app/loc-history-light.webp">
+  <img width="900" src="https://algorithm-loc.vercel.app/loc-history-light.webp" alt="Lines of code over time">
 </picture>
 
 <p align="center">

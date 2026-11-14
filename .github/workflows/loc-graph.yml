@@ -91,3 +91,23 @@ jobs:
           commit=$(git commit-tree "$tree" -m "Update LOC animation ($(date -u +%F))")
           # 单个提交、每天强制覆盖：图片有 200+KB，不适合天天堆在 master 的历史里
           git push --force origin "$commit:refs/heads/loc-graph"
+
+      - name: Deploy to Vercel
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        working-directory: tools/loc-graph
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: node scripts/deploy-vercel.mjs
+
+      - name: Verify the published image
+        if: steps.data.outputs.changed == 'true' || inputs.force
+        run: |
+          set -euo pipefail
+          for theme in light dark; do
+            curl -sSf --retry 5 --retry-delay 5 --retry-all-errors \
+              -o "/tmp/$theme.webp" "https://algorithm-loc.vercel.app/loc-history-$theme.webp?v=$(date +%s)"
+            local=$(sha256sum ".github/loc-history-$theme.webp" | cut -d' ' -f1)
+            remote=$(sha256sum "/tmp/$theme.webp" | cut -d' ' -f1)
+            echo "$theme  $local  $remote"
+            [ "$local" = "$remote" ] || { echo "线上与本地不一致：$theme"; exit 1; }
+          done
